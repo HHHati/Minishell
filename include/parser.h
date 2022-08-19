@@ -1,29 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: Bade-lee <bade-lee@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/18 18:02:26 by Bade-lee          #+#    #+#             */
-/*   Updated: 2022/08/18 18:03:49 by Bade-lee         ###   ########.fr       */
+/*   Created: 2022/08/19 16:42:10 by Bade-lee          #+#    #+#             */
+/*   Updated: 2022/08/19 17:17:57 by Bade-lee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#ifndef PARSER_H
+# define PARSER_H
 
 //          ----------========== {   INCLUDES   } ==========----------
 
-//# include <unistd.h>
-//# include <stdlib.h>
-//# include <stddef.h>
-//# include <limits.h>
-# include "libft/include/libft.h"
+# include "minishell.h"
 
 //          ----------========== {    STRUCT    } ==========----------
 
-
+typedef struct s_parser
+{
+   
+}              t_parser;
 
 //          ----------========== {     FCTS     } ==========----------
 

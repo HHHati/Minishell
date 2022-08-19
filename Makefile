@@ -6,7 +6,7 @@
 #    By: Bade-lee <bade-lee@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/18 17:11:44 by Basile            #+#    #+#              #
-#    Updated: 2022/08/18 17:53:18 by Bade-lee         ###   ########.fr        #
+#    Updated: 2022/08/19 16:16:46 by Bade-lee         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@
 
 NAME = minishell
 CC = cc
-FLAGS = -Wall -Wextra -Werror
+FLAGS = -Wall -Wextra -Werror -lreadline
 INCLUDE = -I minishell.h
 LIB = libft/libft.a
 

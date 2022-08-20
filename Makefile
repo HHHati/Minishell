@@ -3,16 +3,16 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mkoyamba <mkoyamba@student.s19.be>         +#+  +:+       +#+         #
+#    By: Bade-lee <bade-lee@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/18 17:11:44 by Basile            #+#    #+#              #
-#    Updated: 2022/08/20 11:50:13 by mkoyamba         ###   ########.fr        #
+#    Updated: 2022/08/20 12:02:17 by Bade-lee         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 #          ----------========== {     VARS     } ==========----------
 
-SESSION = mkoyamba
+SESSION = Basile
 
 NAME = minishell
 CC = cc
@@ -42,7 +42,7 @@ $(NAME): $(OBJ_DIR) $(OBJ)
 	@$(CC) $(FLAGS) $(RL_FLAG) $(OBJ) $(LIB) -o $(NAME)
 
 $(OBJ_DIR)%.o: %.c
-	$(CC) $(FLAGS) $(INCLUDE) -c $< -o $@
+	@$(CC) $(FLAGS) $(INCLUDE) -c $< -o $@
 	@printf "\e[1;42m \e[0;m"
 
 $(OBJ_DIR):

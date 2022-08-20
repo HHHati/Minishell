@@ -3,19 +3,22 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: Bade-lee <bade-lee@student.s19.be>         +#+  +:+       +#+         #
+#    By: mkoyamba <mkoyamba@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/18 17:11:44 by Basile            #+#    #+#              #
-#    Updated: 2022/08/19 16:16:46 by Bade-lee         ###   ########.fr        #
+#    Updated: 2022/08/20 11:50:13 by mkoyamba         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 #          ----------========== {     VARS     } ==========----------
 
+SESSION = mkoyamba
+
 NAME = minishell
 CC = cc
-FLAGS = -Wall -Wextra -Werror -lreadline
-INCLUDE = -I minishell.h
+FLAGS = -Wall -Wextra -Werror
+RL_FLAG = -lreadline -L /Users/$(SESSION)/.brew/opt/readline/lib
+INCLUDE = -I minishell.h /Users/$(SESSION)/.brew/opt/readline/include
 LIB = libft/libft.a
 
 #          ----------========== {     SRCS     } ==========----------
@@ -25,7 +28,10 @@ SRC =	\
 #          ----------========== {     OBJS     } ==========----------
 
 OBJ = $(addprefix $(OBJ_DIR), $(SRC:.c=.o))
+SRC_DIR = src/
 OBJ_DIR = obj_dir/
+
+VPATH= $(shell find $(SRC_DIR) -type d)
 
 #          ----------========== {    REGLES    } ==========----------
 
@@ -33,10 +39,10 @@ all: $(NAME)
 
 $(NAME): $(OBJ_DIR) $(OBJ)
 	@make -C libft
-	@$(CC) $(FLAGS) $(OBJ) $(LIB) -o $(NAME)
+	@$(CC) $(FLAGS) $(RL_FLAG) $(OBJ) $(LIB) -o $(NAME)
 
 $(OBJ_DIR)%.o: %.c
-	@$(CC) $(FLAGS) $(INCLUDE) -c $< -o $@
+	$(CC) $(FLAGS) $(INCLUDE) -c $< -o $@
 	@printf "\e[1;42m \e[0;m"
 
 $(OBJ_DIR):

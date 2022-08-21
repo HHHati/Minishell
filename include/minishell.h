@@ -6,7 +6,7 @@
 /*   By: Bade-lee <bade-lee@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/18 18:02:26 by Bade-lee          #+#    #+#             */
-/*   Updated: 2022/08/19 17:18:08 by Bade-lee         ###   ########.fr       */
+/*   Updated: 2022/08/21 19:38:44 by Bade-lee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # include <stdlib.h>
 # include <readline/readline.h>
 
-# include "libft/include/libft.h"
+# include "../libft/include/libft.h"
 # include "parser.h"
 # include "builtins.h"
 

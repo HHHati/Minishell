@@ -6,7 +6,7 @@
 /*   By: Bade-lee <bade-lee@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 16:42:10 by Bade-lee          #+#    #+#             */
-/*   Updated: 2022/08/22 19:27:40 by Bade-lee         ###   ########.fr       */
+/*   Updated: 2022/08/22 19:51:06 by Bade-lee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@
 
 //          ----------========== {     DEFS     } ==========----------
 
-# define E_PIPES "Syntax error near '|'\n"
-# define E_QUOTES "Unclosed quotes in line\n"
-# define E_OPERATORS "Syntax error near redirection operators\n"
+# define E_PIPES "minishell: parse error near `|'\n"
+# define E_QUOTES "minishell: unclosed quotes in line\n"
+# define E_OPERATORS "minishell: parse error near redirection operators\n"
 
 # define FD_INPUT 0
 # define STR_INPUT 1
@@ -47,5 +47,7 @@ typedef struct s_redirection
 //          ----------========== {     FCTS     } ==========----------
 
 t_list	*parsing(char *line);
+int		syntax_check(char *line);
+int	is_empty(char *line);
 
 #endif

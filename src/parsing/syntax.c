@@ -6,7 +6,7 @@
 /*   By: Bade-lee <bade-lee@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 19:37:41 by Bade-lee          #+#    #+#             */
-/*   Updated: 2022/08/22 18:54:18 by Bade-lee         ###   ########.fr       */
+/*   Updated: 2022/08/22 19:50:48 by Bade-lee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,8 +124,8 @@ static int	check_operators(char *line)
 
 int	syntax_check(char *line)
 {
-	if (!line)
-		return (1);
+	if (is_empty(line))
+		return (0);
 	if (!check_pipes(line))
 	{
 		printf(E_PIPES);

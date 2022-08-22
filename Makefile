@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mkoyamba <mkoyamba@student.s19.be>         +#+  +:+       +#+         #
+#    By: Bade-lee <bade-lee@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/18 17:11:44 by Basile            #+#    #+#              #
-#    Updated: 2022/08/22 19:33:21 by mkoyamba         ###   ########.fr        #
+#    Updated: 2022/08/22 19:56:20 by Bade-lee         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,6 +28,7 @@ SRC =\
 
 SRC +=\
 		parsing.c\
+		parsing_utils.c\
 		splitting.c\
 		syntax.c\
 

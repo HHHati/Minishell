@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkoyamba <mkoyamba@student.s19.be>         +#+  +:+       +#+        */
+/*   By: Bade-lee <bade-lee@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 16:44:37 by mkoyamba          #+#    #+#             */
-/*   Updated: 2022/08/22 17:40:17 by mkoyamba         ###   ########.fr       */
+/*   Updated: 2022/08/22 19:27:11 by Bade-lee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,6 @@ void	sigint_handler(int sig)
 	write(1, "\b\b", 2);
 	write(1, "\033[0;31m▸ \033[0m", 15);
 	the_flag = 1;
-}
-
-void	parsing(char *line)
-{
-	(void)line;
 }
 
 int	main(void)

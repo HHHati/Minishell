@@ -3,33 +3,33 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mkoyamba <mkoyamba@student.s19.be>         +#+  +:+       +#+         #
+#    By: Bade-lee <bade-lee@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/18 17:11:44 by Basile            #+#    #+#              #
-#    Updated: 2022/08/22 17:44:38 by mkoyamba         ###   ########.fr        #
+#    Updated: 2022/08/22 19:28:32 by Bade-lee         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 #          ----------========== {     VARS     } ==========----------
 
-SESSION = mkoyamba
+SESSION = Basile
 
 NAME = minishell
 CC = cc
 FLAGS = -Wall -Wextra -Werror
-RL_FLAG = -lreadline -L /Users/$(SESSION)/.brew/opt/readline/lib
-INCLUDE = -I include/minishell.h -I /Users/$(SESSION)/.brew/opt/readline/include
+RL_FLAG = -lreadline -L/Users/$(SESSION)/.brew/opt/readline/lib -L /usr/local/Cellar/readline/8.1.2/lib/
+INCLUDE = -I include/minishell.h -I /Users/$(SESSION)/.brew/opt/readline/include -I /usr/local/Cellar/readline/8.1.2/include
 LIB = libft/libft.a
 
 #          ----------========== {     SRCS     } ==========----------
 
-LAUNCHER =	main.c \
+SRC =\
+		main.c
 
-PARSING =	parsing.c \
-			parsing_utils.c \
-			syntax.c \
-
-SRC =	$(LAUNCHER) $(PARSING)
+SRC +=\
+		parsing.c\
+		splitting.c\
+		syntax.c\
 
 #          ----------========== {     OBJS     } ==========----------
 

@@ -6,15 +6,14 @@
 /*   By: Bade-lee <bade-lee@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 15:47:09 by Bade-lee          #+#    #+#             */
-/*   Updated: 2022/08/22 18:19:57 by Bade-lee         ###   ########.fr       */
+/*   Updated: 2022/08/22 19:18:07 by Bade-lee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing.h"
+#include "../../include/parser.h"
 
-int	parsing(char *line)
+t_list	*parsing(char *line)
 {
-	if (!line)
-		return (1);
-	
+	(void)line;
+	return(0);
 }

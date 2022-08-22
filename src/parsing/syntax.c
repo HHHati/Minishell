@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   syntax.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkoyamba <mkoyamba@student.s19.be>         +#+  +:+       +#+        */
+/*   By: Bade-lee <bade-lee@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 19:37:41 by Bade-lee          #+#    #+#             */
-/*   Updated: 2022/08/22 17:47:36 by mkoyamba         ###   ########.fr       */
+/*   Updated: 2022/08/22 18:17:12 by Bade-lee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/parser.h"
 
-int	check_pipes(char *line)
+static int	check_pipes(char *line)
 {
 	size_t	i;
 	int		letter;
@@ -40,7 +40,7 @@ int	check_pipes(char *line)
 	return (1);
 }
 
-int	quotes_closed(char *line)
+static int	quotes_closed(char *line)
 {
 	int		in_squotes;
 	int		in_dquotes;
@@ -57,7 +57,6 @@ int	quotes_closed(char *line)
 			in_dquotes++;
 		if (line[i] == '|' && (in_squotes%2 == 1 || in_dquotes%2 == 1))
 		{
-			printf("%i\n%i\n\n", in_squotes, in_dquotes);
 			return(0);
 		}
 		i++;
@@ -68,13 +67,15 @@ int	quotes_closed(char *line)
 	return (0);
 }
 
-int	check_operators(char *line)
+static int	check_operators(char *line)
 {
 	size_t	i;
 	int		letter;
 
 	i = 0;
 	letter = 0;
+	if (!check_solo_operator(line))
+		return (0);
 	while (line[i])
 	{
 		if (line[i] == '|' && letter == 0)
@@ -83,6 +84,10 @@ int	check_operators(char *line)
 			letter = 1;
 		if (line[i] == '<' || line[i] == '>')
 			letter = 0;	
+		if (line[i] == '<' && (line[i - 1] == '<' && line[i + 1] == '<'))
+			return (0);
+		if (line[i] == '>' && (line[i - 1] == '>' && line[i + 1] == '>'))
+			return (0);
 		i++;
 	}
 	if (letter == 0)
@@ -90,21 +95,38 @@ int	check_operators(char *line)
 	return (1);
 }
 
+static int	check_solo_operator(char *line)
+{
+	size_t i;
+
+	i = 0;
+	
+}
+
 int	syntax_check(char *line)
 {
 	if (!check_pipes(line))
 	{
 		printf(E_PIPES);
-		return (0);
+		return(0);
 	}
 	if (!quotes_closed(line))
 	{
 		printf(E_QUOTES);
-		return (0);
+		return(0);
 	}
 	if (!check_operators(line))
 	{
 		printf(E_OPERATORS);
-		return (0);
+		return(0);
 	}
+	return(1);
+}
+
+int	main()
+{
+	char *test;
+
+	test = "< yo  \"yo\" | test cat";
+	printf("%i", syntax_check(test));
 }

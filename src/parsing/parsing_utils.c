@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Bade-lee <bade-lee@student.s19.be>         +#+  +:+       +#+        */
+/*   By: mkoyamba <mkoyamba@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 10:34:30 by Bade-lee          #+#    #+#             */
-/*   Updated: 2022/08/21 19:40:47 by Bade-lee         ###   ########.fr       */
+/*   Updated: 2022/08/22 17:37:26 by mkoyamba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,20 +42,4 @@ char	**split_line(char *line)
 		i++;
 	}
 	return (tab);
-}
-
-int main()
-{
-	size_t i;
-	char *test;
-	char **yo;
-
-	i = 0;
-	test = " fhgs<g | \'y\' | hiww>>hi <";
-	yo = split_line(test);
-	
-printf("%i\n", check_chevron(test));
-//	printf("%s\n", yo[1]);
-//	printf("%s\n", yo[2]);
-	
 }

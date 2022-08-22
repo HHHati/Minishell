@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   syntax.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Bade-lee <bade-lee@student.s19.be>         +#+  +:+       +#+        */
+/*   By: mkoyamba <mkoyamba@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 19:37:41 by Bade-lee          #+#    #+#             */
-/*   Updated: 2022/08/21 19:40:19 by Bade-lee         ###   ########.fr       */
+/*   Updated: 2022/08/22 17:47:36 by mkoyamba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,9 +93,18 @@ int	check_operators(char *line)
 int	syntax_check(char *line)
 {
 	if (!check_pipes(line))
+	{
 		printf(E_PIPES);
+		return (0);
+	}
 	if (!quotes_closed(line))
+	{
 		printf(E_QUOTES);
+		return (0);
+	}
 	if (!check_operators(line))
+	{
 		printf(E_OPERATORS);
+		return (0);
+	}
 }

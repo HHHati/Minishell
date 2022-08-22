@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Bade-lee <bade-lee@student.s19.be>         +#+  +:+       +#+        */
+/*   By: mkoyamba <mkoyamba@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 15:47:09 by Bade-lee          #+#    #+#             */
-/*   Updated: 2022/08/21 19:35:48 by Bade-lee         ###   ########.fr       */
+/*   Updated: 2022/08/22 17:46:11 by mkoyamba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing.h"
+#include "../../include/parser.h"
 
-t_list	parsing(char *line)
+t_list	*parsing(char *line)
 {
 	if (!line)
-		return (0);
-	
+		return (NULL);
+	return (NULL);
 }

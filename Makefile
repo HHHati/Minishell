@@ -3,33 +3,39 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: Bade-lee <bade-lee@student.s19.be>         +#+  +:+       +#+         #
+#    By: mkoyamba <mkoyamba@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/18 17:11:44 by Basile            #+#    #+#              #
-#    Updated: 2022/08/20 12:02:17 by Bade-lee         ###   ########.fr        #
+#    Updated: 2022/08/22 17:44:38 by mkoyamba         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 #          ----------========== {     VARS     } ==========----------
 
-SESSION = Basile
+SESSION = mkoyamba
 
 NAME = minishell
 CC = cc
 FLAGS = -Wall -Wextra -Werror
 RL_FLAG = -lreadline -L /Users/$(SESSION)/.brew/opt/readline/lib
-INCLUDE = -I minishell.h /Users/$(SESSION)/.brew/opt/readline/include
+INCLUDE = -I include/minishell.h -I /Users/$(SESSION)/.brew/opt/readline/include
 LIB = libft/libft.a
 
 #          ----------========== {     SRCS     } ==========----------
 
-SRC =	\
+LAUNCHER =	main.c \
+
+PARSING =	parsing.c \
+			parsing_utils.c \
+			syntax.c \
+
+SRC =	$(LAUNCHER) $(PARSING)
 
 #          ----------========== {     OBJS     } ==========----------
 
-OBJ = $(addprefix $(OBJ_DIR), $(SRC:.c=.o))
 SRC_DIR = src/
 OBJ_DIR = obj_dir/
+OBJ = $(addprefix $(OBJ_DIR), $(SRC:.c=.o))
 
 VPATH= $(shell find $(SRC_DIR) -type d)
 

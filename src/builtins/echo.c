@@ -6,7 +6,7 @@
 /*   By: mkoyamba <mkoyamba@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 17:22:35 by Bade-lee          #+#    #+#             */
-/*   Updated: 2022/08/22 20:10:27 by mkoyamba         ###   ########.fr       */
+/*   Updated: 2022/08/22 20:22:56 by mkoyamba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,8 @@ int	echo(char **comm)
 		}
 	}
 	if (nl)
-		ft_putendl_fd(comm[len - 1], STDOUT);
-	else
 		ft_putstr_fd(comm[len - 1], STDOUT);
+	else
+		ft_putendl_fd(comm[len - 1], STDOUT);
 	return (0);
 }

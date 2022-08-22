@@ -6,7 +6,7 @@
 /*   By: mkoyamba <mkoyamba@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 17:22:35 by Bade-lee          #+#    #+#             */
-/*   Updated: 2022/08/22 18:58:28 by mkoyamba         ###   ########.fr       */
+/*   Updated: 2022/08/22 20:10:27 by mkoyamba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,19 @@ int	echo(char **comm)
 	n = 1;
 	nl = 0;
 	len = ft_matlen(comm);
-	if (len > 1 && str_ncmp(comm[1], "-n") == 0)
+	if (len > 1 && ft_strncmp(comm[1], "-n", 3) == 0)
 		nl = 1;
 	while (n < len - 1)
-		ft_putstr_fd(comm, STDOUT);
-	ft_putstr_fd(comm[len - 1], STDOUT);
+	{
+		if (n > 1 || nl == 0)
+		{
+			ft_putstr_fd(comm[n], STDOUT);
+			ft_putstr_fd(" ", STDOUT);
+		}
+	}
+	if (nl)
+		ft_putendl_fd(comm[len - 1], STDOUT);
+	else
+		ft_putstr_fd(comm[len - 1], STDOUT);
+	return (0);
 }

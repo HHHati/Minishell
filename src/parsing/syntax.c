@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   syntax.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Bade-lee <bade-lee@student.s19.be>         +#+  +:+       +#+        */
+/*   By: mkoyamba <mkoyamba@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 19:37:41 by Bade-lee          #+#    #+#             */
-/*   Updated: 2022/08/22 19:58:55 by Bade-lee         ###   ########.fr       */
+/*   Updated: 2022/08/22 20:14:15 by mkoyamba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,17 +128,17 @@ int	syntax_check(char *line)
 		return (0);
 	if (!check_pipes(line))
 	{
-		printf(E_PIPES);
+		ft_putstr_fd(E_PIPES, STDERR);
 		return(1);
 	}
 	if (!quotes_closed(line))
 	{
-		printf(E_QUOTES);
+		ft_putstr_fd(E_QUOTES, STDERR);
 		return(1);
 	}
 	if (!check_operators(line))
 	{
-		printf(E_OPERATORS);
+		ft_putstr_fd(E_OPERATORS, STDERR);
 		return(1);
 	}
 	return(0);

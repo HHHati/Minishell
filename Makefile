@@ -3,16 +3,16 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: Bade-lee <bade-lee@student.s19.be>         +#+  +:+       +#+         #
+#    By: mkoyamba <mkoyamba@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/18 17:11:44 by Basile            #+#    #+#              #
-#    Updated: 2022/08/22 19:56:20 by Bade-lee         ###   ########.fr        #
+#    Updated: 2022/08/22 20:09:12 by mkoyamba         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 #          ----------========== {     VARS     } ==========----------
 
-SESSION = 
+SESSION = mkoyamba
 
 NAME = minishell
 CC = cc
@@ -23,14 +23,20 @@ LIB = libft/libft.a
 
 #          ----------========== {     SRCS     } ==========----------
 
+# launcher
 SRC =\
 		main.c
 
+# parsing
 SRC +=\
 		parsing.c\
 		parsing_utils.c\
 		splitting.c\
 		syntax.c\
+
+# builtins
+SRC +=\
+		echo.c\
 
 #          ----------========== {     OBJS     } ==========----------
 

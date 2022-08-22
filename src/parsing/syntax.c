@@ -6,7 +6,7 @@
 /*   By: Bade-lee <bade-lee@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 19:37:41 by Bade-lee          #+#    #+#             */
-/*   Updated: 2022/08/22 19:50:48 by Bade-lee         ###   ########.fr       */
+/*   Updated: 2022/08/22 19:58:55 by Bade-lee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static int	check_pipes(char *line)
  		return (0);
 	while (line[i])
 	{
-		if (line[i] != ' ' && line[i] != '\t' && line[i] != '|')
+		if (line[i] != ' ' && line[i] != '\t' && line[i] != '|' && line[i] != '\n')
 			letter = 1;
 		else if (line[i] == '|')
 		{

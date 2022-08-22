@@ -6,7 +6,7 @@
 /*   By: Bade-lee <bade-lee@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 16:44:37 by mkoyamba          #+#    #+#             */
-/*   Updated: 2022/08/22 19:27:11 by Bade-lee         ###   ########.fr       */
+/*   Updated: 2022/08/22 20:00:09 by Bade-lee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,7 @@ int	main(void)
 			line = readline("\033[0;36m\033[1mminishell\033[0;31m ▸ \033[0m");
 		if (line)
 		{
-			the_flag = 0;
-			parsing(line);
+			the_flag = syntax_check(line);
 			rl_replace_line("", 0);
 			rl_on_new_line();
 		}

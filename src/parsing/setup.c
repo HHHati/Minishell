@@ -1,44 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   splitting.c                                        :+:      :+:    :+:   */
+/*   setup.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: Bade-lee <bade-lee@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/22 11:17:34 by Bade-lee          #+#    #+#             */
-/*   Updated: 2022/08/23 11:19:39 by Bade-lee         ###   ########.fr       */
+/*   Created: 2022/08/23 11:10:34 by Bade-lee          #+#    #+#             */
+/*   Updated: 2022/08/23 13:02:30 by Bade-lee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/parser.h"
 
-int	count_pipes(char *line)
+t_list **create_big_list(char **tab)
 {
+	t_list	**list;
 	size_t	i;
-	int		count;
+	size_t	len
 
 	i = 0;
-	count = 0;
-	while (line[i])
+	len = ft_matlen(tab) - 1;
+	*list = ft_lstnew(get_content(tab[i]));
+	if (!*list)
+		return (0);
+	while (i != len)
 	{
-		if (line[i] == '|')
-			count++;
+		*list = ft_lstadd_back(list, ft_lstnew(get_content(tab[i])));
 		i++;
 	}
-	return (count);
+	return (list);
 }
 
-char	**split_line(char *line)
+t_content	get_content(char *line)
 {
-	size_t	i;
-	char	**tab;
+	t_content *content;
 
-	i = 0;
-	tab = ft_split(line, '|');
-	while (tab[i])
-	{
-		tab[i] = ft_strtrim(tab[i], " \t\n");
-		i++;
-	}
-	return (tab);
+	content->input = handle_input(line)
+	content->output = handle_output(line)
+	content->comm = handle_comm(line)
+	return (content);
 }

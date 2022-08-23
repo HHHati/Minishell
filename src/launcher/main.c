@@ -6,13 +6,13 @@
 /*   By: mkoyamba <mkoyamba@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 16:44:37 by mkoyamba          #+#    #+#             */
-/*   Updated: 2022/08/23 11:08:10 by mkoyamba         ###   ########.fr       */
+/*   Updated: 2022/08/23 18:05:09 by mkoyamba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-sig_atomic_t the_flag = 0;
+int	flag = 0;
 
 void	sigint_handler(int sig)
 {
@@ -23,7 +23,7 @@ void	sigint_handler(int sig)
 	rl_redisplay();
 	write(1, "\b\b", 2);
 	write(1, "\033[0;31m▸ \033[0m", 15);
-	the_flag = 1;
+	flag = 1;
 }
 
 int	main(int argc, char **argv, char **env)
@@ -43,19 +43,21 @@ int	main(int argc, char **argv, char **env)
 	signal(SIGQUIT, SIG_IGN);
 	while (1)
 	{
-		if (the_flag == 0)
+		if (flag == 0)
 			line = readline("\033[0;36m\033[1mminishell\033[0;32m ▸ \033[0m");
 		else
 			line = readline("\033[0;36m\033[1mminishell\033[0;31m ▸ \033[0m");
 		if (line)
 		{
-			the_flag = syntax_check(line);
+			flag = syntax_check(line);
+			if (flag == 0)
+				print_lst(parsing(line));
 			rl_replace_line("", 0);
 			rl_on_new_line();
 		}
 		else
 		{
-			if (the_flag == 1)
+			if (flag == 1)
 				printf("\033[F\033[0;36m\033[1mminishell\033[0;31m ▸ \033[0mexit\n");
 			else
 				printf("\033[F\033[0;36m\033[1mminishell\033[0;32m ▸ \033[0mexit\n");

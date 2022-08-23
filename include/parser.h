@@ -6,7 +6,7 @@
 /*   By: mkoyamba <mkoyamba@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 16:42:10 by Bade-lee          #+#    #+#             */
-/*   Updated: 2022/08/23 11:05:15 by mkoyamba         ###   ########.fr       */
+/*   Updated: 2022/08/23 17:00:29 by mkoyamba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,17 @@ typedef struct s_redirection
 
 //          ----------========== {     FCTS     } ==========----------
 
-t_list	*parsing(char *line);
-int		syntax_check(char *line);
-int		is_empty(char *line);
-int		is_builtin(char **command);
+t_list		**parsing(char *line);
+t_list		**create_big_list(char **tab);
+int			syntax_check(char *line);
+int			is_empty(char *line);
+int			is_builtin(char **command);
+char		**split_line(char *line);
+t_list		**handle_input(char *line);
+t_list		**handle_output(char *line);
+void		*get_content(char *line);
+void		out(void *to_free, int code);
+
+void	print_lst(t_list **alst); // A SUPPRIMER !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 #endif

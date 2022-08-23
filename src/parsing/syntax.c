@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   syntax.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Bade-lee <bade-lee@student.s19.be>         +#+  +:+       +#+        */
+/*   By: mkoyamba <mkoyamba@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 19:37:41 by Bade-lee          #+#    #+#             */
-/*   Updated: 2022/08/23 10:48:16 by Bade-lee         ###   ########.fr       */
+/*   Updated: 2022/08/23 17:59:21 by mkoyamba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,16 +72,18 @@ static int	check_solo_operator(char *line)
 
 	i = 0;
 	letter = 1;
-	while (line[i])
+	while (line && line[i])
 	{
-		if (((line[i] == '<' && line[i + 1] != '<')
-				|| (line[i] == '>' && line[i + 1] != '>')) && letter == 0)
+		if (((line[i] == '<' && line[i + 1] && line[i + 1] != '<')
+				|| (line[i] == '>' && line[i + 1] && line[i + 1] != '>')) && letter == 0)
 			return (0);
 		if (line[i] == '<' || line[i] == '>')
 		{
 			letter = 0;
 			i++;
 		}
+		if (!line[i])
+			break ;
 		if (line[i] != ' ' && line[i] != '\t'
 			&& line[i] != '<' && line[i] != '>')
 			letter = 1;
@@ -99,10 +101,10 @@ static int	check_operators(char *line)
 
 	i = 0;
 	letter = 0;
-	while (line[i])
+	while (line && line[i])
 	{
-		if ((line[i] == '<' && line[i + 1] == '>')
-			|| (line[i] == '>' && line[i + 1] == '<'))
+		if ((line[i] == '<' && line[i + 1] && line[i + 1] == '>')
+			|| (line[i] == '>' && line[i + 1] && line[i + 1] == '<'))
 			return (0);
 		if (line[i] != ' ' && line[i] != '\t'
 			&& line[i] != '<' && line[i] != '>')
@@ -110,9 +112,9 @@ static int	check_operators(char *line)
 		if ((line[i] == '<' || line[i] == '>')
 			|| (line[i] == '|' && letter == 0))
 			letter = 0;
-		if (line[i] == '<' && (line[i - 1] == '<' && line[i + 1] == '<'))
+		if (line[i] == '<' && i > 0 && (line[i - 1] == '<' && line[i + 1] && line[i + 1] == '<'))
 			return (0);
-		if (line[i] == '>' && (line[i - 1] == '>' && line[i + 1] == '>'))
+		if (line[i] == '>' && (i > 0 && line[i - 1] == '>' && line[i + 1] && line[i + 1] == '>'))
 			return (0);
 		i++;
 	}

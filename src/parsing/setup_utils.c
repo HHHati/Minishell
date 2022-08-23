@@ -3,59 +3,77 @@
 /*                                                        :::      ::::::::   */
 /*   setup_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Bade-lee <bade-lee@student.s19.be>         +#+  +:+       +#+        */
+/*   By: mkoyamba <mkoyamba@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 11:57:01 by Bade-lee          #+#    #+#             */
-/*   Updated: 2022/08/23 15:50:14 by Bade-lee         ###   ########.fr       */
+/*   Updated: 2022/08/23 19:02:19 by mkoyamba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/parser.h"
 
-char *(char *line, char c, size_t i)
+static char *take_str(char *line, char c, size_t i)
 {
-	char *str;
-	size_t n;
+	char	*str;
+	size_t	n;
 
+	n = 0;
+	i++;
+	while (line[i + n] != c)
+		n++;
+	str = malloc((n + 1) * sizeof(char));
+	if (!str)
+		return (NULL);
 	n = 0;
 	while (line[i] != c)
 	{
-		str[n] == line[i];
+		str[n] = line[i];
 		i++;
 		n++;
 	}
+	str[n] = '\0';
 	return (str);
 }
 
-char *file_name(char *line, size_t i)
+static char *file_name(char *line, size_t i)
 {
 	char *str;
 	size_t n;
 
 	n = 0;
-	while (line[i] != ' ' || line[i] != '\t' || line[i] != '\n'
-		|| line[i] != '|' || line[i] != '<' || line[i] != '>')
+	while (line && line [i + n] && (line[i + n] == ' ' || line[i + n] == '\t' || line[i + n] == '\n'))
+		i++;
+	while (line && line [i + n] && line[i + n] != ' ' && line[i + n] != '\t' && line[i + n] != '\n')
+		n++;
+	str = malloc((n + 1) * sizeof(char));
+	if (!str)
+		return (NULL);
+	n = 0;
+	while (line && line[i] && line[i] != ' ' && line[i] != '\t' && line[i] != '\n')
 	{
-		str[n] == line[i];
+		str[n] = line[i];
 		i++;
 		n++;
 	}
+	str[n] = '\0';
 	return (str);
 }
 
-t_redirection get_content_operators(char *line, size_t i, int type)
+static t_redirection *get_content_operators(char *line, size_t i, int type)
 {
-	t_redirection *input_content;
-	size_t n;
+	t_redirection	*input_content;
 
-	n = 0;
+	input_content = malloc(sizeof(t_redirection));
+	if (!input_content)
+		return (NULL);
 	input_content->type = type;
+	i++;
 	while (line[i] == ' ' || line[i] == '\t' || line[i] == '\n')
 		i++;
-	if (line[i] == "\"" || line[i] == "\'")
+	if (line[i] == '\"' || line[i] == '\'')
 		input_content->name = take_str(line, line[i], i);
 	else
-		input_content->name = take_str(line, i);
+		input_content->name = file_name(line, i);
 	return (input_content);
 
 }
@@ -64,9 +82,13 @@ t_redirection get_content_operators(char *line, size_t i, int type)
 t_list	**handle_input(char *line)
 {
 	size_t	i;
-	t_list **input_list;
+	t_list	**input_list;
+	t_list	*backup;
 
 	i = 0;
+	input_list = malloc(sizeof(t_list *));
+	if (!input_list)
+		out(NULL, 0);
 	*input_list = ft_lstnew(NULL);
 	while (line[i])
 	{
@@ -74,22 +96,31 @@ t_list	**handle_input(char *line)
 		{
 			if (line[i + 1] == '<')
 			{
-				*input_list = ft_lstadd_back(input_list, ft_lstnew(get_content_operator(line, i, FD_INPUT)));
+				ft_lstadd_back(input_list, ft_lstnew(get_content_operators(line, i + 1, FD_INPUT)));
 				i++;
 			}
 			else
-				*input_list = ft_lstadd_back(input_list, ft_lstnew(get_content_operator(line, i, STR_INPUT)));
+				ft_lstadd_back(input_list, ft_lstnew(get_content_operators(line, i, STR_INPUT)));
 			i++;
 		}
+		i++;
 	}
+	backup = *input_list;
+	*input_list = (*input_list)->next;
+	free(backup);
+	return (input_list);
 }
 
 t_list	**handle_output(char *line)
 {
 	size_t	i;
 	t_list **output_list;
+	t_list	*backup;
 
 	i = 0;
+	output_list = malloc(sizeof(t_list *));
+	if (!output_list)
+		out(NULL, 0);
 	*output_list = ft_lstnew(NULL);
 	while (line[i])
 	{
@@ -97,13 +128,17 @@ t_list	**handle_output(char *line)
 		{
 			if (line[i + 1] == '>')
 			{
-				*output_list = ft_lstadd_back(output_list, ft_lstnew(get_content_operator(line, i, SMP_OUTPUT)));
+				ft_lstadd_back(output_list, ft_lstnew(get_content_operators(line, i + 1, SMP_OUTPUT)));
 				i++;
 			}
 			else
-				*output_list = ft_lstadd_back(output_list, ft_lstnew(get_content_operator(line, i, APPEND_OUTPUT)));
+				ft_lstadd_back(output_list, ft_lstnew(get_content_operators(line, i, APPEND_OUTPUT)));
 			i++;
 		}
+		i++;
 	}
-
+	backup = *output_list;
+	*output_list = (*output_list)->next;
+	free(backup);
+	return (output_list);
 }

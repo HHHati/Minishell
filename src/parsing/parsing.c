@@ -3,20 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Bade-lee <bade-lee@student.s19.be>         +#+  +:+       +#+        */
+/*   By: mkoyamba <mkoyamba@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 15:47:09 by Bade-lee          #+#    #+#             */
-/*   Updated: 2022/08/23 11:05:46 by Bade-lee         ###   ########.fr       */
+/*   Updated: 2022/08/23 18:08:36 by mkoyamba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/parser.h"
 
-t_list	*parsing(char *line)
+t_list	**parsing(char *line)
 {
-	char **tab;
+	char	**tab;
+	t_list	**result;
 
+	if (!line[0])
+		return (NULL);
 	tab = split_line(line);
-	
-	return (0);
+	result = create_big_list(tab);
+	return (result);
 }

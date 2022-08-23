@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Bade-lee <bade-lee@student.s19.be>         +#+  +:+       +#+        */
+/*   By: mkoyamba <mkoyamba@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 16:42:10 by Bade-lee          #+#    #+#             */
-/*   Updated: 2022/08/22 19:51:06 by Bade-lee         ###   ########.fr       */
+/*   Updated: 2022/08/23 11:05:15 by mkoyamba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@
 # define SMP_OUTPUT 0
 # define APPEND_OUTPUT 1
 
+typedef void	(*t_tabp)(va_list, int *);
+
 //          ----------========== {    STRUCT    } ==========----------
 
 typedef struct s_content
@@ -48,6 +50,7 @@ typedef struct s_redirection
 
 t_list	*parsing(char *line);
 int		syntax_check(char *line);
-int	is_empty(char *line);
+int		is_empty(char *line);
+int		is_builtin(char **command);
 
 #endif

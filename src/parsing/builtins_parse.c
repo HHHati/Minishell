@@ -1,30 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtins.h                                         :+:      :+:    :+:   */
+/*   builtins_parse.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mkoyamba <mkoyamba@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/19 17:17:09 by Bade-lee          #+#    #+#             */
-/*   Updated: 2022/08/23 11:04:39 by mkoyamba         ###   ########.fr       */
+/*   Created: 2022/08/23 10:40:05 by mkoyamba          #+#    #+#             */
+/*   Updated: 2022/08/23 11:00:00 by mkoyamba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef BUILTINS_H
-# define BUILTINS_H
+#include "../../include/parser.h"
 
-//          ----------========== {   INCLUDES   } ==========----------
+int	is_builtin(char **command)
+{
+	size_t	n;
+	static char	*builtins[7] = {"cd", "echo", "env", "exit", "export", "pwd",
+					"unset"};
 
-# include "minishell.h"
-
-//          ----------========== {    STRUCT    } ==========----------
-
-
-
-//          ----------========== {     FCTS     } ==========----------
-
-size_t	ft_matlen(char **str);
-int		builtin_echo(char **comm);
-int		builtin_env(char **comm);
-
-#endif
+	n = 0;
+	while (n < ft_matlen(builtins))
+	{
+		if (ft_strncmp(command[0], builtins[n], ft_strlen(builtins[n])) == 0)
+			return (1);
+		n++;
+	}
+	return (0);
+}

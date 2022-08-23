@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Bade-lee <bade-lee@student.s19.be>         +#+  +:+       +#+        */
+/*   By: mkoyamba <mkoyamba@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 16:44:37 by mkoyamba          #+#    #+#             */
-/*   Updated: 2022/08/22 20:00:09 by Bade-lee         ###   ########.fr       */
+/*   Updated: 2022/08/23 11:08:10 by mkoyamba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,15 @@ void	sigint_handler(int sig)
 	the_flag = 1;
 }
 
-int	main(void)
+int	main(int argc, char **argv, char **env)
 {
 	struct termios termios_save;
 	struct termios termios_new;
 	char	*line;
 
+	(void)argc;
+	(void)argv;
+	(void)env;
 	tcgetattr(0, &termios_save);
 	termios_new = termios_save;
 	termios_new.c_lflag &= ~ECHOCTL;

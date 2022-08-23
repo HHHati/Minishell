@@ -6,7 +6,7 @@
 /*   By: Bade-lee <bade-lee@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 19:47:34 by Bade-lee          #+#    #+#             */
-/*   Updated: 2022/08/22 19:50:03 by Bade-lee         ###   ########.fr       */
+/*   Updated: 2022/08/23 10:45:54 by Bade-lee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	is_empty(char *line)
 {
-	size_t i;
+	size_t	i;
 
 	i = 0;
 	while (line[i])

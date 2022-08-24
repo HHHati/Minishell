@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   command.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Bade-lee <bade-lee@student.s19.be>         +#+  +:+       +#+        */
+/*   By: mkoyamba <mkoyamba@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 12:37:28 by Bade-lee          #+#    #+#             */
-/*   Updated: 2022/08/24 15:22:59 by Bade-lee         ###   ########.fr       */
+/*   Updated: 2022/08/24 16:54:30 by mkoyamba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,16 +21,16 @@ size_t	pass_quotes(char *line, size_t i, char c)
 
 size_t	pass_operator(char *line, size_t i)
 {
-	if (line[i] == '<' || line[i] == '>')
+	if (line[i] && (line[i] == '<' || line[i] == '>'))
 		i++;
 	while (line [i] && (line[i] == ' ' || line[i] == '\t' || line[i] == '\n'))
 		i++;
-	if (line[i + 1] == '\"' || line[i + 1] == '\'')
+	if (line[i + 1] && (line[i + 1] == '\"' || line[i + 1] == '\''))
 		pass_quotes(line, i, line[i]);
 	else
-		while (line[i] != ' ' && line[i] != '\t' && line[i] != '\n')
+		while (line[i] && line[i] != ' ' && line[i] != '\t' && line[i] != '\n')
 			i++;
-	while (line[i] == ' ' || line[i] == '\t' || line[i] == '\n')
+	while (line[i] && (line[i] == ' ' || line[i] == '\t' || line[i] == '\n'))
 			i++;
 	return (i);
 }

@@ -3,11 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Bade-lee <bade-lee@student.s19.be>         +#+  +:+       +#+        */
+/*   By: mkoyamba <mkoyamba@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 17:22:33 by Bade-lee          #+#    #+#             */
-/*   Updated: 2022/08/19 17:23:08 by Bade-lee         ###   ########.fr       */
+/*   Updated: 2022/08/24 17:05:46 by mkoyamba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "builtins.h"
+#include "../../include/builtins.h"
+
+int	builtin_cd(void)
+{
+	return (0);
+}

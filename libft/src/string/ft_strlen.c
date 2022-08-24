@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bade-lee <bade-lee@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mkoyamba <mkoyamba@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/01 14:56:43 by bade-lee          #+#    #+#             */
-/*   Updated: 2021/10/18 10:05:07 by bade-lee         ###   ########.fr       */
+/*   Updated: 2022/08/24 13:41:02 by mkoyamba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../../include/parser.h"
 
 size_t	ft_strlen(const char *str)
 {

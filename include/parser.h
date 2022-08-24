@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Bade-lee <bade-lee@student.s19.be>         +#+  +:+       +#+        */
+/*   By: mkoyamba <mkoyamba@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 16:42:10 by Bade-lee          #+#    #+#             */
-/*   Updated: 2022/08/24 15:47:56 by Bade-lee         ###   ########.fr       */
+/*   Updated: 2022/08/24 17:03:08 by mkoyamba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,14 +56,16 @@ int			is_builtin(char **command);
 char		**split_line(char *line);
 t_list		**handle_input(char *line);
 t_list		**handle_output(char *line);
-char	**handle_comm(char *line);
+char		**handle_comm(char *line);
 void		*get_content(char *line);
 void		out(void *to_free, int code);
-char	**ft_split_comm(char *str, char *charset);
-int	check_solo_operator_2(char *line, size_t i, int letter);
-int	check_operator_place(char *line, size_t i);
-t_list	**free_first(t_list **list);
+char		**ft_split_comm(char *str, char *charset);
+int			check_solo_operator_2(char *line, size_t i, int letter);
+int			check_operator_place(char *line, size_t i);
+t_list		**free_first(t_list **list);
+char		*replace(char *line);
+char		*to_put(char *end_word);
 
-void	print_lst(t_list **alst); // A SUPPRIMER !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+void		print_lst(t_list **alst); // A SUPPRIMER !!!!!!!!!!!
 
 #endif

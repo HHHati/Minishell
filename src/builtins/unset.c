@@ -3,11 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Bade-lee <bade-lee@student.s19.be>         +#+  +:+       +#+        */
+/*   By: mkoyamba <mkoyamba@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 17:22:49 by Bade-lee          #+#    #+#             */
-/*   Updated: 2022/08/19 17:23:24 by Bade-lee         ###   ########.fr       */
+/*   Updated: 2022/08/24 17:07:17 by mkoyamba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "builtins.h"
+#include "../../include/builtins.h"
+
+int	builtin_unset(void)
+{
+	return (0);
+}

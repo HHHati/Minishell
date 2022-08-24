@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   setup_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkoyamba <mkoyamba@student.s19.be>         +#+  +:+       +#+        */
+/*   By: Bade-lee <bade-lee@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 11:57:01 by Bade-lee          #+#    #+#             */
-/*   Updated: 2022/08/24 17:50:55 by mkoyamba         ###   ########.fr       */
+/*   Updated: 2022/08/24 19:01:54 by Bade-lee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ t_list	**handle_input(char *line)
 	i = 0;
 	ip_list = malloc(sizeof(t_list *));
 	if (!ip_list)
-		out(NULL, 0);
+		return (NULL);
 	*ip_list = ft_lstnew(NULL);
 	while (line[i])
 	{
@@ -116,7 +116,7 @@ t_list	**handle_output(char *line)
 	i = 0;
 	op_list = malloc(sizeof(t_list *));
 	if (!op_list)
-		out(NULL, 0);
+		return (NULL);
 	*op_list = ft_lstnew(NULL);
 	while (line[i])
 	{

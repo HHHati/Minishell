@@ -6,7 +6,7 @@
 /*   By: Bade-lee <bade-lee@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 14:51:27 by Bade-lee          #+#    #+#             */
-/*   Updated: 2022/08/24 15:23:12 by Bade-lee         ###   ########.fr       */
+/*   Updated: 2022/08/24 19:02:23 by Bade-lee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ char	**ft_split_comm(char *str, char *charset)
 	n = ft_count_words(str, charset);
 	result = malloc(sizeof(char *) * (n + 1));
 	if (!result)
-		return (0);
+		return (NULL);
 	result[n] = 0;
 	ft_write_split(result, str, charset);
 	return (result);

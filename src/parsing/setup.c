@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   setup.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkoyamba <mkoyamba@student.s19.be>         +#+  +:+       +#+        */
+/*   By: Bade-lee <bade-lee@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 11:10:34 by Bade-lee          #+#    #+#             */
-/*   Updated: 2022/08/23 18:47:27 by mkoyamba         ###   ########.fr       */
+/*   Updated: 2022/08/24 11:33:46 by Bade-lee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/parser.h"
 
-t_list **create_big_list(char **tab)
+t_list	**create_big_list(char **tab)
 {
 	t_list	**list;
 	size_t	i;
@@ -44,6 +44,6 @@ void	*get_content(char *line)
 		return (NULL);
 	content->input = handle_input(line);
 	content->output = handle_output(line);
-	//content->comm = handle_comm(line);
+	content->comm = handle_comm(line);
 	return (content);
 }

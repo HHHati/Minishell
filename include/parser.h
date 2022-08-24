@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkoyamba <mkoyamba@student.s19.be>         +#+  +:+       +#+        */
+/*   By: Bade-lee <bade-lee@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 16:42:10 by Bade-lee          #+#    #+#             */
-/*   Updated: 2022/08/23 17:00:29 by mkoyamba         ###   ########.fr       */
+/*   Updated: 2022/08/24 11:49:29 by Bade-lee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,11 @@
 # define E_QUOTES "minishell: unclosed quotes in line\n"
 # define E_OPERATORS "minishell: parse error near redirection operators\n"
 
-# define FD_INPUT 0
-# define STR_INPUT 1
+# define FD_IP 0
+# define STR_IP 1
 
-# define SMP_OUTPUT 0
-# define APPEND_OUTPUT 1
+# define SMP_OP 0
+# define APP_OP 1
 
 typedef void	(*t_tabp)(va_list, int *);
 

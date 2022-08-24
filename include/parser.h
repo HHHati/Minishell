@@ -6,7 +6,7 @@
 /*   By: mkoyamba <mkoyamba@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 16:42:10 by Bade-lee          #+#    #+#             */
-/*   Updated: 2022/08/24 18:00:49 by mkoyamba         ###   ########.fr       */
+/*   Updated: 2022/08/24 19:25:36 by mkoyamba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ typedef struct s_redirection
 {
 	char	*name;
 	int		type;
+	int		fd;
 }				t_redirection;
 
 //          ----------========== {     FCTS     } ==========----------

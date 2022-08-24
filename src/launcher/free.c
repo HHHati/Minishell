@@ -1,28 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env.c                                              :+:      :+:    :+:   */
+/*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mkoyamba <mkoyamba@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/19 17:22:38 by Bade-lee          #+#    #+#             */
-/*   Updated: 2022/08/24 19:49:38 by mkoyamba         ###   ########.fr       */
+/*   Created: 2022/08/24 19:19:37 by mkoyamba          #+#    #+#             */
+/*   Updated: 2022/08/24 19:51:35 by mkoyamba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/builtins.h"
+#include "../../include/minishell.h"
 
-int	builtin_env(t_minishell *minishell)
+void	free_parsed(t_list **parsed)
 {
-	size_t	n;
-	char	**env;
+	(void)parsed;
+}
 
-	env = minishell->env;
-	n = 0;
-	while (env[n])
-	{
-		ft_putendl_fd(env[n], STDOUT);
-		n++;
-	}
-	return (0);
+void	free_minishell(t_minishell *minishell)
+{
+	free_parsed(minishell->list);
+	mat_free(minishell->env);
+	free(minishell);
 }

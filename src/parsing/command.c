@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   command.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Bade-lee <bade-lee@student.s19.be>         +#+  +:+       +#+        */
+/*   By: mkoyamba <mkoyamba@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 12:37:28 by Bade-lee          #+#    #+#             */
-/*   Updated: 2022/08/24 18:55:15 by Bade-lee         ###   ########.fr       */
+/*   Updated: 2022/08/24 20:16:15 by mkoyamba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,8 +77,6 @@ char	*take_comm(char *line, size_t *i)
 	comm[n] = '\0';
 	return (comm);
 }
-
-
 
 char	**handle_comm(char *line)
 {

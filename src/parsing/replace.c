@@ -6,7 +6,7 @@
 /*   By: mkoyamba <mkoyamba@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 17:06:27 by mkoyamba          #+#    #+#             */
-/*   Updated: 2022/08/24 17:37:48 by mkoyamba         ###   ########.fr       */
+/*   Updated: 2022/08/24 19:31:01 by mkoyamba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	replace(t_list **parsed)
 	{
 		content = (t_content *)list->content;
 		put = *(content->input);
-		while(put)
+		while (put)
 		{
 			redirection = (t_redirection *)put->content;
 			if (redirection->type == STR_IP)

@@ -6,7 +6,7 @@
 #    By: mkoyamba <mkoyamba@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/18 17:11:44 by Basile            #+#    #+#              #
-#    Updated: 2022/08/24 17:15:11 by mkoyamba         ###   ########.fr        #
+#    Updated: 2022/08/24 20:11:30 by mkoyamba         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,9 @@ LIB = libft/libft.a
 
 # launcher
 SRC =\
-		main.c
+		main.c\
+		main_utils.c\
+		free.c\
 
 # parsing
 SRC +=\

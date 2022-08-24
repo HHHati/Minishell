@@ -6,7 +6,7 @@
 /*   By: Bade-lee <bade-lee@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 16:42:10 by Bade-lee          #+#    #+#             */
-/*   Updated: 2022/08/24 11:49:29 by Bade-lee         ###   ########.fr       */
+/*   Updated: 2022/08/24 15:08:21 by Bade-lee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ t_list		**handle_input(char *line);
 t_list		**handle_output(char *line);
 void		*get_content(char *line);
 void		out(void *to_free, int code);
+char	**ft_split_comm(char *str, char *charset);
 
 void	print_lst(t_list **alst); // A SUPPRIMER !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 

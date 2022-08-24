@@ -6,7 +6,7 @@
 #    By: mkoyamba <mkoyamba@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/18 17:11:44 by Basile            #+#    #+#              #
-#    Updated: 2022/08/24 17:13:29 by mkoyamba         ###   ########.fr        #
+#    Updated: 2022/08/24 17:15:11 by mkoyamba         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,6 +39,8 @@ SRC +=\
 		builtins_parse.c\
 		setup.c\
 		setup_utils.c\
+		replace.c\
+		replace_utils.c\
 		test.c\
 
 # builtins

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   setup_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Bade-lee <bade-lee@student.s19.be>         +#+  +:+       +#+        */
+/*   By: mkoyamba <mkoyamba@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 11:57:01 by Bade-lee          #+#    #+#             */
-/*   Updated: 2022/08/24 11:50:37 by Bade-lee         ###   ########.fr       */
+/*   Updated: 2022/08/24 17:50:55 by mkoyamba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,11 +96,11 @@ t_list	**handle_input(char *line)
 		{
 			if (line[i + 1] == '<')
 			{
-				ft_lstadd_back(ip_list, ft_lstnew(get_op(line, i + 1, FD_IP)));
+				ft_lstadd_back(ip_list, ft_lstnew(get_op(line, i + 1, STR_IP)));
 				i++;
 			}
 			else
-				ft_lstadd_back(ip_list, ft_lstnew(get_op(line, i, STR_IP)));
+				ft_lstadd_back(ip_list, ft_lstnew(get_op(line, i, FD_IP)));
 			i++;
 		}
 		i++;

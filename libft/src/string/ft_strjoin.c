@@ -6,11 +6,11 @@
 /*   By: mkoyamba <mkoyamba@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/12 13:25:19 by Basile19          #+#    #+#             */
-/*   Updated: 2022/08/24 13:46:03 by mkoyamba         ###   ########.fr       */
+/*   Updated: 2022/08/24 17:36:51 by mkoyamba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/parser.h"
+#include "libft.h"
 
 char	*ft_strjoin(char const *s1, char const *s2)
 {

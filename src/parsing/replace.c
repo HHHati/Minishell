@@ -6,85 +6,31 @@
 /*   By: mkoyamba <mkoyamba@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 17:06:27 by mkoyamba          #+#    #+#             */
-/*   Updated: 2022/08/24 17:07:54 by mkoyamba         ###   ########.fr       */
+/*   Updated: 2022/08/24 17:37:48 by mkoyamba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/parser.h"
 
-static size_t	word_len_space(char *line, size_t n, size_t i)
+void	replace(t_list **parsed)
 {
-	while (line[n + i] && line[n + i] != ' ' && line[n + i] != '\t'
-		&& line[n + i] != '\n')
+	t_list			*list;
+	t_content		*content;
+	t_redirection	*redirection;
+	t_list			*put;
+
+	list = *parsed;
+	while (list)
 	{
-		if (line[n + i] == '\'')
+		content = (t_content *)list->content;
+		put = *(content->input);
+		while(put)
 		{
-			i++;
-			while (line[n + i] != '\'')
-				i++;
+			redirection = (t_redirection *)put->content;
+			if (redirection->type == STR_IP)
+				redirection->name = to_put(redirection->name);
+			put = put->next;
 		}
-		else if (line[n + i] == '\"')
-		{
-			i++;
-			while (line[n + i] != '\"')
-				i++;
-		}
-		i++;
+		list = list->next;
 	}
-	return (i);
 }
-
-static size_t	word_len(char *line, size_t n)
-{
-	size_t	i;
-
-	i = 0;
-	if (line[n + i] == '\'')
-	{
-		i++;
-		while (line[n + i] != '\'')
-			i++;
-		i++;
-	}
-	else if (line[n + i] == '\"')
-	{
-		i++;
-		while (line[n + i] != '\"')
-			i++;
-		i++;
-	}
-	else
-		i = word_len_space(line, n, i);
-	return (i);
-}
-/*
-static char	*end_word(char *line, size_t n)
-{
-	//char	*result;
-	(void)line;
-	(void)n;
-
-	return (NULL);
-}
-
-char	*replace(char *line)
-{
-	size_t	end_fst_half;
-	size_t	start_sec_half;
-	char	*str_to_put;
-	char	*result;
-
-	end_fst_half = 0;
-	while (line[end_fst_half])
-	{
-		if (line[end_fst_half] == '<' && line[end_fst_half + 1] &&
-			line[end_fst_half + 1] == '<')
-		{
-			start_sec_half = end_fst_half + 2;
-			while (line[start_sec_half] == ' ' || line[start_sec_half] == '\t' ||
-				line[start_sec_half] == '\n')
-			str_to_put = to_put(end_word(line, start_sec_half));
-		}
-		end_fst_half++;
-	}
-}*/

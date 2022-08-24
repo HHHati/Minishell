@@ -6,7 +6,7 @@
 /*   By: mkoyamba <mkoyamba@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 16:18:29 by mkoyamba          #+#    #+#             */
-/*   Updated: 2022/08/24 17:00:12 by mkoyamba         ###   ########.fr       */
+/*   Updated: 2022/08/24 17:47:52 by mkoyamba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	print_lst(t_list **alst)
 		while(*put)
 		{
 			redirection = (t_redirection *)(*put)->content;
-			printf("    %s -> type : %i\n", redirection->name, redirection->type);
+			printf("    |%s| -> type : %i\n", redirection->name, redirection->type);
 			*put = (*put)->next;
 		}
 		printf("\nOUTPUT : \n");

@@ -6,11 +6,11 @@
 /*   By: mkoyamba <mkoyamba@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/01 14:56:43 by bade-lee          #+#    #+#             */
-/*   Updated: 2022/08/24 13:41:02 by mkoyamba         ###   ########.fr       */
+/*   Updated: 2022/08/24 17:37:03 by mkoyamba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/parser.h"
+#include "libft.h"
 
 size_t	ft_strlen(const char *str)
 {

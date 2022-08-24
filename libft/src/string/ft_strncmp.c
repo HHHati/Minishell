@@ -6,11 +6,11 @@
 /*   By: mkoyamba <mkoyamba@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/01 17:05:40 by bade-lee          #+#    #+#             */
-/*   Updated: 2022/08/24 13:43:55 by mkoyamba         ###   ########.fr       */
+/*   Updated: 2022/08/24 17:36:59 by mkoyamba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/parser.h"
+#include "libft.h"
 
 int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {

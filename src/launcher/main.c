@@ -6,7 +6,7 @@
 /*   By: mkoyamba <mkoyamba@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 16:44:37 by mkoyamba          #+#    #+#             */
-/*   Updated: 2022/08/24 16:35:58 by mkoyamba         ###   ########.fr       */
+/*   Updated: 2022/08/24 17:47:06 by mkoyamba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ int	main(int argc, char **argv, char **env)
 	struct termios	termios_save;
 	struct termios	termios_new;
 	char			*line;
+	t_list			**list;
 
 	(void)argc;
 	(void)argv;
@@ -49,11 +50,15 @@ int	main(int argc, char **argv, char **env)
 			line = readline("\033[0;36m\033[1mminishell\033[0;31m ▸ \033[0m");
 		if (line)
 		{
-			g_flag = syntax_check(line);
 			if (ft_strlen(line) > 0)
 				add_history(line);
+			g_flag = syntax_check(line);
 			if (g_flag == 0)
-				print_lst(parsing(line));
+			{
+				list = parsing(line);
+				replace(list);
+				print_lst(list);
+			}
 			rl_replace_line("", 0);
 			rl_on_new_line();
 		}

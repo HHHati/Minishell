@@ -6,7 +6,7 @@
 /*   By: mkoyamba <mkoyamba@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/18 18:02:26 by Bade-lee          #+#    #+#             */
-/*   Updated: 2022/08/24 17:03:24 by mkoyamba         ###   ########.fr       */
+/*   Updated: 2022/08/24 18:00:53 by mkoyamba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@
 # define STDIN 0
 # define STDOUT 1
 # define STDERR 2
+
+extern int g_flag;
 
 //          ----------========== {   INCLUDES   } ==========----------
 

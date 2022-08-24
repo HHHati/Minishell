@@ -6,7 +6,7 @@
 /*   By: Bade-lee <bade-lee@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 19:37:41 by Bade-lee          #+#    #+#             */
-/*   Updated: 2022/08/24 12:11:41 by Bade-lee         ###   ########.fr       */
+/*   Updated: 2022/08/24 15:47:31 by Bade-lee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ static int	check_solo_operator(char *line)
 	letter = 1;
 	while (line && line[i])
 	{
-		if (!check_solo_operator_2(line, i))
+		if (!check_solo_operator_2(line, i, letter))
 			return (0);
 		if (line[i] == '<' || line[i] == '>')
 		{

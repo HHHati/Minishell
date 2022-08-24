@@ -6,7 +6,7 @@
 /*   By: Bade-lee <bade-lee@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 19:47:34 by Bade-lee          #+#    #+#             */
-/*   Updated: 2022/08/24 11:48:48 by Bade-lee         ###   ########.fr       */
+/*   Updated: 2022/08/24 15:41:13 by Bade-lee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ t_list	**free_first(t_list **list)
 {
 	t_list	**backup;
 
-	backup = *list;
+	backup = list;
 	*list = (*list)->next;
 	free(backup);
 	return (list);

@@ -6,7 +6,7 @@
 /*   By: Bade-lee <bade-lee@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 12:37:28 by Bade-lee          #+#    #+#             */
-/*   Updated: 2022/08/24 17:28:01 by Bade-lee         ###   ########.fr       */
+/*   Updated: 2022/08/24 18:55:15 by Bade-lee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ size_t	pass_quotes(char *line, size_t i, char c)
 
 size_t	pass_operator(char *line, size_t i)
 {
-	if (line[i] && (line[i] == '<' || line[i] == '>'))
+	while (line[i] && (line[i] == '<' || line[i] == '>'))
 		i++;
 	while (line [i] && (line[i] == ' ' || line[i] == '\t' || line[i] == '\n'))
 		i++;
@@ -48,35 +48,50 @@ size_t	first_comm(char *line)
 	return (i);
 }
 
-char	*take_comm(char *line, size_t i)
+char	*take_comm(char *line, size_t *i)
 {
 	char	*comm;
 	size_t	n;
+	size_t	j;
 
 	n = 0;
-	while (line [i] && line[i] != '<' && line[i] != '>')
+	j = *i;
+	while (line [*i] && line[*i] != '<' && line[*i] != '>')
 	{
-		i++;
+		*i += 1;
 		n++;
 	}
 	comm = malloc((n + 1) * sizeof(char));
 	if (!comm)
 		return (NULL);
 	n = 0;
-	i = first_comm(line);
-	while (line [i] && line[i] != '<' && line[i] != '>')
+	*i = j;
+	while (line [*i] && line[*i] != '<' && line[*i] != '>')
 	{
-		if (line[i] == '\"' || line[i] == '\'')
-			i++;
-		comm[n] = line[i];
-		i++;
+		if (line[*i] == '\"' || line[*i] == '\'')
+			*i += 1;
+		comm[n] = line[*i];
+		*i += 1;
 		n++;
 	}
 	comm[n] = '\0';
 	return (comm);
 }
 
+
+
 char	**handle_comm(char *line)
 {
-	return (ft_split_comm(take_comm(line, first_comm(line)), " \t\n"));
+	size_t	i;
+	char	*new_line;
+
+	i = first_comm(line);
+	new_line = take_comm(line, &i);
+	while (i < ft_strlen(line))
+	{
+		i = pass_operator(line, i);
+		new_line = ft_strjoin(new_line, take_comm(line, &i));
+		i++;
+	}
+	return (ft_split_comm(new_line, " \t\n"));
 }

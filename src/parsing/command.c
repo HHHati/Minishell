@@ -6,12 +6,11 @@
 /*   By: Bade-lee <bade-lee@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 12:37:28 by Bade-lee          #+#    #+#             */
-/*   Updated: 2022/08/24 15:13:57 by Bade-lee         ###   ########.fr       */
+/*   Updated: 2022/08/24 15:22:59 by Bade-lee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/parser.h"
-
 
 size_t	pass_quotes(char *line, size_t i, char c)
 {
@@ -42,9 +41,8 @@ size_t	first_comm(char *line)
 
 	i = 0;
 	while (line [i] && (line[i] == ' ' || line[i] == '\t' || line[i] == '\n')
-			&& line[i] != '<' && line[i] != '>')
+		&& line[i] != '<' && line[i] != '>')
 		i++;
-	
 	while (line[i] == '<' || line[i] == '>')
 		i = pass_operator(line, i + 1);
 	return (i);
@@ -79,17 +77,4 @@ char	*take_comm(char *line, size_t i)
 char	**handle_comm(char *line)
 {
 	return (ft_split_comm(take_comm(line, first_comm(line)), " \t\n"));
-}
-
-int	main()
-{
-	char *test = "    << \"je\" < yo test des choses comme il se doit < test";
-	size_t i = 0;
-	char **splitted = handle_comm(take_comm(test, first_comm(test)));
-
-	while (splitted[i])
-	{
-		printf("%s\n", take_comm(splitted[i],first_comm(splitted[i])));
-		i++;
-	}
 }

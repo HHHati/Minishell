@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkoyamba <mkoyamba@student.s19.be>         +#+  +:+       +#+        */
+/*   By: Bade-lee <bade-lee@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 16:42:10 by Bade-lee          #+#    #+#             */
-/*   Updated: 2022/08/24 17:03:08 by mkoyamba         ###   ########.fr       */
+/*   Updated: 2022/08/24 17:22:57 by Bade-lee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ int			check_operator_place(char *line, size_t i);
 t_list		**free_first(t_list **list);
 char		*replace(char *line);
 char		*to_put(char *end_word);
+int			count_quotes(char *line);
 
 void		print_lst(t_list **alst); // A SUPPRIMER !!!!!!!!!!!
 

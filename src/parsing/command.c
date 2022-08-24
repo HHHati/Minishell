@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   command.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkoyamba <mkoyamba@student.s19.be>         +#+  +:+       +#+        */
+/*   By: Bade-lee <bade-lee@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 12:37:28 by Bade-lee          #+#    #+#             */
-/*   Updated: 2022/08/24 16:54:30 by mkoyamba         ###   ########.fr       */
+/*   Updated: 2022/08/24 17:28:01 by Bade-lee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,8 @@ char	*take_comm(char *line, size_t i)
 	i = first_comm(line);
 	while (line [i] && line[i] != '<' && line[i] != '>')
 	{
+		if (line[i] == '\"' || line[i] == '\'')
+			i++;
 		comm[n] = line[i];
 		i++;
 		n++;

@@ -6,20 +6,20 @@
 /*   By: Bade-lee <bade-lee@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 17:22:49 by Bade-lee          #+#    #+#             */
-/*   Updated: 2022/08/25 11:44:50 by Bade-lee         ###   ########.fr       */
+/*   Updated: 2022/08/25 12:16:26 by Bade-lee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/builtins.h"
 
-static int	valid_name(char *name)
+static int	valid_name_unset(char *name)
 {
 	size_t	i;
 
 	i = 0;
 	if (!name)
 		return (0);
-	if (name[i] != '_' && !ft_isalpha(name[i])
+	if (name[i] != '_' && !ft_isalpha(name[i]))
 		return (0);
 	while (name[i])
 	{
@@ -61,26 +61,24 @@ static void	delete_var(char *name, char **env)
 int	builtin_unset(t_minishell *minishell)
 {
 	size_t	i;
-	int		error;
+	int		status;
 
 	i = 1;
 	if (!minishell->env[i])
 		return (0);
-	error = 0;
+	status = 0;
 	while (minishell->env[i])
 	{
-		if (!valid_name(minishell->env[i]))
+		if (!valid_name_unset(minishell->env[i]))
 		{
 			ft_putstr_fd("minishell: unset: '", STDERR);
 			ft_putstr_fd(minishell->env[i], STDERR);
 			ft_putendl_fd("': not a valid identifier", STDERR);
-			error = 1;
+			status = 1;
 		}
 		else
-			delete_var(minishell->env[i]), minishell->env)
+			delete_var(minishell->env[i], minishell->env);
 		i++;
 	}
-	if (error)
-		return(1)
-	return (0);
+	return (status);
 }

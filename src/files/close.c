@@ -6,7 +6,7 @@
 /*   By: mkoyamba <mkoyamba@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 15:14:40 by mkoyamba          #+#    #+#             */
-/*   Updated: 2022/08/25 15:34:58 by mkoyamba         ###   ########.fr       */
+/*   Updated: 2022/08/25 16:51:29 by mkoyamba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	close_put(t_list **db_put)
 {
-	t_list	*put;
+	t_list			*put;
 	t_redirection	*redir;
 
 	put = *db_put;

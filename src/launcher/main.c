@@ -6,7 +6,7 @@
 /*   By: mkoyamba <mkoyamba@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 16:44:37 by mkoyamba          #+#    #+#             */
-/*   Updated: 2022/08/25 16:15:26 by mkoyamba         ###   ########.fr       */
+/*   Updated: 2022/08/25 16:49:11 by mkoyamba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ static void	on_line(t_minishell *minishell, char *line)
 		minishell->list = parsing(line);
 		if (minishell->list)
 		{
-			//replace(minishell->list);
+			replace(minishell->list);
 			exec_line(minishell);
 			free_parsed(minishell->list);
 		}

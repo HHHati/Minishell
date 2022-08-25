@@ -6,7 +6,7 @@
 /*   By: mkoyamba <mkoyamba@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 14:12:34 by mkoyamba          #+#    #+#             */
-/*   Updated: 2022/08/25 15:38:50 by mkoyamba         ###   ########.fr       */
+/*   Updated: 2022/08/25 16:51:19 by mkoyamba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static int	opener_input(t_list *input, t_list **parsed)
 		{
 			fd = open(redir->name, O_RDONLY);
 			if (fd < 0)
-				return(error_parsed(parsed, redir->name, 0));
+				return (error_parsed(parsed, redir->name, 0));
 			redir->fd = fd;
 		}
 		input = input->next;
@@ -35,7 +35,7 @@ static int	opener_input(t_list *input, t_list **parsed)
 static int	not_a_directory(t_redirection *redir, t_list **parsed)
 {
 	int	fd;
-	
+
 	if (redir->type == SMP_OP)
 	{
 		fd = open(redir->name, O_CREAT);

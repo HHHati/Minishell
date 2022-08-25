@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Bade-lee <bade-lee@student.s19.be>         +#+  +:+       +#+        */
+/*   By: mkoyamba <mkoyamba@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 17:22:44 by Bade-lee          #+#    #+#             */
-/*   Updated: 2022/08/25 14:15:56 by Bade-lee         ###   ########.fr       */
+/*   Updated: 2022/08/25 16:36:54 by mkoyamba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ static int	modify_variable(char **env, char *name, t_minishell *minishell)
 		equal = 1;
 	while (env[i])
 	{
-		if (!(ft_strncmp(name, env[i]) && env[i[n] == '=']))
+		if (ft_strncmp(name, env[i], n + 1) == 0)
 			return (replace_line(name, i, equal, minishell));
 		i++;
 	}
@@ -77,7 +77,7 @@ static int	add_value(char *name, t_minishell *minishell)
 
 	i = 0;
 	n = ft_strlen(name);
-	minishell->env = New_env_alloc(minishell);
+	minishell->env = new_env_alloc(minishell);
 	if (!minishell->env)
 		return (1);
 	while (minishell->env[i])
@@ -97,7 +97,6 @@ int	builtin_export(char **comm, t_minishell *minishell)
 	int		status;
 
 	i = 1;
-	comm(void);
 	if (comm[i])
 		return (builtin_env(minishell));
 	status = 0;

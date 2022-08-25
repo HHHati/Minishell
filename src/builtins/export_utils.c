@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Bade-lee <bade-lee@student.s19.be>         +#+  +:+       +#+        */
+/*   By: mkoyamba <mkoyamba@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 13:00:56 by Bade-lee          #+#    #+#             */
-/*   Updated: 2022/08/25 13:44:02 by Bade-lee         ###   ########.fr       */
+/*   Updated: 2022/08/25 16:31:50 by mkoyamba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,10 @@ int	contain_equal(char *name)
 	return (0);
 }
 
-void	print_error_export(char **env)
+void	print_error_export(char *name)
 {
 	ft_putstr_fd("minishell: export: '", STDERR);
-	ft_putstr_fd(env, STDERR);
+	ft_putstr_fd(name, STDERR);
 	ft_putendl_fd("': not a valid identifier", STDERR);
 }
 

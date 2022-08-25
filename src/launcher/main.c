@@ -6,7 +6,7 @@
 /*   By: mkoyamba <mkoyamba@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 16:44:37 by mkoyamba          #+#    #+#             */
-/*   Updated: 2022/08/25 13:41:05 by mkoyamba         ###   ########.fr       */
+/*   Updated: 2022/08/25 16:15:26 by mkoyamba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,15 @@ static void	not_on_line(t_minishell *minishell, int mode)
 		ft_putendl_fd("exit", STDOUT);
 	tcsetattr(0, 0, &(minishell->settings.termios_save));
 	free_minishell(minishell);
-	exit(0);
+}
+
+static void	exec_line(t_minishell *minishell)
+{
+	(void)minishell;
+	//print_lst(minishell->list); // A SUPPRIMER !!!!!!!!!!!!!!!!!
+	files_opening(minishell->list);
+	if (g_flag)
+		return ;
 }
 
 static void	on_line(t_minishell *minishell, char *line)
@@ -46,8 +54,8 @@ static void	on_line(t_minishell *minishell, char *line)
 		minishell->list = parsing(line);
 		if (minishell->list)
 		{
-			replace(minishell->list);
-			print_lst(minishell->list);
+			//replace(minishell->list);
+			exec_line(minishell);
 			free_parsed(minishell->list);
 		}
 		else

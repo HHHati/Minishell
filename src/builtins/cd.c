@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Bade-lee <bade-lee@student.s19.be>         +#+  +:+       +#+        */
+/*   By: mkoyamba <mkoyamba@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 17:22:33 by Bade-lee          #+#    #+#             */
-/*   Updated: 2022/08/25 15:20:56 by Bade-lee         ###   ########.fr       */
+/*   Updated: 2022/08/25 16:29:53 by mkoyamba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static char	*str_dupli(char *line)
 	return (new_line);
 }
 
-static char	*get_env_value(char *name, t_minishell minishell)
+static char	*get_env_value(char *name, t_minishell *minishell)
 {
 	size_t	i;
 	size_t	n;
@@ -44,7 +44,7 @@ static char	*get_env_value(char *name, t_minishell minishell)
 	{
 		if (!(ft_strncmp(minishell->env[i], name, n))
 			&& minishell->env[i][n] == '=')
-			return (str_dupli(minishell->env[i][n + 1]));
+			return (str_dupli(&(minishell->env[i][n + 1])));
 		i++;
 	}
 	return (str_dupli(""));
@@ -62,7 +62,7 @@ int	builtin_cd(char **comm, t_minishell *minishell)
 	if (comm[1])
 		path = get_env_value("HOME", minishell);
 	else
-		path = str_dupli(comm[i]);
+		path = str_dupli(comm[1]);
 	if (!path)
 		return (1);
 	if (chdir(path) == -1)

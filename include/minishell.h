@@ -6,7 +6,7 @@
 /*   By: mkoyamba <mkoyamba@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/18 18:02:26 by Bade-lee          #+#    #+#             */
-/*   Updated: 2022/08/25 13:05:18 by mkoyamba         ###   ########.fr       */
+/*   Updated: 2022/08/25 16:44:43 by mkoyamba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,14 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <termios.h>
+# include <fcntl.h>
+# include <sys/errno.h>
 # include <readline/readline.h>
 # include <readline/history.h>
 
 # include "../libft/include/libft.h"
-# include "parser.h"
-# include "builtins.h"
 
-# include "wraloc.h" //A SUPPRIMER !!!!
+// # include "wraloc.h" //A SUPPRIMER !!!!
 
 //          ----------========== {     DEFS     } ==========----------
 
@@ -62,5 +62,11 @@ t_minishell	*get_minishell(char **env);
 void		sigint_handler(int sig);
 void		free_parsed(t_list **parsed);
 void		free_minishell(t_minishell *minishell);
+
+//          ----------========== {   INCLUDES   } ==========----------
+
+# include "parser.h"
+# include "builtins.h"
+# include "files.h"
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: mkoyamba <mkoyamba@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 19:19:37 by mkoyamba          #+#    #+#             */
-/*   Updated: 2022/08/25 13:59:36 by mkoyamba         ###   ########.fr       */
+/*   Updated: 2022/08/25 16:11:32 by mkoyamba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ void	free_parsed(t_list **parsed)
 		return ;
 	while (*parsed)
 	{
+		close_fds(parsed);
 		content = (t_content *)(*parsed)->content;
 		free_put(*(content->input));
 		free(content->input);
@@ -56,4 +57,5 @@ void	free_minishell(t_minishell *minishell)
 	mat_free(minishell->env);
 	free(minishell);
 	rl_clear_history();
+	exit(0);
 }

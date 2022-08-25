@@ -6,7 +6,7 @@
 #    By: mkoyamba <mkoyamba@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/18 17:11:44 by Basile            #+#    #+#              #
-#    Updated: 2022/08/24 20:11:30 by mkoyamba         ###   ########.fr        #
+#    Updated: 2022/08/25 16:27:03 by mkoyamba         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,7 +47,18 @@ SRC +=\
 
 # builtins
 SRC +=\
+		cd.c\
 		echo.c\
+		env.c\
+		export_utils.c\
+		export.c\
+		pwd.c\
+		unset.c\
+
+# files
+SRC +=\
+		close.c\
+		open.c\
 
 #          ----------========== {     OBJS     } ==========----------
 

@@ -6,7 +6,7 @@
 /*   By: Bade-lee <bade-lee@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 19:47:34 by Bade-lee          #+#    #+#             */
-/*   Updated: 2022/08/24 17:27:08 by Bade-lee         ###   ########.fr       */
+/*   Updated: 2022/08/25 17:38:26 by Bade-lee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,4 +34,21 @@ t_list	**free_first(t_list **list)
 	*list = (*list)->next;
 	free(backup);
 	return (list);
+}
+
+char	*take_comm_2(char *comm, char *line, size_t n, size_t *i)
+{
+	while (line[*i] && line[*i] != '<' && line[*i] != '>')
+	{
+		if (line[*i] == '\"' || line[*i] == '\'')
+			*i += 1;
+		if (line[*i])
+		{
+			comm[n] = line[*i];
+			*i += 1;
+		}
+		n++;
+	}
+	comm[n] = '\0';
+	return (comm);
 }

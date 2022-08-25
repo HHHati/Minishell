@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkoyamba <mkoyamba@student.s19.be>         +#+  +:+       +#+        */
+/*   By: Bade-lee <bade-lee@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 16:42:10 by Bade-lee          #+#    #+#             */
-/*   Updated: 2022/08/24 19:25:36 by mkoyamba         ###   ########.fr       */
+/*   Updated: 2022/08/25 17:36:07 by Bade-lee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ int			check_operator_place(char *line, size_t i);
 t_list		**free_first(t_list **list);
 void		replace(t_list **parsed);
 char		*to_put(char *end_word);
+char		*take_comm_2(char *comm, char *line, size_t n, size_t *i);
 
 void		print_lst(t_list **alst); // A SUPPRIMER !!!!!!!!!!!
 

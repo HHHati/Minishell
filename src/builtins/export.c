@@ -6,7 +6,7 @@
 /*   By: Bade-lee <bade-lee@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 17:22:44 by Bade-lee          #+#    #+#             */
-/*   Updated: 2022/08/25 14:07:49 by Bade-lee         ###   ########.fr       */
+/*   Updated: 2022/08/25 14:15:56 by Bade-lee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,22 +98,22 @@ int	builtin_export(char **comm, t_minishell *minishell)
 
 	i = 1;
 	comm(void);
-	if (minishell->env[i])
+	if (comm[i])
 		return (builtin_env(minishell));
 	status = 0;
-	while (minishell->env[i])
+	while (comm[i])
 	{
-		if (!valid_name_export(minishell->env[i]))
+		if (!valid_name_export(comm[i]))
 		{
-			print_error_export(minishell->env[i]);
+			print_error_export(comm[i]);
 			status = 1;
 			i++;
 			continue ;
 		}
-		if (variable_already_exist(minishell->env, minishell->env[i]))
-			modify_variable(minishell->env, minishell->env[i], minishell);
+		if (variable_already_exist(minishell->env, comm[i]))
+			modify_variable(minishell->env, comm[i], minishell);
 		else
-			add_value(minishell->env[i], minishell);
+			add_value(comm[i], minishell);
 		i++;
 	}
 	return (status);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   setup.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Bade-lee <bade-lee@student.s19.be>         +#+  +:+       +#+        */
+/*   By: mkoyamba <mkoyamba@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 11:10:34 by Bade-lee          #+#    #+#             */
-/*   Updated: 2022/08/24 11:33:46 by Bade-lee         ###   ########.fr       */
+/*   Updated: 2022/08/25 12:53:20 by mkoyamba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,14 @@ t_list	**create_big_list(char **tab)
 	size_t	len;
 
 	i = 0;
+	if (!tab)
+		return (NULL);
 	list = malloc(sizeof(t_list *));
 	if (!list)
+	{
+		mat_free(tab);
 		return (NULL);
+	}
 	len = ft_matlen(tab);
 	*list = ft_lstnew(get_content(tab[i]));
 	if (!*list)
@@ -32,6 +37,7 @@ t_list	**create_big_list(char **tab)
 		ft_lstadd_back(list, ft_lstnew(get_content(tab[i])));
 		i++;
 	}
+	mat_free(tab);
 	return (list);
 }
 

@@ -6,16 +6,38 @@
 /*   By: mkoyamba <mkoyamba@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 16:44:37 by mkoyamba          #+#    #+#             */
-/*   Updated: 2022/08/24 20:13:41 by mkoyamba         ###   ########.fr       */
+/*   Updated: 2022/08/25 13:41:05 by mkoyamba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
+static void	not_on_line(t_minishell *minishell, int mode)
+{
+	if (mode == CTRL_D)
+	{
+		if (g_flag != 0)
+			ft_putendl_fd(
+				"\033[F\033[0;36m\033[1mminishell\033[0;31m ▸ \033[0mexit",
+				STDOUT);
+		else
+			ft_putendl_fd(
+				"\033[F\033[0;36m\033[1mminishell\033[0;32m ▸ \033[0mexit",
+				STDOUT);
+	}
+	else
+		ft_putendl_fd("exit", STDOUT);
+	tcsetattr(0, 0, &(minishell->settings.termios_save));
+	free_minishell(minishell);
+	exit(0);
+}
+
 static void	on_line(t_minishell *minishell, char *line)
 {
 	if (ft_strlen(line) > 0)
 		add_history(line);
+	if (ft_strncmp(line, "exit", 5) == 0)
+		not_on_line(minishell, EXIT);
 	g_flag = syntax_check(line);
 	if (g_flag == 0)
 	{
@@ -36,19 +58,6 @@ static void	on_line(t_minishell *minishell, char *line)
 	}
 	rl_replace_line("", 0);
 	rl_on_new_line();
-}
-
-void	not_on_line(t_minishell *minishell)
-{
-	if (g_flag != 0)
-		ft_putendl_fd(
-			"\033[F\033[0;36m\033[1mminishell\033[0;31m ▸ \033[0mexit", STDOUT);
-	else
-		ft_putendl_fd(
-			"\033[F\033[0;36m\033[1mminishell\033[0;32m ▸ \033[0mexit", STDOUT);
-	tcsetattr(0, 0, &(minishell->settings.termios_save));
-	free_minishell(minishell);
-	exit(0);
 }
 
 int	main(int argc, char **argv, char **env)
@@ -74,7 +83,7 @@ int	main(int argc, char **argv, char **env)
 		if (line)
 			on_line(minishell, line);
 		else
-			not_on_line(minishell);
+			not_on_line(minishell, CTRL_D);
 		free(line);
 	}
 	return (0);

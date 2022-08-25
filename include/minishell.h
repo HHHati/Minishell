@@ -6,7 +6,7 @@
 /*   By: mkoyamba <mkoyamba@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/18 18:02:26 by Bade-lee          #+#    #+#             */
-/*   Updated: 2022/08/24 19:41:33 by mkoyamba         ###   ########.fr       */
+/*   Updated: 2022/08/25 13:05:18 by mkoyamba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,16 @@
 # include "parser.h"
 # include "builtins.h"
 
+# include "wraloc.h" //A SUPPRIMER !!!!
+
 //          ----------========== {     DEFS     } ==========----------
 
 # define STDIN 0
 # define STDOUT 1
 # define STDERR 2
+
+# define CTRL_D 0
+# define EXIT 1
 
 int	g_flag;
 

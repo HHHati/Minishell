@@ -6,7 +6,7 @@
 /*   By: Bade-lee <bade-lee@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 17:17:09 by Bade-lee          #+#    #+#             */
-/*   Updated: 2022/08/25 14:07:07 by Bade-lee         ###   ########.fr       */
+/*   Updated: 2022/08/25 14:49:56 by Bade-lee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	print_error_export(char **env);
 char	**new_env_alloc(t_minishell *minishell);
 int		replace_line(char *name, size_t i, int equal, t_minishell *minishell);
 
-int		builtin_pwd(t_minishell *minishell);
+int		builtin_pwd(void);
 
 int		builtin_unset(t_minishell *minishell);
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Bade-lee <bade-lee@student.s19.be>         +#+  +:+       +#+        */
+/*   By: mkoyamba <mkoyamba@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 16:44:37 by mkoyamba          #+#    #+#             */
-/*   Updated: 2022/08/25 17:38:22 by Bade-lee         ###   ########.fr       */
+/*   Updated: 2022/08/26 00:34:47 by mkoyamba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,13 @@ static void	not_on_line(t_minishell *minishell, int mode)
 
 static void	exec_line(t_minishell *minishell)
 {
-//	print_lst(minishell->list); // A SUPPRIMER !!!!!!!!!!!!!!!!!
+	if (g_flag)
+		return ;
+	//print_lst(minishell->list); // A SUPPRIMER !!!!!!!!!!!!!!!!!
 	files_opening(minishell->list);
 	if (g_flag)
 		return ;
+	minishell_exec(minishell);
 }
 
 static void	on_line(t_minishell *minishell, char *line)
@@ -54,6 +57,8 @@ static void	on_line(t_minishell *minishell, char *line)
 		if (minishell->list)
 		{
 			replace(minishell->list);
+			if (g_flag)
+				return ;
 			exec_line(minishell);
 			free_parsed(minishell->list);
 		}

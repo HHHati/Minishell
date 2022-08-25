@@ -6,7 +6,7 @@
 #    By: mkoyamba <mkoyamba@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/18 17:11:44 by Basile            #+#    #+#              #
-#    Updated: 2022/08/25 16:27:03 by mkoyamba         ###   ########.fr        #
+#    Updated: 2022/08/25 19:03:37 by mkoyamba         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,7 +38,6 @@ SRC +=\
 		syntax_utils.c\
 		command.c\
 		command_utils.c\
-		builtins_parse.c\
 		setup.c\
 		setup_utils.c\
 		replace.c\
@@ -59,6 +58,17 @@ SRC +=\
 SRC +=\
 		close.c\
 		open.c\
+
+# exec
+SRC +=\
+		exec_solo.c\
+		exec_first.c\
+		exec_middle.c\
+		exec_last.c\
+		exec_utils.c\
+		exec.c\
+		get_path.c\
+		split_pipex.c\
 
 #          ----------========== {     OBJS     } ==========----------
 

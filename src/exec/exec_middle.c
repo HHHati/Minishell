@@ -1,32 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   struct.h                                           :+:      :+:    :+:   */
+/*   exec_middle.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mkoyamba <mkoyamba@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/25 16:53:46 by mkoyamba          #+#    #+#             */
-/*   Updated: 2022/08/25 21:25:21 by mkoyamba         ###   ########.fr       */
+/*   Created: 2022/08/25 18:33:42 by mkoyamba          #+#    #+#             */
+/*   Updated: 2022/08/25 19:35:25 by mkoyamba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef STRUCT_H
-# define STRUCT_H
+#include "../../include/exec.h"
 
-//          ----------========== {    STRUCT    } ==========----------
-
-typedef struct s_settings
+void	exec_middle(t_list *pipe, int rang, int **pipes, t_minishell *minishell)
 {
-	struct termios	termios_save;
-	struct termios	termios_new;
-}				t_settings;
-
-typedef struct s_minishell
-{
-	t_list		**list;
-	char		**env;
-	t_settings	settings;
-	int			fork_comm[2];
-}				t_minishell;
-
-#endif
+	(void)pipe;
+	(void)rang;
+	(void)pipes;
+	(void)minishell;
+}

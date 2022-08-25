@@ -6,7 +6,7 @@
 /*   By: mkoyamba <mkoyamba@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/18 18:02:26 by Bade-lee          #+#    #+#             */
-/*   Updated: 2022/08/25 16:55:06 by mkoyamba         ###   ########.fr       */
+/*   Updated: 2022/08/26 00:54:25 by mkoyamba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,14 @@
 # include <termios.h>
 # include <fcntl.h>
 # include <sys/errno.h>
+# include <signal.h>
 # include <readline/readline.h>
 # include <readline/history.h>
 
 # include "../libft/include/libft.h"
 # include "struct.h"
 # include "builtins.h"
+# include "exec.h"
 # include "parser.h"
 # include "files.h"
 

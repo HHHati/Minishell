@@ -6,7 +6,7 @@
 /*   By: mkoyamba <mkoyamba@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 14:12:34 by mkoyamba          #+#    #+#             */
-/*   Updated: 2022/08/25 16:51:19 by mkoyamba         ###   ########.fr       */
+/*   Updated: 2022/08/26 01:26:45 by mkoyamba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static int	opener_input(t_list *input, t_list **parsed)
 		redir = (t_redirection *)input->content;
 		if (redir->type == FD_IP)
 		{
-			fd = open(redir->name, O_RDONLY);
+			fd = open(redir->name, O_RDONLY, S_IRWXU);
 			if (fd < 0)
 				return (error_parsed(parsed, redir->name, 0));
 			redir->fd = fd;
@@ -32,23 +32,23 @@ static int	opener_input(t_list *input, t_list **parsed)
 	return (1);
 }
 
-static int	not_a_directory(t_redirection *redir, t_list **parsed)
+static int	not_a_directory(t_redirection **redir, t_list **parsed)
 {
 	int	fd;
 
-	if (redir->type == SMP_OP)
+	if ((*redir)->type == SMP_OP)
 	{
-		fd = open(redir->name, O_CREAT);
+		fd = open((*redir)->name, O_CREAT | O_WRONLY | O_TRUNC, 0644);
 		if (fd < 0)
-			return (error_parsed(parsed, redir->name, 2));
-		redir->fd = fd;
+			return (error_parsed(parsed, (*redir)->name, 2));
+		(*redir)->fd = fd;
 	}
-	else if (redir->type == APP_OP)
+	else if ((*redir)->type == APP_OP)
 	{
-		fd = open(redir->name, O_APPEND);
+		fd = open((*redir)->name, O_CREAT | O_WRONLY | O_APPEND, 0644);
 		if (fd < 0)
-			return (error_parsed(parsed, redir->name, 2));
-		redir->fd = fd;
+			return (error_parsed(parsed, (*redir)->name, 2));
+		(*redir)->fd = fd;
 	}
 	return (1);
 }
@@ -68,7 +68,7 @@ static int	opener_output(t_list *output, t_list **parsed)
 			return (error_parsed(parsed, redir->name, 1));
 		}
 		else
-			if (!not_a_directory(redir, parsed))
+			if (!not_a_directory(&redir, parsed))
 				return (0);
 		output = output->next;
 	}

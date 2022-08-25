@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   setup_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Bade-lee <bade-lee@student.s19.be>         +#+  +:+       +#+        */
+/*   By: mkoyamba <mkoyamba@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 11:57:01 by Bade-lee          #+#    #+#             */
-/*   Updated: 2022/08/24 19:01:54 by Bade-lee         ###   ########.fr       */
+/*   Updated: 2022/08/25 21:40:24 by mkoyamba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,11 +124,11 @@ t_list	**handle_output(char *line)
 		{
 			if (line[i + 1] == '>')
 			{
-				ft_lstadd_back(op_list, ft_lstnew(get_op(line, i + 1, SMP_OP)));
+				ft_lstadd_back(op_list, ft_lstnew(get_op(line, i + 1, APP_OP)));
 				i++;
 			}
 			else
-				ft_lstadd_back(op_list, ft_lstnew(get_op(line, i, APP_OP)));
+				ft_lstadd_back(op_list, ft_lstnew(get_op(line, i, SMP_OP)));
 			i++;
 		}
 		i++;

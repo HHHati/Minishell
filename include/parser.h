@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkoyamba <mkoyamba@student.s19.be>         +#+  +:+       +#+        */
+/*   By: Bade-lee <bade-lee@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 16:42:10 by Bade-lee          #+#    #+#             */
-/*   Updated: 2022/08/26 01:43:59 by mkoyamba         ###   ########.fr       */
+/*   Updated: 2022/08/27 01:11:04 by Bade-lee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ typedef struct s_redirection
 
 //          ----------========== {     FCTS     } ==========----------
 
-t_list		**parsing(char *line);
+t_list		**parsing(char *line, t_minishell *minishell);
 t_list		**create_big_list(char **tab);
 int			syntax_check(char *line);
 int			is_empty(char *line);
@@ -69,5 +69,11 @@ char		*to_put(char *end_word);
 char		*take_comm_2(char *comm, char *line, size_t n, size_t *i);
 
 void		print_lst(t_list **alst); // A SUPPRIMER !!!!!!!!!!!
+
+char		*check_dollar(char *line, t_minishell *minishell);
+char		*take_dollar_variable(char *line, size_t i, t_minishell *minishell);
+char		*replace_dollar(char *line, size_t start, size_t end, char *new_str);
+int			check_if_dollar(char *line);
+char		*remove_quotes_dollar(char *line, size_t i, char c);
 
 #endif

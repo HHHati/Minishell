@@ -6,21 +6,21 @@
 /*   By: Bade-lee <bade-lee@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 16:03:32 by Bade-lee          #+#    #+#             */
-/*   Updated: 2022/08/26 21:08:22 by Bade-lee         ###   ########.fr       */
+/*   Updated: 2022/08/27 01:11:46 by Bade-lee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/parser.h"
 
 
-char	*update_dollar(char *line, size_t i, t_minishell *minishell)
+static char	*update_dollar(char *line, size_t i, t_minishell *minishell)
 {
 	char *save;
 	if (line[i + 1] == '\'' || line[i + 1] == '\"')
 	{
 		line = remove_quotes_dollar(line, i + 2, line[i + 1]);
 		if (!line)
-			return (NULL)
+			return (NULL);
 		save = line;
 		line = replace_dollar(line, i, i + 1, "");
 		free(save);
@@ -63,10 +63,4 @@ char	*check_dollar(char *line, t_minishell *minishell)
 		i++;
 	}
 	return (line);
-}
-
-int main()
-{
-	char *test = "je suis $? la ligne $? test";
-	printf("%s", check_dollar(test));
 }

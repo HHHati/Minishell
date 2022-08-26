@@ -6,7 +6,7 @@
 /*   By: Bade-lee <bade-lee@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 15:47:09 by Bade-lee          #+#    #+#             */
-/*   Updated: 2022/08/26 20:57:19 by Bade-lee         ###   ########.fr       */
+/*   Updated: 2022/08/26 21:54:08 by Bade-lee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,10 @@ t_list	**parsing(char *line, t_minishell *minishell)
 
 	if (!line[0])
 		return (NULL);
-	line = check_dollar(line, minishell)
+	line = check_dollar(line, minishell);
 	if (!line)
 		return (NULL);
-	tab = split_line(line, minishell);
+	tab = split_line(line);
 	result = create_big_list(tab);
 	return (result);
 }

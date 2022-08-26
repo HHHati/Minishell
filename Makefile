@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mkoyamba <mkoyamba@student.s19.be>         +#+  +:+       +#+         #
+#    By: Bade-lee <bade-lee@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/18 17:11:44 by Basile            #+#    #+#              #
-#    Updated: 2022/08/25 19:03:37 by mkoyamba         ###   ########.fr        #
+#    Updated: 2022/08/27 01:10:16 by Bade-lee         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,6 +42,8 @@ SRC +=\
 		setup_utils.c\
 		replace.c\
 		replace_utils.c\
+		dollar.c\
+		dollar_utils.c\
 		test.c\
 
 # builtins

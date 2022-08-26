@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   splitting.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkoyamba <mkoyamba@student.s19.be>         +#+  +:+       +#+        */
+/*   By: Bade-lee <bade-lee@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 11:17:34 by Bade-lee          #+#    #+#             */
-/*   Updated: 2022/08/25 12:33:20 by mkoyamba         ###   ########.fr       */
+/*   Updated: 2022/08/26 18:08:34 by Bade-lee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	count_pipes(char *line)
 	return (count);
 }
 
-char	**split_line(char *line)
+char	**split_line(char *line, t_minishell *minishell)
 {
 	size_t	i;
 	char	**tab;

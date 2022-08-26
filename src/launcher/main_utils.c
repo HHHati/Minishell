@@ -6,7 +6,7 @@
 /*   By: mkoyamba <mkoyamba@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 18:31:40 by mkoyamba          #+#    #+#             */
-/*   Updated: 2022/08/25 16:11:06 by mkoyamba         ###   ########.fr       */
+/*   Updated: 2022/08/26 20:04:34 by mkoyamba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,16 @@
 void	sigint_handler(int sig)
 {
 	(void)sig;
+	if (s_flag == IN_PID)
+		exit (1);
+	g_flag = 1;
+	s_flag = S_PRINT;
 	ft_putstr_fd("\n", 2);
 	rl_replace_line("", 0);
 	rl_on_new_line();
 	rl_redisplay();
 	write(1, "\b\b", 2);
 	write(1, "\033[0;31m▸ \033[0m", 15);
-	g_flag = 1;
 }
 
 void	mat_free(char **mat)
@@ -69,6 +72,8 @@ t_minishell	*get_minishell(char **env)
 {
 	t_minishell	*minishell;
 
+	g_flag = 0;
+	s_flag = DEFAULT;
 	minishell = malloc(sizeof(t_minishell));
 	if (!minishell)
 		return (NULL);

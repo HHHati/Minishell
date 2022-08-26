@@ -6,7 +6,7 @@
 /*   By: mkoyamba <mkoyamba@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 18:10:30 by mkoyamba          #+#    #+#             */
-/*   Updated: 2022/08/25 22:05:10 by mkoyamba         ###   ########.fr       */
+/*   Updated: 2022/08/26 15:31:06 by mkoyamba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,13 +51,7 @@ int	exec_solo(t_list *pipe, t_minishell *minishell)
 {
 	t_content	*content;
 	char		*path;
-	int			save;
 
-	close(minishell->fork_comm[0]);
-	save = dup(STDOUT);
-	dup2(minishell->fork_comm[1], STDOUT);
-	ft_putstr_fd("0", STDOUT);
-	dup2(save, STDOUT);
 	content = pipe->content;
 	path = get_path(minishell->env, content->comm);
 	if (!path)
@@ -67,7 +61,5 @@ int	exec_solo(t_list *pipe, t_minishell *minishell)
 	ft_putstr_fd("minishell: ", STDERR);
 	ft_putstr_fd(content->comm[0], STDERR);
 	ft_putendl_fd(": command not found", STDERR);
-	dup2(minishell->fork_comm[1], STDOUT);
-	ft_putstr_fd("1", STDOUT);
-	exit (1);
+	exit (127);
 }

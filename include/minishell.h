@@ -6,7 +6,7 @@
 /*   By: mkoyamba <mkoyamba@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/18 18:02:26 by Bade-lee          #+#    #+#             */
-/*   Updated: 2022/08/26 00:54:25 by mkoyamba         ###   ########.fr       */
+/*   Updated: 2022/08/26 18:17:23 by mkoyamba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,10 @@
 # define CTRL_D 0
 # define EXIT 1
 
-int	g_flag;
+int	g_tab_flag[2];
+
+# define g_flag g_tab_flag[0]
+# define s_flag g_tab_flag[1]
 
 //          ----------========== {     FCTS     } ==========----------
 

@@ -6,7 +6,7 @@
 /*   By: mkoyamba <mkoyamba@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 16:44:37 by mkoyamba          #+#    #+#             */
-/*   Updated: 2022/08/26 00:34:47 by mkoyamba         ###   ########.fr       */
+/*   Updated: 2022/08/26 20:55:41 by mkoyamba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,6 @@ int	main(int argc, char **argv, char **env)
 
 	(void)argc;
 	(void)argv;
-	g_flag = 0;
 	minishell = get_minishell(env);
 	if (!minishell)
 	{
@@ -88,15 +87,19 @@ int	main(int argc, char **argv, char **env)
 	}
 	while (1)
 	{
+		s_flag = DEFAULT;
 		if (g_flag == 0)
 			line = readline("\033[0;36m\033[1mminishell\033[0;32m ▸ \033[0m");
-		else
+		else if (g_flag == 1)
+			line = readline("");
+		else if (s_flag != S_PRINT)
 			line = readline("\033[0;36m\033[1mminishell\033[0;31m ▸ \033[0m");
 		if (line)
 			on_line(minishell, line);
 		else
 			not_on_line(minishell, CTRL_D);
-		free(line);
+		if (s_flag == DEFAULT)
+			free(line);
 	}
 	return (0);
 }

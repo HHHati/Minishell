@@ -6,7 +6,7 @@
 /*   By: mkoyamba <mkoyamba@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 16:53:46 by mkoyamba          #+#    #+#             */
-/*   Updated: 2022/08/25 21:25:21 by mkoyamba         ###   ########.fr       */
+/*   Updated: 2022/08/26 12:43:51 by mkoyamba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ typedef struct s_minishell
 	t_list		**list;
 	char		**env;
 	t_settings	settings;
-	int			fork_comm[2];
 }				t_minishell;
 
 #endif

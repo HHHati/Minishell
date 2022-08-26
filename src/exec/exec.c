@@ -6,15 +6,31 @@
 /*   By: mkoyamba <mkoyamba@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 17:19:30 by mkoyamba          #+#    #+#             */
-/*   Updated: 2022/08/26 01:38:46 by mkoyamba         ###   ########.fr       */
+/*   Updated: 2022/08/26 20:24:40 by mkoyamba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/exec.h"
 
+static void	sign_exec(int sig)
+{
+	ft_putstr_fd("\n", 2);
+	rl_replace_line("", 0);
+	rl_on_new_line();
+	(void)sig;
+}
+
+static void	sign_out(int sig)
+{
+	(void)sig;
+	exit (1);
+}
+
 static void	mini_pipex(t_list *pipe, int rang, int **pipes,
 				t_minishell *minishell)
 {
+	s_flag = IN_PID;
+	signal(SIGINT, sign_out);
 	if (ft_lstsize(pipe) == 1)
 	{
 		g_flag = exec_solo(*(minishell->list), minishell);
@@ -28,39 +44,36 @@ static void	mini_pipex(t_list *pipe, int rang, int **pipes,
 		exec_middle(pipe, rang, pipes, minishell);
 }
 
-static void	set_g_flag(t_minishell *minishell)
-{
-	int		save;
-	char	buf[2];
-
-	close(minishell->fork_comm[1]);
-	save = dup(STDIN);
-	dup2(minishell->fork_comm[0], STDIN);
-	if (read(STDIN, buf, 2) == 2)
-		g_flag = 1;
-	else
-		g_flag = 0;
-	dup2(save, STDIN);
-}
-
 void	minishell_exec(t_minishell *minishell)
 {
 	pid_t	pid;
 	int		n;
-	t_list	*list;
 	int		**pipes;
+	int		*pids;
 
 	n = 0;
+	
+	pids = malloc(ft_lstsize(*(minishell->list)) * sizeof(int));
+	if (!pids)
+		return ;
 	pipes = get_pipes(minishell);
-	pipe(minishell->fork_comm);
-	list = *(minishell->list);
-	while (n < ft_lstsize(list))
+	if (!pipes)
+	{
+		free(pids);
+		return ;
+	}
+	signal(SIGINT, sign_exec);
+	while (n < ft_lstsize(*(minishell->list)))
 	{
 		pid = fork();
 		if (pid == 0)
 			mini_pipex(*(minishell->list), n, pipes, minishell);
+		else if (pid > 0)
+			pids[n] = pid;
 		n++;
 	}
-	waitpid(pid, NULL, 0);
-	set_g_flag(minishell);
+	close_pipes(pipes, ft_lstsize(*(minishell->list)));
+	waitpid(pid, &g_flag, 0);
+	signal(SIGINT, sigint_handler);
+	//kill_pids(pids, ft_lstsize(*(minishell->list)));
 }

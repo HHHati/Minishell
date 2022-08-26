@@ -6,7 +6,7 @@
 /*   By: mkoyamba <mkoyamba@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 17:11:55 by mkoyamba          #+#    #+#             */
-/*   Updated: 2022/08/25 22:09:28 by mkoyamba         ###   ########.fr       */
+/*   Updated: 2022/08/26 19:50:55 by mkoyamba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,23 +44,56 @@ void	matint_free(int **pipes)
 
 int	**get_pipes(t_minishell *minishell)
 {
-	t_list	*list;
 	int		**pipes;
 	int		n;
 
-	list = *(minishell->list);
-	pipes = ft_calloc((ft_lstsize(list) - 1), sizeof(int *));
+	pipes = ft_calloc((ft_lstsize(*(minishell->list))), sizeof(int *));
+	if (!pipes)
+		return (NULL);
 	n = 0;
-	while (n < ft_lstsize(list) - 1)
+	while (n < ft_lstsize(*(minishell->list)) - 1)
 	{
 		pipes[n] = ft_calloc(2, sizeof(int));
+		if (!pipes[n])
+		{
+			matint_free(pipes);
+			return (NULL);
+		}
 		n++;
 	}
+	pipes[n] = NULL;
 	n = 0;
-	while (n < ft_lstsize(list) - 1)
+	while (n < ft_lstsize(*(minishell->list)) - 1)
 	{
 		pipe(pipes[n]);
 		n++;
 	}
 	return (pipes);
+}
+
+void	close_pipes(int **pipes, int size)
+{
+	int	n;
+
+	n = 0;
+	while (n < size - 1)
+	{
+		close(pipes[n][0]);
+		close(pipes[n][1]);
+		free(pipes[n]);
+		n++;
+	}
+	free(pipes);
+}
+
+void	kill_pids(int *pids, int len)
+{
+	int	n;
+
+	n = 0;
+	while (n < len)
+	{
+		kill(pids[n], SIGSTOP);
+		n++;
+	}
 }

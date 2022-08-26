@@ -6,7 +6,7 @@
 /*   By: mkoyamba <mkoyamba@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 14:12:34 by mkoyamba          #+#    #+#             */
-/*   Updated: 2022/08/26 01:26:45 by mkoyamba         ###   ########.fr       */
+/*   Updated: 2022/08/26 20:55:09 by mkoyamba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,21 +77,27 @@ static int	opener_output(t_list *output, t_list **parsed)
 
 void	files_opening(t_list **parsed)
 {
+	t_list		*pointer;
 	t_list		*input;
 	t_list		*output;
 	t_content	*content;
 
-	content = (t_content *)(*parsed)->content;
-	input = *(content->input);
-	output = *(content->output);
-	if (!opener_input(input, parsed))
+	pointer = *parsed;
+	while (pointer)
 	{
-		g_flag = 1;
-		return ;
-	}
-	if (!opener_output(output, parsed))
-	{
-		g_flag = 1;
-		return ;
+		content = (t_content *)pointer->content;
+		input = *(content->input);
+		output = *(content->output);
+		if (!opener_input(input, parsed))
+		{
+			g_flag = 1;
+			return ;
+		}
+		if (!opener_output(output, parsed))
+		{
+			g_flag = 1;
+			return ;
+		}
+		pointer = pointer->next;
 	}
 }

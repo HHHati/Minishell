@@ -6,7 +6,7 @@
 /*   By: Bade-lee <bade-lee@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 16:42:10 by Bade-lee          #+#    #+#             */
-/*   Updated: 2022/08/27 01:11:04 by Bade-lee         ###   ########.fr       */
+/*   Updated: 2022/08/27 10:54:32 by Bade-lee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,6 @@ void		print_lst(t_list **alst); // A SUPPRIMER !!!!!!!!!!!
 char		*check_dollar(char *line, t_minishell *minishell);
 char		*take_dollar_variable(char *line, size_t i, t_minishell *minishell);
 char		*replace_dollar(char *line, size_t start, size_t end, char *new_str);
-int			check_if_dollar(char *line);
 char		*remove_quotes_dollar(char *line, size_t i, char c);
 
 #endif

@@ -6,25 +6,11 @@
 /*   By: Bade-lee <bade-lee@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 16:56:41 by Bade-lee          #+#    #+#             */
-/*   Updated: 2022/08/27 01:30:55 by Bade-lee         ###   ########.fr       */
+/*   Updated: 2022/08/27 11:13:45 by Bade-lee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/parser.h"
-
-int	check_if_dollar(char *line)
-{
-	size_t	i;
-
-	i = 0;
-	while (line[i])
-	{
-		if (line[i] == '$')
-			return (1);
-		i++;
-	}
-	return (0);
-}
 
 static size_t	dollar_in_env(char *name, t_minishell *minishell)
 {
@@ -38,39 +24,14 @@ static size_t	dollar_in_env(char *name, t_minishell *minishell)
 	while (minishell->env[i])
 	{
 		if (!(ft_strncmp(name, minishell->env[i], n))
-				&& minishell->env[i][n] == '=')
+			&& minishell->env[i][n] == '=')
 			return (i);
 		i++;
 	}
 	return (0);
 }
 
-char	*remove_quotes_dollar(char *line, size_t i, char c)
-{
-	size_t	n;
-	char	*save;
-
-	n = i;
-	while (line[i])
-	{
-		if (line[i] == c)
-		{
-			line = replace_dollar(line, n - 1, n, "");
-			if (!line)
-				return (NULL);
-			save = line;
-			line = replace_dollar(line, i - 1, i, "");
-			free(save);
-			if (!line)
-				return (NULL);
-			return (line);
-		}
-		i++;
-	}
-	return (line);
-}
-
-static char *malloc_start(char *start_str, size_t start, char *line)
+static char	*malloc_start(char *start_str, size_t start, char *line)
 {
 	size_t	i;
 
@@ -89,7 +50,7 @@ static char *malloc_start(char *start_str, size_t start, char *line)
 		i++;
 	}
 	start_str[i] = '\0';
-	return(start_str);
+	return (start_str);
 }
 
 char	*replace_dollar(char *line, size_t start, size_t end, char *new_str)
@@ -112,7 +73,7 @@ char	*replace_dollar(char *line, size_t start, size_t end, char *new_str)
 	return (new_str);
 }
 
-static char *get_dollar_value(size_t index, t_minishell *minishell)
+static char	*get_dollar_value(size_t index, t_minishell *minishell)
 {
 	size_t	i;
 	size_t	n;
@@ -139,17 +100,28 @@ static char *get_dollar_value(size_t index, t_minishell *minishell)
 	return (variable);
 }
 
+char	*malloc_variable(char *line, size_t i)
+{
+	char	*name;
+	size_t	n;
+
+	n = 0;
+	while (line[i] && line[i] != ' ' && line[i] != '\t' && line[i] != '\n')
+		n++;
+	name = malloc((n + 1) * sizeof(char));
+	if (!name)
+		return (NULL);
+	return (name);
+}
+
 char	*take_dollar_variable(char *line, size_t i, t_minishell *minishell)
 {
-	char *name;
+	char	*name;
 	size_t	n;
 	size_t	index;
 
-	n = 0;
 	index = i;
-	while (line[index] != ' ' || line[index] != '\t' || line[index] != '\n')
-		n++;
-	name = malloc((n + 1) * sizeof(char));
+	name = malloc_variable(line, i);
 	if (!name)
 		return (NULL);
 	n = 0;
@@ -161,7 +133,8 @@ char	*take_dollar_variable(char *line, size_t i, t_minishell *minishell)
 	}
 	if (dollar_in_env(name, minishell) != 0)
 	{
-		line = replace_dollar(line, index, n, get_dollar_value(dollar_in_env(name, minishell), minishell));
+		line = replace_dollar(line, index, n,
+				get_dollar_value(dollar_in_env(name, minishell), minishell));
 		if (!line)
 			return (NULL);
 		free(name);

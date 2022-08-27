@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   files.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkoyamba <mkoyamba@student.s19.be>         +#+  +:+       +#+        */
+/*   By: Bade-lee <bade-lee@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 14:13:07 by mkoyamba          #+#    #+#             */
-/*   Updated: 2022/08/25 15:40:11 by mkoyamba         ###   ########.fr       */
+/*   Updated: 2022/08/27 14:09:25 by Bade-lee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 
 //          ----------========== {     FCTS     } ==========----------
 
-void	files_opening(t_list **parsed);
+int		files_opening(t_list **parsed);
 void	close_fds(t_list **parsed);
 int		error_parsed(t_list **parsed, char *name, int mode);
 

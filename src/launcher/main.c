@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkoyamba <mkoyamba@student.s19.be>         +#+  +:+       +#+        */
+/*   By: Bade-lee <bade-lee@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 16:44:37 by mkoyamba          #+#    #+#             */
-/*   Updated: 2022/08/27 10:49:48 by mkoyamba         ###   ########.fr       */
+/*   Updated: 2022/08/27 14:15:01 by Bade-lee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,12 @@ static void	not_on_line(t_minishell *minishell, int mode)
 
 static void	exec_line(t_minishell *minishell)
 {
-	if (g_flag)
-		return ;
 	//print_lst(minishell->list); // A SUPPRIMER !!!!!!!!!!!!!!!!!
-	files_opening(minishell->list);
-	if (g_flag)
+	if (!files_opening(minishell->list))
+	{
+		g_flag = 1;
 		return ;
+	}
 	minishell_exec(minishell);
 }
 
@@ -46,20 +46,21 @@ static void	on_line(t_minishell *minishell, char *line)
 {
 	if (ft_strlen(line) > 0)
 		add_history(line);
+	else
+		g_flag = 0;
 	if (ft_strncmp(line, "exit", 5) == 0)
 		not_on_line(minishell, EXIT);
-	g_flag = syntax_check(line);
-	if (g_flag == 0)
+	if (!syntax_check(line))
 	{
 		if (!line[0])
 			return ;
 		minishell->list = parsing(line, minishell);
 		if (minishell->list)
 		{
-			replace(minishell->list);
-			if (g_flag)
-				return ;
-			exec_line(minishell);
+			if (replace(minishell->list))
+				exec_line(minishell);
+			else
+				g_flag = 1;
 			free_parsed(minishell->list);
 		}
 		else
@@ -90,16 +91,13 @@ int	main(int argc, char **argv, char **env)
 		s_flag = DEFAULT;
 		if (g_flag == 0)
 			line = readline("\033[0;36m\033[1mminishell\033[0;32m ▸ \033[0m");
-		else if (g_flag == 1)
-			line = readline("");
-		else if (s_flag != S_PRINT)
+		else
 			line = readline("\033[0;36m\033[1mminishell\033[0;31m ▸ \033[0m");
 		if (line)
 			on_line(minishell, line);
 		else
 			not_on_line(minishell, CTRL_D);
-		if (s_flag == DEFAULT)
-			free(line);
+		free(line);
 	}
 	return (0);
 }

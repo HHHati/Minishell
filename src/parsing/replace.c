@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   replace.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkoyamba <mkoyamba@student.s19.be>         +#+  +:+       +#+        */
+/*   By: Bade-lee <bade-lee@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 17:06:27 by mkoyamba          #+#    #+#             */
-/*   Updated: 2022/08/24 19:31:01 by mkoyamba         ###   ########.fr       */
+/*   Updated: 2022/08/27 14:12:01 by Bade-lee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/parser.h"
 
-void	replace(t_list **parsed)
+int	replace(t_list **parsed)
 {
 	t_list			*list;
 	t_content		*content;
@@ -28,9 +28,14 @@ void	replace(t_list **parsed)
 		{
 			redirection = (t_redirection *)put->content;
 			if (redirection->type == STR_IP)
+			{
 				redirection->name = to_put(redirection->name);
+				if (!redirection->name)
+					return (0);
+			}
 			put = put->next;
 		}
 		list = list->next;
 	}
+	return (1);
 }

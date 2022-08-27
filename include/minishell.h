@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkoyamba <mkoyamba@student.s19.be>         +#+  +:+       +#+        */
+/*   By: Bade-lee <bade-lee@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/18 18:02:26 by Bade-lee          #+#    #+#             */
-/*   Updated: 2022/08/26 18:17:23 by mkoyamba         ###   ########.fr       */
+/*   Updated: 2022/08/27 14:17:07 by Bade-lee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,11 @@
 # define CTRL_D 0
 # define EXIT 1
 
-int	g_tab_flag[2];
+int	g_tab_flag[3];
 
 # define g_flag g_tab_flag[0]
 # define s_flag g_tab_flag[1]
+# define e_flag g_tab_flag[2]
 
 //          ----------========== {     FCTS     } ==========----------
 

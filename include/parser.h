@@ -6,7 +6,7 @@
 /*   By: Bade-lee <bade-lee@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 16:42:10 by Bade-lee          #+#    #+#             */
-/*   Updated: 2022/08/27 10:54:32 by Bade-lee         ###   ########.fr       */
+/*   Updated: 2022/08/27 14:12:35 by Bade-lee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ char		**ft_split_comm(char *str, char *charset);
 int			check_solo_operator_2(char *line, size_t i, int letter);
 int			check_operator_place(char *line, size_t i);
 t_list		**free_first(t_list **list);
-void		replace(t_list **parsed);
+int			replace(t_list **parsed);
 char		*to_put(char *end_word);
 char		*take_comm_2(char *comm, char *line, size_t n, size_t *i);
 

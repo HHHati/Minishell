@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   open.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkoyamba <mkoyamba@student.s19.be>         +#+  +:+       +#+        */
+/*   By: Bade-lee <bade-lee@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 14:12:34 by mkoyamba          #+#    #+#             */
-/*   Updated: 2022/08/26 20:55:09 by mkoyamba         ###   ########.fr       */
+/*   Updated: 2022/08/27 14:06:26 by Bade-lee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ static int	opener_output(t_list *output, t_list **parsed)
 	return (1);
 }
 
-void	files_opening(t_list **parsed)
+int	files_opening(t_list **parsed)
 {
 	t_list		*pointer;
 	t_list		*input;
@@ -89,15 +89,10 @@ void	files_opening(t_list **parsed)
 		input = *(content->input);
 		output = *(content->output);
 		if (!opener_input(input, parsed))
-		{
-			g_flag = 1;
-			return ;
-		}
+			return (0);
 		if (!opener_output(output, parsed))
-		{
-			g_flag = 1;
-			return ;
-		}
+			return (0);
 		pointer = pointer->next;
 	}
+	return (1);
 }

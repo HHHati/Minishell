@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkoyamba <mkoyamba@student.s19.be>         +#+  +:+       +#+        */
+/*   By: Bade-lee <bade-lee@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 17:19:30 by mkoyamba          #+#    #+#             */
-/*   Updated: 2022/08/27 11:09:47 by mkoyamba         ###   ########.fr       */
+/*   Updated: 2022/08/27 14:35:03 by Bade-lee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,9 @@
 
 static void	sign_exec(int sig)
 {
+	g_flag = 1;
+	s_flag = S_PRINT;
+	e_flag = 0;
 	ft_putstr_fd("\n", 2);
 	rl_replace_line("", 0);
 	rl_on_new_line();
@@ -50,6 +53,7 @@ void	minishell_exec(t_minishell *minishell)
 	int		n;
 	int		**pipes;
 	int		*pids;
+	int		status;
 
 	n = 0;
 	pids = malloc(ft_lstsize(*(minishell->list)) * sizeof(int));
@@ -72,7 +76,17 @@ void	minishell_exec(t_minishell *minishell)
 		n++;
 	}
 	close_pipes(pipes, ft_lstsize(*(minishell->list)));
-	waitpid(pid, &g_flag, 0);
+	waitpid(pid, &status, 0);
+	g_flag = WEXITSTATUS(status);
+	if (g_flag)
+		return ;
+	else if (s_flag && !e_flag)
+		g_flag = 1;
+	else if(!s_flag)
+		g_flag = 0;
+	else if(s_flag && e_flag && !g_flag)
+		g_flag = 0;
+	s_flag = DEFAULT;
 	signal(SIGINT, sigint_handler);
 	kill_pids(pids, ft_lstsize(*(minishell->list)));
 }

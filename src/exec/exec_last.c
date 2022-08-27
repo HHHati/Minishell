@@ -6,23 +6,31 @@
 /*   By: mkoyamba <mkoyamba@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 18:33:54 by mkoyamba          #+#    #+#             */
-/*   Updated: 2022/08/27 10:55:08 by mkoyamba         ###   ########.fr       */
+/*   Updated: 2022/08/27 12:30:59 by mkoyamba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/exec.h"
 
-static void	set_input(t_list *input)
+static void	set_input(t_list *input, int *d_redir)
 {
 	t_list			*pointer;
 	t_redirection	*redir;
+	int				save;
 
 	pointer = ft_lstlast(input);
 	redir = (t_redirection *)pointer->content;
 	if (redir->type == FD_IP)
 		dup2(redir->fd, STDIN);
 	else
-		ft_putstr_fd(redir->name, STDIN);
+	{
+		save = dup(STDOUT);
+		dup2(d_redir[1], STDOUT);
+		ft_putstr_fd(redir->name, STDOUT);
+		dup2(save, STDOUT);
+		close(d_redir[1]);
+		dup2(d_redir[0], STDIN);
+	}
 }
 
 static void	set_output(t_list *output)
@@ -35,13 +43,13 @@ static void	set_output(t_list *output)
 	dup2(redir->fd, STDOUT);
 }
 
-static void	set_put(t_content *content, int rang, int **pipes)
+static void	set_put(t_content *content, int rang, int **pipes, int *d_redir)
 {
 	t_list		*put;
 
 	put = *(content->input);
 	if (ft_lstsize(put) > 0)
-		set_input(put);
+		set_input(put, d_redir);
 	else
 		dup2(pipes[rang - 1][0], STDIN);
 	put = *(content->output);
@@ -49,18 +57,20 @@ static void	set_put(t_content *content, int rang, int **pipes)
 		set_output(put);
 }
 
-void	exec_last(t_list *pipe, int rang, int **pipes, t_minishell *minishell)
+void	exec_last(t_list *pipex, int rang, int **pipes, t_minishell *minishell)
 {
 	t_content	*content;
 	char		*path;
+	int			double_r[2];
 
 	close(pipes[rang - 1][1]);
-	pipe = ft_lstlast(pipe);
-	content = pipe->content;
+	pipe(double_r);
+	pipex = ft_lstlast(pipex);
+	content = pipex->content;
 	path = get_path(minishell->env, content->comm);
 	if (!path)
 		exit(1);
-	set_put(content, rang, pipes);
+	set_put(content, rang, pipes, double_r);
 	close_pipes(pipes, ft_lstsize(*(minishell->list)));
 	execve(path, content->comm, minishell->env);
 	ft_putstr_fd("minishell: ", STDERR);

@@ -6,7 +6,7 @@
 /*   By: mkoyamba <mkoyamba@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 17:11:55 by mkoyamba          #+#    #+#             */
-/*   Updated: 2022/08/26 19:50:55 by mkoyamba         ###   ########.fr       */
+/*   Updated: 2022/08/27 10:52:48 by mkoyamba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,4 +96,5 @@ void	kill_pids(int *pids, int len)
 		kill(pids[n], SIGSTOP);
 		n++;
 	}
+	free(pids);
 }

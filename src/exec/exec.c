@@ -6,7 +6,7 @@
 /*   By: mkoyamba <mkoyamba@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 17:19:30 by mkoyamba          #+#    #+#             */
-/*   Updated: 2022/08/26 20:24:40 by mkoyamba         ###   ########.fr       */
+/*   Updated: 2022/08/27 10:53:53 by mkoyamba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ void	minishell_exec(t_minishell *minishell)
 	int		*pids;
 
 	n = 0;
-	
 	pids = malloc(ft_lstsize(*(minishell->list)) * sizeof(int));
 	if (!pids)
 		return ;
@@ -75,5 +74,5 @@ void	minishell_exec(t_minishell *minishell)
 	close_pipes(pipes, ft_lstsize(*(minishell->list)));
 	waitpid(pid, &g_flag, 0);
 	signal(SIGINT, sigint_handler);
-	//kill_pids(pids, ft_lstsize(*(minishell->list)));
+	kill_pids(pids, ft_lstsize(*(minishell->list)));
 }

@@ -6,13 +6,13 @@
 /*   By: mkoyamba <mkoyamba@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 18:33:42 by mkoyamba          #+#    #+#             */
-/*   Updated: 2022/08/26 20:46:31 by mkoyamba         ###   ########.fr       */
+/*   Updated: 2022/08/27 10:55:31 by mkoyamba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/exec.h"
 
-static	void	set_input(t_list *input)
+static void	set_input(t_list *input)
 {
 	t_list			*pointer;
 	t_redirection	*redir;
@@ -25,7 +25,7 @@ static	void	set_input(t_list *input)
 		ft_putstr_fd(redir->name, STDIN);
 }
 
-static	void	set_output(t_list *output)
+static void	set_output(t_list *output)
 {
 	t_list			*pointer;
 	t_redirection	*redir;
@@ -35,7 +35,7 @@ static	void	set_output(t_list *output)
 	dup2(redir->fd, STDOUT);
 }
 
-static void		set_put(t_content *content, int **pipes, int rang)
+static void	set_put(t_content *content, int **pipes, int rang)
 {
 	t_list		*put;
 

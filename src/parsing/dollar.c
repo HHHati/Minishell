@@ -6,7 +6,7 @@
 /*   By: Bade-lee <bade-lee@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 16:03:32 by Bade-lee          #+#    #+#             */
-/*   Updated: 2022/08/27 13:55:45 by Bade-lee         ###   ########.fr       */
+/*   Updated: 2022/08/27 17:40:58 by Bade-lee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@ char	*remove_quotes_dollar(char *line, size_t i, char c)
 static char	*update_dollar(char *line, size_t i, t_minishell *minishell)
 {
 	char	*save;
-
 	if (line[i + 1] && (line[i + 1] == '\'' || line[i + 1] == '\"'))
 	{
 		line = remove_quotes_dollar(line, i + 2, line[i + 1]);
@@ -65,11 +64,6 @@ static char	*update_dollar(char *line, size_t i, t_minishell *minishell)
 		free(save);
 		if (!line)
 			return (NULL);
-		save = line;
-		line = take_dollar_variable(line, i, minishell);
-		free(save);
-		if (!line)
-			return (NULL);
 		return (line);
 	}
 	else if (line[i + 1] && line[i + 1] == '?')
@@ -77,6 +71,9 @@ static char	*update_dollar(char *line, size_t i, t_minishell *minishell)
 		line = replace_dollar(line, i, i + 2, ft_itoa(g_flag));
 		return (line);
 	}
+	line = take_dollar_variable(line, i, minishell);
+	if (!line)
+		return (NULL);
 	return (line);
 }
 
@@ -89,13 +86,13 @@ char	*check_dollar(char *line, t_minishell *minishell)
 		return (line);
 	while (line[i])
 	{
-		if (line[i] == '\'')
+		if (line[i] && line[i] == '\'')
 		{
 			while (line[i] && line[i] != '\'')
 				i++;
 			i++;
 		}
-		else if (line[i] == '$')
+		else if (line[i] && line[i] == '$')
 		{
 			line = update_dollar(line, i, minishell);
 			if (!line)

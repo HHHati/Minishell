@@ -6,7 +6,7 @@
 /*   By: Bade-lee <bade-lee@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 16:56:41 by Bade-lee          #+#    #+#             */
-/*   Updated: 2022/08/27 11:13:45 by Bade-lee         ###   ########.fr       */
+/*   Updated: 2022/08/27 17:38:59 by Bade-lee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,14 @@
 static size_t	dollar_in_env(char *name, t_minishell *minishell)
 {
 	size_t	i;
-	size_t	n;
+	size_t	len;
 
 	i = 0;
-	n = 0;
-	while (name[n])
-		n++;
+	len = 0;
 	while (minishell->env[i])
 	{
-		if (!(ft_strncmp(name, minishell->env[i], n))
-			&& minishell->env[i][n] == '=')
+		if (!(ft_strncmp(name, minishell->env[i], ft_strlen(name)))
+				&& minishell->env[i][len] == '=')
 			return (i);
 		i++;
 	}
@@ -83,7 +81,7 @@ static char	*get_dollar_value(size_t index, t_minishell *minishell)
 	i = 0;
 	while (minishell->env[index][i] != '=')
 		i++;
-	len = i;
+	len = i + 1;
 	n = i;
 	while (minishell->env[index][len])
 		len++;
@@ -106,8 +104,12 @@ char	*malloc_variable(char *line, size_t i)
 	size_t	n;
 
 	n = 0;
-	while (line[i] && line[i] != ' ' && line[i] != '\t' && line[i] != '\n')
+	while (line[i] && line[i] != ' ' && line[i] != '\t' && line[i] != '\''
+		&& line[i] != '\"' && line[i] != '\n' && line[i] != '$')
+	{
 		n++;
+		i++;
+	}
 	name = malloc((n + 1) * sizeof(char));
 	if (!name)
 		return (NULL);
@@ -120,17 +122,18 @@ char	*take_dollar_variable(char *line, size_t i, t_minishell *minishell)
 	size_t	n;
 	size_t	index;
 
-	index = i;
-	name = malloc_variable(line, i);
+	index = i + 1;
+	name = malloc_variable(line, i + 1);
 	if (!name)
 		return (NULL);
 	n = 0;
-	while (line[i])
+	while (line[i + 1] && line[i + 1] != ' ' && line[i + 1] != '\t' && line[i + 1] != '\n' && line[i + 1] != '$')
 	{
-		name[n] = line [i];
+		name[n] = line [i + 1];
 		i++;
 		n++;
 	}
+	name[n] = '\0';
 	if (dollar_in_env(name, minishell) != 0)
 	{
 		line = replace_dollar(line, index, n,

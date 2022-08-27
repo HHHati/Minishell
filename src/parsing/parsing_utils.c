@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Bade-lee <bade-lee@student.s19.be>         +#+  +:+       +#+        */
+/*   By: mkoyamba <mkoyamba@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 19:47:34 by Bade-lee          #+#    #+#             */
-/*   Updated: 2022/08/25 17:38:26 by Bade-lee         ###   ########.fr       */
+/*   Updated: 2022/08/27 10:46:39 by mkoyamba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,12 +42,12 @@ char	*take_comm_2(char *comm, char *line, size_t n, size_t *i)
 	{
 		if (line[*i] == '\"' || line[*i] == '\'')
 			*i += 1;
-		if (line[*i])
+		if (line[*i] && line[*i] != '\"' && line[*i] != '\'')
 		{
 			comm[n] = line[*i];
 			*i += 1;
+			n++;
 		}
-		n++;
 	}
 	comm[n] = '\0';
 	return (comm);

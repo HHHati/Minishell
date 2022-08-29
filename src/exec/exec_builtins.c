@@ -1,28 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.c                                          :+:      :+:    :+:   */
+/*   exec_builtins.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mkoyamba <mkoyamba@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/20 15:47:09 by Bade-lee          #+#    #+#             */
-/*   Updated: 2022/08/27 19:47:59 by mkoyamba         ###   ########.fr       */
+/*   Created: 2022/08/29 16:43:24 by mkoyamba          #+#    #+#             */
+/*   Updated: 2022/08/29 16:53:50 by mkoyamba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/parser.h"
+#include "../../include/exec.h"
 
-t_list	**parsing(char *line, t_minishell *minishell)
+int	is_builtin(char **comm)
 {
-	char	**tab;
-	t_list	**result;
+	static char	*builtins[7] = {"cd", "echo", "env", "export", "pwd", "unset"};
+	size_t		n;
 
-	if (!line[0])
-		return (NULL);
-	line = check_dollar(line, minishell);
-	if (!line)
-		return (NULL);
-	tab = split_line(line);
-	result = create_big_list(tab);
-	return (result);
+	n = 0;
+	while (builtins[n])
+	{
+		if (!ft_strncmp(builtins[n], comm[0], ft_strlen(builtins[n]) + 1))
+			return (1);
+		n++;
+	}
+	return (0);
 }
+

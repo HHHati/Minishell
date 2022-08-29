@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: Bade-lee <bade-lee@student.s19.be>         +#+  +:+       +#+         #
+#    By: mkoyamba <mkoyamba@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/18 17:11:44 by Basile            #+#    #+#              #
-#    Updated: 2022/08/27 01:10:16 by Bade-lee         ###   ########.fr        #
+#    Updated: 2022/08/29 16:43:46 by mkoyamba         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -71,6 +71,7 @@ SRC +=\
 		exec.c\
 		get_path.c\
 		split_pipex.c\
+		exec_builtins.c\
 
 #          ----------========== {     OBJS     } ==========----------
 

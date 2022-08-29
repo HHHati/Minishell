@@ -6,7 +6,7 @@
 /*   By: mkoyamba <mkoyamba@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 17:22:33 by Bade-lee          #+#    #+#             */
-/*   Updated: 2022/08/25 16:29:53 by mkoyamba         ###   ########.fr       */
+/*   Updated: 2022/08/27 17:24:18 by mkoyamba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,9 +68,9 @@ int	builtin_cd(char **comm, t_minishell *minishell)
 	if (chdir(path) == -1)
 	{
 		ft_putstr_fd("minishell: cd: ", STDERR);
-		ft_putstr_fd(path, STDERR);
+		ft_putstr_fd(comm[1], STDERR);
 		ft_putstr_fd(": ", STDERR);
-		ft_putendl_fd(strerror(errno), STDERR);
+		ft_putendl_fd("No such file or directory", STDERR);
 		free(path);
 		return (1);
 	}

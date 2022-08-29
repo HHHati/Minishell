@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Bade-lee <bade-lee@student.s19.be>         +#+  +:+       +#+        */
+/*   By: mkoyamba <mkoyamba@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 16:44:37 by mkoyamba          #+#    #+#             */
-/*   Updated: 2022/08/27 14:15:01 by Bade-lee         ###   ########.fr       */
+/*   Updated: 2022/08/29 16:28:47 by mkoyamba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,12 +42,17 @@ static void	exec_line(t_minishell *minishell)
 	minishell_exec(minishell);
 }
 
-static void	on_line(t_minishell *minishell, char *line)
+static void	histo_add(char *line)
 {
 	if (ft_strlen(line) > 0)
 		add_history(line);
 	else
 		g_flag = 0;
+}
+
+static void	on_line(t_minishell *minishell, char *line)
+{
+	histo_add(line);
 	if (ft_strncmp(line, "exit", 5) == 0)
 		not_on_line(minishell, EXIT);
 	if (!syntax_check(line))
@@ -78,8 +83,7 @@ int	main(int argc, char **argv, char **env)
 	t_minishell		*minishell;
 	char			*line;
 
-	(void)argc;
-	(void)argv;
+	(void)argc, (void)argv;
 	minishell = get_minishell(env);
 	if (!minishell)
 	{
@@ -97,7 +101,8 @@ int	main(int argc, char **argv, char **env)
 			on_line(minishell, line);
 		else
 			not_on_line(minishell, CTRL_D);
-		free(line);
+		if (line)
+			free(line);
 	}
 	return (0);
 }

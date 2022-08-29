@@ -6,7 +6,7 @@
 /*   By: mkoyamba <mkoyamba@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 18:33:42 by mkoyamba          #+#    #+#             */
-/*   Updated: 2022/08/27 11:20:05 by mkoyamba         ###   ########.fr       */
+/*   Updated: 2022/08/29 16:24:45 by mkoyamba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,18 +59,18 @@ static void	set_put(t_content *content, int **pipes, int rang, int *d_redir)
 		dup2(pipes[rang][1], STDOUT);
 }
 
-void	exec_middle(t_list *pipex, int rang, int **pipes, t_minishell *minishell)
+void	exec_middle(t_list *pipex, int rg, int **pipes, t_minishell *minishell)
 {
 	t_content	*content;
 	char		*path;
 	int			n;
 	int			double_r[2];
 
-	close(pipes[rang - 1][1]);
-	close(pipes[rang][0]);
+	close(pipes[rg - 1][1]);
+	close(pipes[rg][0]);
 	pipe(double_r);
 	n = 0;
-	while (n < rang)
+	while (n < rg)
 	{
 		pipex = pipex->next;
 		n++;
@@ -79,7 +79,7 @@ void	exec_middle(t_list *pipex, int rang, int **pipes, t_minishell *minishell)
 	path = get_path(minishell->env, content->comm);
 	if (!path)
 		exit(1);
-	set_put(content, pipes, rang, double_r);
+	set_put(content, pipes, rg, double_r);
 	close_pipes(pipes, ft_lstsize(*(minishell->list)));
 	execve(path, content->comm, minishell->env);
 	ft_putstr_fd("minishell: ", STDERR);

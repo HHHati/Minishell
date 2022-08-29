@@ -6,25 +6,28 @@
 /*   By: mkoyamba <mkoyamba@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 17:11:55 by mkoyamba          #+#    #+#             */
-/*   Updated: 2022/08/27 10:52:48 by mkoyamba         ###   ########.fr       */
+/*   Updated: 2022/08/29 16:58:55 by mkoyamba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/exec.h"
 
-int	is_builtin(char **comm)
+pid_t	exec_loop(t_minishell *minishell, int **pipes, int *pids)
 {
-	static char	*builtins[7] = {"cd", "echo", "env", "export", "pwd", "unset"};
-	size_t		n;
+	pid_t	pid;
+	int		n;
 
 	n = 0;
-	while (builtins[n])
+	while (n < ft_lstsize(*(minishell->list)))
 	{
-		if (!ft_strncmp(builtins[n], comm[0], ft_strlen(builtins[n]) + 1))
-			return (1);
+		pid = fork();
+		if (pid == 0)
+			mini_pipex(*(minishell->list), n, pipes, minishell);
+		else if (pid > 0)
+			pids[n] = pid;
 		n++;
 	}
-	return (0);
+	return (pid);
 }
 
 void	matint_free(int **pipes)

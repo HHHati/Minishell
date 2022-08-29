@@ -6,7 +6,7 @@
 /*   By: mkoyamba <mkoyamba@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 16:44:37 by mkoyamba          #+#    #+#             */
-/*   Updated: 2022/08/29 16:28:47 by mkoyamba         ###   ########.fr       */
+/*   Updated: 2022/08/29 19:39:04 by mkoyamba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static void	not_on_line(t_minishell *minishell, int mode)
 {
 	if (mode == CTRL_D)
 	{
-		if (g_flag != 0)
+		if (g_tab_flag[0] != 0)
 			ft_putendl_fd(
 				"\033[F\033[0;36m\033[1mminishell\033[0;31m ▸ \033[0mexit",
 				STDOUT);
@@ -34,11 +34,6 @@ static void	not_on_line(t_minishell *minishell, int mode)
 static void	exec_line(t_minishell *minishell)
 {
 	//print_lst(minishell->list); // A SUPPRIMER !!!!!!!!!!!!!!!!!
-	if (!files_opening(minishell->list))
-	{
-		g_flag = 1;
-		return ;
-	}
 	minishell_exec(minishell);
 }
 
@@ -47,7 +42,7 @@ static void	histo_add(char *line)
 	if (ft_strlen(line) > 0)
 		add_history(line);
 	else
-		g_flag = 0;
+		g_tab_flag[0] = 0;
 }
 
 static void	on_line(t_minishell *minishell, char *line)
@@ -65,13 +60,13 @@ static void	on_line(t_minishell *minishell, char *line)
 			if (replace(minishell->list))
 				exec_line(minishell);
 			else
-				g_flag = 1;
+				g_tab_flag[0] = 1;
 			free_parsed(minishell->list);
 		}
 		else
 		{
 			ft_putendl_fd("minishell: malloc error", STDERR);
-			g_flag = 1;
+			g_tab_flag[0] = 1;
 		}
 	}
 	rl_replace_line("", 0);
@@ -92,8 +87,8 @@ int	main(int argc, char **argv, char **env)
 	}
 	while (1)
 	{
-		s_flag = DEFAULT;
-		if (g_flag == 0)
+		g_tab_flag[1] = DEFAULT;
+		if (g_tab_flag[0] == 0)
 			line = readline("\033[0;36m\033[1mminishell\033[0;32m ▸ \033[0m");
 		else
 			line = readline("\033[0;36m\033[1mminishell\033[0;31m ▸ \033[0m");

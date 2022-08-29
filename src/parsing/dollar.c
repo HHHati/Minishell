@@ -6,7 +6,7 @@
 /*   By: mkoyamba <mkoyamba@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 16:03:32 by Bade-lee          #+#    #+#             */
-/*   Updated: 2022/08/27 19:48:40 by mkoyamba         ###   ########.fr       */
+/*   Updated: 2022/08/29 19:37:31 by mkoyamba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ static char	*replace_var(char *line, int i, t_minishell *minishell)
 	n = 1;
 	if (line[i + 1] && line[i + 1] == '?')
 	{
-		value = ft_itoa(g_flag);
+		value = ft_itoa(g_tab_flag[0]);
 		if (!value)
 			return (NULL);
 		result = replace_dollar(line, i, i + 2, value);

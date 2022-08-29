@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Bade-lee <bade-lee@student.s19.be>         +#+  +:+       +#+        */
+/*   By: mkoyamba <mkoyamba@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 17:22:35 by Bade-lee          #+#    #+#             */
-/*   Updated: 2022/08/25 14:04:24 by Bade-lee         ###   ########.fr       */
+/*   Updated: 2022/08/29 19:47:33 by mkoyamba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,13 @@ size_t	ft_matlen(char **str)
 	return (n);
 }
 
-int	builtin_echo(char **comm)
+int	builtin_echo(char **comm, t_minishell *minishell)
 {
 	size_t	len;
 	size_t	n;
 	int		nl;
 
+	(void)minishell;
 	n = 1;
 	nl = 1;
 	len = ft_matlen(comm);
@@ -35,15 +36,16 @@ int	builtin_echo(char **comm)
 		nl = 0;
 	while (n < len - 1)
 	{
-		if (n > 1 || nl == 0)
+		if (n > 1 || nl == 1)
 		{
 			ft_putstr_fd(comm[n], STDOUT);
 			ft_putstr_fd(" ", STDOUT);
 		}
+		n++;
 	}
 	if (nl)
 		ft_putendl_fd(comm[len - 1], STDOUT);
-	else
+	else if (n > 1)
 		ft_putstr_fd(comm[len - 1], STDOUT);
 	return (0);
 }

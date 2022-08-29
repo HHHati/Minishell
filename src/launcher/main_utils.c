@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Bade-lee <bade-lee@student.s19.be>         +#+  +:+       +#+        */
+/*   By: mkoyamba <mkoyamba@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 18:31:40 by mkoyamba          #+#    #+#             */
-/*   Updated: 2022/08/27 14:29:32 by Bade-lee         ###   ########.fr       */
+/*   Updated: 2022/08/29 19:41:48 by mkoyamba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,11 @@
 void	sigint_handler(int sig)
 {
 	(void)sig;
-	if (s_flag == IN_PID)
+	if (g_tab_flag[1] == IN_PID)
 		exit (1);
-	g_flag = 1;
-	e_flag = 1;
-	s_flag = S_PRINT;
+	g_tab_flag[0] = 1;
+	g_tab_flag[2] = 1;
+	g_tab_flag[1] = S_PRINT;
 	ft_putstr_fd("\n", 2);
 	rl_replace_line("", 0);
 	rl_on_new_line();
@@ -73,9 +73,9 @@ t_minishell	*get_minishell(char **env)
 {
 	t_minishell	*minishell;
 
-	g_flag = DEFAULT;
-	s_flag = DEFAULT;
-	e_flag = DEFAULT;
+	g_tab_flag[0] = DEFAULT;
+	g_tab_flag[1] = DEFAULT;
+	g_tab_flag[2] = DEFAULT;
 	minishell = malloc(sizeof(t_minishell));
 	if (!minishell)
 		return (NULL);

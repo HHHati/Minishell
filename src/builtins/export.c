@@ -6,7 +6,7 @@
 /*   By: mkoyamba <mkoyamba@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 17:22:44 by Bade-lee          #+#    #+#             */
-/*   Updated: 2022/08/25 16:36:54 by mkoyamba         ###   ########.fr       */
+/*   Updated: 2022/08/29 19:27:06 by mkoyamba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,8 +97,6 @@ int	builtin_export(char **comm, t_minishell *minishell)
 	int		status;
 
 	i = 1;
-	if (comm[i])
-		return (builtin_env(minishell));
 	status = 0;
 	while (comm[i])
 	{

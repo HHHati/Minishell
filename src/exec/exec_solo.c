@@ -6,7 +6,7 @@
 /*   By: mkoyamba <mkoyamba@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 18:10:30 by mkoyamba          #+#    #+#             */
-/*   Updated: 2022/08/27 12:30:52 by mkoyamba         ###   ########.fr       */
+/*   Updated: 2022/08/29 19:35:25 by mkoyamba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,10 +63,20 @@ int	exec_solo(t_list *pipex, t_minishell *minishell)
 
 	pipe(double_r);
 	content = pipex->content;
-	path = get_path(minishell->env, content->comm);
-	if (!path)
-		exit(1);
+	if (!files_opening(minishell->list))
+	{
+		g_tab_flag[0] = 1;
+		return (1);
+	}
 	set_put(content, double_r);
+	if (!is_builtin(content->comm))
+	{
+		path = get_path(minishell->env, content->comm);
+		if (!path)
+			exit(1);
+	}
+	else
+		return (exec_builtins(pipex, minishell));
 	execve(path, content->comm, minishell->env);
 	ft_putstr_fd("minishell: ", STDERR);
 	ft_putstr_fd(content->comm[0], STDERR);

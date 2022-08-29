@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Bade-lee <bade-lee@student.s19.be>         +#+  +:+       +#+        */
+/*   By: mkoyamba <mkoyamba@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 16:42:10 by Bade-lee          #+#    #+#             */
-/*   Updated: 2022/08/27 14:12:35 by Bade-lee         ###   ########.fr       */
+/*   Updated: 2022/08/29 19:50:00 by mkoyamba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,6 @@
 
 # define SMP_OP 0
 # define APP_OP 1
-
-typedef void	(*t_tabp)(va_list, int *);
 
 //          ----------========== {    STRUCT    } ==========----------
 
@@ -72,7 +70,8 @@ void		print_lst(t_list **alst); // A SUPPRIMER !!!!!!!!!!!
 
 char		*check_dollar(char *line, t_minishell *minishell);
 char		*take_dollar_variable(char *line, size_t i, t_minishell *minishell);
-char		*replace_dollar(char *line, size_t start, size_t end, char *new_str);
+char		*replace_dollar(
+				char *line, size_t start, size_t end, char *new_str);
 char		*remove_quotes_dollar(char *line, size_t i, char c);
 
 #endif

@@ -3,23 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Bade-lee <bade-lee@student.s19.be>         +#+  +:+       +#+        */
+/*   By: mkoyamba <mkoyamba@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 17:22:47 by Bade-lee          #+#    #+#             */
-/*   Updated: 2022/08/25 14:51:59 by Bade-lee         ###   ########.fr       */
+/*   Updated: 2022/08/29 18:20:56 by mkoyamba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/builtins.h"
 
-int	builtin_pwd(void)
+int	builtin_pwd(char **comm, t_minishell *minishell)
 {
-	char	*pwd;
+	size_t	n;
 
-	pwd = getcwd(NULL, 0);
-	if (!pwd)
-		return (1);
-	ft_putendl_fd(pwd, STDOUT);
-	free(pwd);
+	(void)comm;
+	n = 0;
+	while (minishell->env[n])
+	{
+		if (!ft_strncmp(minishell->env[n], "PWD=", 4))
+			break ;
+		n++;
+	}
+	ft_putendl_fd(minishell->env[n] + 4, STDOUT);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: mkoyamba <mkoyamba@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 14:54:41 by mkoyamba          #+#    #+#             */
-/*   Updated: 2022/08/24 17:44:20 by mkoyamba         ###   ########.fr       */
+/*   Updated: 2022/08/29 19:37:03 by mkoyamba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ char	*to_put(char *end_word)
 	result = NULL;
 	while (1)
 	{
-		if (g_flag == 1)
+		if (g_tab_flag[0] == 1)
 		{
 			if (result)
 				free(result);

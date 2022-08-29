@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   open.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Bade-lee <bade-lee@student.s19.be>         +#+  +:+       +#+        */
+/*   By: mkoyamba <mkoyamba@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 14:12:34 by mkoyamba          #+#    #+#             */
-/*   Updated: 2022/08/27 14:06:26 by Bade-lee         ###   ########.fr       */
+/*   Updated: 2022/08/29 19:42:03 by mkoyamba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,16 +83,18 @@ int	files_opening(t_list **parsed)
 	t_content	*content;
 
 	pointer = *parsed;
-	while (pointer)
+	content = (t_content *)pointer->content;
+	input = *(content->input);
+	output = *(content->output);
+	if (!opener_input(input, parsed))
 	{
-		content = (t_content *)pointer->content;
-		input = *(content->input);
-		output = *(content->output);
-		if (!opener_input(input, parsed))
-			return (0);
-		if (!opener_output(output, parsed))
-			return (0);
-		pointer = pointer->next;
+		g_tab_flag[2] = 1;
+		return (0);
+	}
+	if (!opener_output(output, parsed))
+	{
+		g_tab_flag[2] = 1;
+		return (0);
 	}
 	return (1);
 }

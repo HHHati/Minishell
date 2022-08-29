@@ -6,7 +6,7 @@
 /*   By: mkoyamba <mkoyamba@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 18:33:24 by mkoyamba          #+#    #+#             */
-/*   Updated: 2022/08/27 12:30:54 by mkoyamba         ###   ########.fr       */
+/*   Updated: 2022/08/29 19:35:05 by mkoyamba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,12 +66,21 @@ void	exec_first(t_list *pipex, int **pipes, t_minishell *minishell)
 	close(pipes[0][0]);
 	pipe(double_r);
 	content = pipex->content;
-	path = get_path(minishell->env, content->comm);
-	if (!path)
-		exit(1);
+	if (!files_opening(minishell->list))
+	{
+		g_tab_flag[0] = 1;
+		exit (1);
+	}
 	set_put(content, pipes, double_r);
-	close(pipes[0][1]);
 	close_pipes(pipes, ft_lstsize(*(minishell->list)));
+	if (!is_builtin(content->comm))
+	{
+		path = get_path(minishell->env, content->comm);
+		if (!path)
+			exit(1);
+	}
+	else
+		exit(exec_builtins(pipex, minishell));
 	execve(path, content->comm, minishell->env);
 	ft_putstr_fd("minishell: ", STDERR);
 	ft_putstr_fd(content->comm[0], STDERR);

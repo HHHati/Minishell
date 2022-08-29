@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Bade-lee <bade-lee@student.s19.be>         +#+  +:+       +#+        */
+/*   By: mkoyamba <mkoyamba@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 17:22:49 by Bade-lee          #+#    #+#             */
-/*   Updated: 2022/08/25 12:16:26 by Bade-lee         ###   ########.fr       */
+/*   Updated: 2022/08/29 18:21:14 by mkoyamba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,12 +58,13 @@ static void	delete_var(char *name, char **env)
 	}
 }
 
-int	builtin_unset(t_minishell *minishell)
+int	builtin_unset(char **comm, t_minishell *minishell)
 {
 	size_t	i;
 	int		status;
 
 	i = 1;
+	(void)comm;
 	if (!minishell->env[i])
 		return (0);
 	status = 0;

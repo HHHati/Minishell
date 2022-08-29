@@ -6,7 +6,7 @@
 /*   By: mkoyamba <mkoyamba@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 15:14:40 by mkoyamba          #+#    #+#             */
-/*   Updated: 2022/08/26 15:43:19 by mkoyamba         ###   ########.fr       */
+/*   Updated: 2022/08/29 18:25:55 by mkoyamba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,5 @@ int	error_parsed(t_list **parsed, char *name, int mode)
 		ft_putstr_fd(": ", STDERR);
 		ft_putstr_fd(E_PERM, STDERR);
 	}
-	ft_putstr_fd("\033[0;36m\033[1mminishell\033[0;31m ▸ \033[0m", STDOUT);
 	return (0);
 }

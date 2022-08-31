@@ -6,7 +6,7 @@
 /*   By: Bade-lee <bade-lee@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 11:53:37 by Bade-lee          #+#    #+#             */
-/*   Updated: 2022/08/24 15:47:25 by Bade-lee         ###   ########.fr       */
+/*   Updated: 2022/08/31 17:37:01 by Bade-lee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,4 +33,40 @@ int	check_solo_operator_2(char *line, size_t i, int letter)
 		&& letter == 0)
 		return (0);
 	return (1);
+}
+
+int	check_simple_quotes(char *line, size_t i)
+{
+	size_t	dquotes;
+
+	dquotes = 0;
+	i++;
+	while (line[i] && line[i] != '\'')
+	{
+		if (line[i] == '\"')
+			dquotes++;
+		i++;
+	}
+	if (dquotes % 2 != 0)
+		return (0);
+	i--;
+	return (i);
+}
+
+int	check_double_quotes(char *line, size_t i)
+{
+	size_t	squotes;
+
+	squotes = 0;
+	i++;
+	while (line[i] && line[i] != '\"')
+	{
+		if (line[i] == '\'')
+			squotes++;
+		i++;
+	}
+	if (squotes % 2 != 0)
+		return (0);
+	i--;
+	return (i);
 }

@@ -6,7 +6,7 @@
 /*   By: Bade-lee <bade-lee@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 19:37:41 by Bade-lee          #+#    #+#             */
-/*   Updated: 2022/08/29 17:15:03 by Bade-lee         ###   ########.fr       */
+/*   Updated: 2022/08/31 17:52:53 by Bade-lee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,14 +53,24 @@ static int	quotes_closed(char *line)
 	while (line[i])
 	{
 		if (line[i] == '\'')
+		{
 			in_squotes++;
-		if (line[i] == '\"')
+			if (!check_simple_quotes(line, i))
+				return (0);
+			i = check_simple_quotes(line, i);
+		}
+		else if (line[i] == '\"')
+		{
 			in_dquotes++;
+			if (!check_double_quotes(line, i))
+				return (0);
+			i = check_double_quotes(line, i);
+		}
 		i++;
 	}
-	if (in_squotes % 2 == 0 && in_dquotes % 2 == 0)
-		return (1);
-	return (0);
+	if (in_squotes % 2 != 0 || in_dquotes % 2 != 0)
+		return (0);
+	return (1);
 }
 
 static int	check_solo_operator(char *line)

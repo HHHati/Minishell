@@ -6,7 +6,7 @@
 /*   By: mkoyamba <mkoyamba@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 17:19:30 by mkoyamba          #+#    #+#             */
-/*   Updated: 2022/08/29 19:42:42 by mkoyamba         ###   ########.fr       */
+/*   Updated: 2022/08/31 16:35:35 by mkoyamba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,8 @@ void	minishell_exec(t_minishell *minishell)
 		&& is_builtin(((t_content *)(*(minishell->list))->content)->comm))
 	{
 		g_tab_flag[0] = exec_solo(*(minishell->list), minishell);
+		free(pids);
+		free(pipes);
 		return ;
 	}
 	signal(SIGINT, sign_exec);

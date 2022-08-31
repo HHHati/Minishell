@@ -6,7 +6,7 @@
 /*   By: mkoyamba <mkoyamba@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 17:22:49 by Bade-lee          #+#    #+#             */
-/*   Updated: 2022/08/29 18:21:14 by mkoyamba         ###   ########.fr       */
+/*   Updated: 2022/08/31 12:43:35 by mkoyamba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,21 +64,20 @@ int	builtin_unset(char **comm, t_minishell *minishell)
 	int		status;
 
 	i = 1;
-	(void)comm;
 	if (!minishell->env[i])
 		return (0);
 	status = 0;
-	while (minishell->env[i])
+	while (comm[i])
 	{
-		if (!valid_name_unset(minishell->env[i]))
+		if (!valid_name_unset(comm[i]))
 		{
 			ft_putstr_fd("minishell: unset: '", STDERR);
-			ft_putstr_fd(minishell->env[i], STDERR);
+			ft_putstr_fd(comm[i], STDERR);
 			ft_putendl_fd("': not a valid identifier", STDERR);
 			status = 1;
 		}
 		else
-			delete_var(minishell->env[i], minishell->env);
+			delete_var(comm[i], minishell->env);
 		i++;
 	}
 	return (status);

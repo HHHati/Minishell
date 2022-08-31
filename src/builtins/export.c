@@ -6,13 +6,13 @@
 /*   By: mkoyamba <mkoyamba@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 17:22:44 by Bade-lee          #+#    #+#             */
-/*   Updated: 2022/08/31 11:25:52 by mkoyamba         ###   ########.fr       */
+/*   Updated: 2022/08/31 12:39:31 by mkoyamba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/builtins.h"
 
-static int	valid_name_export(char *name)
+int	valid_name_export(char *name)
 {
 	size_t	i;
 
@@ -105,8 +105,8 @@ static int	add_value(char *name, t_minishell *minishell)
 
 int	builtin_export(char **comm, t_minishell *minishell)
 {
-	size_t	i;
-	int		status;
+	int	i;
+	int	status;
 
 	i = 1;
 	status = 0;
@@ -116,12 +116,7 @@ int	builtin_export(char **comm, t_minishell *minishell)
 			i++;
 		if (!comm[i])
 			break ;
-		if (!valid_name_export(comm[i]))
-		{
-			print_error_export(comm[i]);
-			status = 1;
-			i++;
-		}
+		is_valid_export(comm, &i, &status);
 		if (!comm[i])
 			break ;
 		if (variable_already_exist(minishell->env, comm[i]))
@@ -132,7 +127,6 @@ int	builtin_export(char **comm, t_minishell *minishell)
 			ft_putstr_fd(comm[i], STDERR);
 			ft_putendl_fd(": alloc error", STDERR);
 		}
-		ft_putendl_fd(minishell->env[0], 2);
 		i++;
 	}
 	return (status);

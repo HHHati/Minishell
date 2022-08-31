@@ -6,7 +6,7 @@
 /*   By: mkoyamba <mkoyamba@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 17:17:09 by Bade-lee          #+#    #+#             */
-/*   Updated: 2022/08/29 17:56:08 by mkoyamba         ###   ########.fr       */
+/*   Updated: 2022/08/31 12:40:02 by mkoyamba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,5 +35,7 @@ char	**new_env_alloc(t_minishell *minishell);
 int		replace_line(char *name, size_t i, int equal, t_minishell *minishell);
 int		builtin_pwd(char **comm, t_minishell *minishell);
 int		builtin_unset(char **comm, t_minishell *minishell);
+void	is_valid_export(char **comm, int *i, int *status);
+int		valid_name_export(char *name);
 
 #endif

@@ -6,7 +6,7 @@
 #    By: mkoyamba <mkoyamba@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/18 17:11:44 by Basile            #+#    #+#              #
-#    Updated: 2022/08/29 16:43:46 by mkoyamba         ###   ########.fr        #
+#    Updated: 2022/08/31 12:38:33 by mkoyamba         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -55,6 +55,7 @@ SRC +=\
 		export.c\
 		pwd.c\
 		unset.c\
+		builtins_utils.c\
 
 # files
 SRC +=\

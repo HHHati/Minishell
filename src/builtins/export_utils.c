@@ -6,42 +6,20 @@
 /*   By: mkoyamba <mkoyamba@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 13:00:56 by Bade-lee          #+#    #+#             */
-/*   Updated: 2022/08/31 10:56:56 by mkoyamba         ###   ########.fr       */
+/*   Updated: 2022/08/31 12:40:17 by mkoyamba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/builtins.h"
 
-char	*ft_strncpy(char *dest, char *src, size_t n)
+void	is_valid_export(char **comm, int *i, int *status)
 {
-	size_t	i;
-
-	i = 0;
-	while ((src[i] != '\0') && (i < n))
+	if (!valid_name_export(comm[*i]))
 	{
-		dest[i] = src[i];
-		i++;
+		print_error_export(comm[*i]);
+		*status = 1;
+		*i += 1;
 	}
-	while (i < n)
-	{
-		dest[i] = '\0';
-		i++;
-	}
-	return (dest);
-}
-
-int	contain_equal(char *name)
-{
-	size_t	i;
-
-	i = 0;
-	while (name[i])
-	{
-		if (name[i] == '=')
-			return (1);
-		i++;
-	}
-	return (0);
 }
 
 void	print_error_export(char *name)

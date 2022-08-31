@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkoyamba <mkoyamba@student.s19.be>         +#+  +:+       +#+        */
+/*   By: Bade-lee <bade-lee@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 17:19:30 by mkoyamba          #+#    #+#             */
-/*   Updated: 2022/08/31 16:35:35 by mkoyamba         ###   ########.fr       */
+/*   Updated: 2022/08/31 18:20:02 by Bade-lee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,4 +93,5 @@ void	minishell_exec(t_minishell *minishell)
 	signal(SIGINT, sign_exec);
 	pid = exec_loop(minishell, pipes, pids);
 	exec_end(pipes, minishell, pids, pid);
+	free(pids);
 }

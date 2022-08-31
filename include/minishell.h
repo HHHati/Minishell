@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkoyamba <mkoyamba@student.s19.be>         +#+  +:+       +#+        */
+/*   By: Bade-lee <bade-lee@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/18 18:02:26 by Bade-lee          #+#    #+#             */
-/*   Updated: 2022/08/29 19:43:05 by mkoyamba         ###   ########.fr       */
+/*   Updated: 2022/08/31 18:27:39 by Bade-lee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@
 # include "parser.h"
 # include "files.h"
 
-// # include "wraloc.h" //A SUPPRIMER !!!!
+//# include "wraloc.h" //A SUPPRIMER !!!!
 
 //          ----------========== {     DEFS     } ==========----------
 

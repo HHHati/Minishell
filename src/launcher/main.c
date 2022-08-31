@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkoyamba <mkoyamba@student.s19.be>         +#+  +:+       +#+        */
+/*   By: Bade-lee <bade-lee@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 16:44:37 by mkoyamba          #+#    #+#             */
-/*   Updated: 2022/08/31 16:57:51 by mkoyamba         ###   ########.fr       */
+/*   Updated: 2022/08/31 17:57:14 by Bade-lee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ static void	not_on_line(t_minishell *minishell, int mode)
 
 static void	exec_line(t_minishell *minishell)
 {
-	//print_lst(minishell->list); // A SUPPRIMER !!!!!!!!!!!!!!!!!
-	minishell_exec(minishell);
+	print_lst(minishell->list); // A SUPPRIMER !!!!!!!!!!!!!!!!!
+	//minishell_exec(minishell);
 }
 
 static void	histo_add(char *line)

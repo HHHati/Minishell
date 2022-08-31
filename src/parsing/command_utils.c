@@ -6,7 +6,7 @@
 /*   By: Bade-lee <bade-lee@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 14:51:27 by Bade-lee          #+#    #+#             */
-/*   Updated: 2022/08/31 16:09:45 by Bade-lee         ###   ########.fr       */
+/*   Updated: 2022/08/31 18:05:24 by Bade-lee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ static size_t	count_words(char *line)
 	{
 		while (line[i] && (line[i] == ' ' || line[i] == '\t'))
 			i++;
+		if (!line[i])
+			break ;
 		if (line[i] == '\"' && line[i + 1])
 		{
 			while (line[++i] && line[i] != '\"')
@@ -110,7 +112,7 @@ char	**ft_split_comm(char *line)
 
 	if (!line)
 		return (0);
-	result = malloc ((count_words(line) + 1) * sizeof(char *));
+	result = ft_calloc((count_words(line) + 1), sizeof(char *));
 	if (!result)
 		return (0);
 	result = place_words(result, line);

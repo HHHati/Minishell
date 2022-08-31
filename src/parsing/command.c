@@ -6,7 +6,7 @@
 /*   By: Bade-lee <bade-lee@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 12:37:28 by Bade-lee          #+#    #+#             */
-/*   Updated: 2022/08/25 17:36:23 by Bade-lee         ###   ########.fr       */
+/*   Updated: 2022/08/31 16:07:02 by Bade-lee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,7 @@ char	*take_comm(char *line, size_t *i)
 	while (line[*i] && line[*i] != '<' && line[*i] != '>')
 	{
 		*i += 1;
-		if (!(line[*i] == '\"' || line[*i] == '\''))
-			n++;
+		n++;
 	}
 	comm = malloc((n + 1) * sizeof(char));
 	if (!comm)
@@ -89,7 +88,8 @@ char	**handle_comm(char *line)
 		free(buf2);
 		i++;
 	}
-	result = ft_split_comm(new_line, " \t\n");
+	result = ft_split_comm(new_line);
+	result = trim_str(result);
 	free(new_line);
 	return (result);
 }

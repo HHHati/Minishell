@@ -6,27 +6,11 @@
 /*   By: Bade-lee <bade-lee@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 11:17:34 by Bade-lee          #+#    #+#             */
-/*   Updated: 2022/08/26 21:54:02 by Bade-lee         ###   ########.fr       */
+/*   Updated: 2022/08/31 12:08:49 by Bade-lee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/parser.h"
-
-int	count_pipes(char *line)
-{
-	size_t	i;
-	int		count;
-
-	i = 0;
-	count = 0;
-	while (line[i])
-	{
-		if (line[i] == '|')
-			count++;
-		i++;
-	}
-	return (count);
-}
 
 char	**split_line(char *line)
 {
@@ -35,7 +19,7 @@ char	**split_line(char *line)
 	char	*buf;
 
 	i = 0;
-	tab = ft_split(line, '|');
+	tab = ft_split_pipes(line);
 	while (tab[i])
 	{
 		buf = tab[i];

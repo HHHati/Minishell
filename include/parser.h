@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkoyamba <mkoyamba@student.s19.be>         +#+  +:+       +#+        */
+/*   By: Bade-lee <bade-lee@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 16:42:10 by Bade-lee          #+#    #+#             */
-/*   Updated: 2022/08/29 20:53:48 by mkoyamba         ###   ########.fr       */
+/*   Updated: 2022/08/31 15:58:00 by Bade-lee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,18 +58,20 @@ t_list		**handle_output(char *line);
 char		**handle_comm(char *line);
 void		*get_content(char *line);
 void		out(void *to_free, int code);
-char		**ft_split_comm(char *str, char *charset);
+char		**ft_split_comm(char *str);
 int			check_solo_operator_2(char *line, size_t i, int letter);
 int			check_operator_place(char *line, size_t i);
 t_list		**free_first(t_list **list);
 int			replace(t_list **parsed);
 char		*to_put(char *end_word);
 char		*take_comm_2(char *comm, char *line, size_t n, size_t *i);
-void		print_lst(t_list **alst); // A SUPPRIMER !!!!!!!!!!!
+char		**ft_split_pipes(char *str);
 char		*check_dollar(char *line, t_minishell *minishell);
 char		*take_dollar_variable(char *line, size_t i, t_minishell *minishell);
-char		*replace_dollar(
-				char *line, size_t start, size_t end, char *new_str);
+char		*replace_dollar(char *line, size_t start, size_t end, char *new_str);
 char		*remove_quotes_dollar(char *line, size_t i, char c);
+char 		**trim_str(char **result);
+
+void		print_lst(t_list **alst); // A SUPPRIMER !!!!!!!!!!!
 
 #endif

@@ -6,95 +6,173 @@
 /*   By: Bade-lee <bade-lee@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 14:51:27 by Bade-lee          #+#    #+#             */
-/*   Updated: 2022/08/24 19:02:23 by Bade-lee         ###   ########.fr       */
+/*   Updated: 2022/08/31 16:09:45 by Bade-lee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/parser.h"
 
-int	ft_is_sep(char c, char *charset)
+static size_t	count_words(char *line)
 {
-	int	n;
+	size_t	i;
+	size_t	words;
 
-	n = 0;
-	while (charset[n] != '\0')
+	i = 0;
+	words = 0;
+	while (line[i])
 	{
-		if (c == charset[n])
-			return (1);
-		n++;
+		while (line[i] && (line[i] == ' ' || line[i] == '\t'))
+			i++;
+		if (line[i] == '\"' && line[i + 1])
+		{
+			while (line[++i] && line[i] != '\"')
+				continue ;
+			words++;	
+		}
+		else if (line[i] && line[i] == '\'' && line[i + 1])
+		{
+			while (line[++i] && line[i] != '\'')
+				continue ;
+			words++;
+		}
+		else
+		{
+			words++;
+			while (line[i] && line[i] != '\"' && line[i] != '\'' && line[i] != ' ' && line[i] != '\t')
+				i++;
+			i--;
+		}
+		i++;	
 	}
-	if (c == '\0')
-		return (1);
-	return (0);
+	return (words);
 }
 
-int	ft_count_words(char *str, char *charset)
+static size_t	find_next_word(char *line, size_t start)
 {
-	int	n;
-	int	i;
+	size_t	i;
 
-	n = 0;
 	i = 0;
-	while (str[n] != '\0')
+	while (line[start + i] && (line[start + i] == ' ' || line[start + i] == '\t'))
+		i++;
+	if (line[start + i] == '\"' && line[i + 1])
 	{
-		if (ft_is_sep(str[n + 1], charset) == 1
-			&& ft_is_sep(str[n], charset) == 0)
+		i++;
+		while (line[start + i] && line[start + i] != '\"')
 			i++;
-		n++;
+		return (i);	
+	}
+	else if (line[start + i] && line[start + i] == '\'' && line[i + 1])
+	{
+		i++;
+		while (line[start + i] && line[start + i] != '\'')
+			i++;
+		return (i);
+	}
+	else
+	{
+		while (line[start + i] && (line[start + i] != ' ' && line[i] != '\t'))
+			i++;
+		return (i);
 	}
 	return (i);
 }
 
-void	ft_put_word(char *dest, char *src, char *charset)
+static char	**place_words(char **result, char *line)
 {
-	int	n;
+	size_t	i;
+	size_t	n;
+	size_t	start;
 
 	n = 0;
-	while (ft_is_sep(src[n], charset) == 0)
+	start = 0;
+	while (n < count_words(line))
 	{
-		dest[n] = src[n];
+		i = 0;
+		result[n] = malloc((find_next_word(line, start) + 2) * sizeof(char));
+		if (!result[n])
+			return (0);
+		while (line[start + i] && (i < find_next_word(line, start) + 1))
+		{
+			result[n][i] = line[start + i];
+			i++;
+		}
+		result[n][i] = '\0';
+		start += find_next_word(line, start) + 1;
 		n++;
 	}
-	dest[n] = '\0';
+	result[n] = NULL;
+	return (result);
 }
 
-void	ft_write_split(char **tab, char *str, char *charset)
-{
-	int	n;
-	int	i;
-	int	a;
-
-	n = 0;
-	a = 0;
-	while (str[n] != '\0')
-	{
-		if (ft_is_sep(str[n], charset) == 1)
-			n++;
-		else
-		{
-			i = 0;
-			while (ft_is_sep(str[n + i], charset) == 0)
-				i++;
-			tab[a] = malloc(sizeof(char) * (i + 1));
-			if (!tab[a])
-				return ;
-			ft_put_word(tab[a], (str + n), charset);
-			n = n + i;
-			a++;
-		}
-	}
-}
-
-char	**ft_split_comm(char *str, char *charset)
+char	**ft_split_comm(char *line)
 {
 	char	**result;
-	int		n;
 
-	n = ft_count_words(str, charset);
-	result = malloc(sizeof(char *) * (n + 1));
+	if (!line)
+		return (0);
+	result = malloc ((count_words(line) + 1) * sizeof(char *));
 	if (!result)
-		return (NULL);
-	result[n] = 0;
-	ft_write_split(result, str, charset);
+		return (0);
+	result = place_words(result, line);
+	if (!result)
+		return (0);
 	return (result);
+}
+
+char	*take_comm_2(char *comm, char *line, size_t n, size_t *i)
+{
+	while (line [*i] && line[*i] && line[*i] != '<' && line[*i] != '>')
+	{
+		comm[n] = line[*i];
+		*i += 1;
+		n++;
+	}
+	comm[n] = '\0';
+	return (comm);
+}
+
+char **trim_str(char **result)
+{
+	size_t	i;
+	char **new_tab;
+
+	i = 0;
+	new_tab = ft_calloc(ft_matlen(result) + 1, sizeof(char *));
+	if (!new_tab)
+		return (0);
+	while (result[i])
+	{
+		new_tab[i] = ft_strtrim(result[i], " \t");
+		if (!(new_tab[i]))
+		{
+			mat_free(new_tab);
+			return (0);
+		}
+		i++;
+	}
+	i = 0;
+	while (new_tab[i])
+	{
+		if (new_tab[i][0] == '\"')
+		{
+			new_tab[i] = ft_strtrim(new_tab[i], "\"");
+			if (!(new_tab[i]))
+			{
+			mat_free(new_tab);
+			return (0);
+			}
+		}
+		else if (new_tab[i][0] == '\'')
+		{
+			new_tab[i] = ft_strtrim(new_tab[i], "\'");
+			if (!(new_tab[i]))
+			{
+			mat_free(new_tab);
+			return (0);
+			}
+		}
+		i++;
+	}
+	mat_free(result);
+	return (new_tab);
 }

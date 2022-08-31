@@ -6,7 +6,7 @@
 /*   By: Bade-lee <bade-lee@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 12:37:28 by Bade-lee          #+#    #+#             */
-/*   Updated: 2022/08/31 18:14:31 by Bade-lee         ###   ########.fr       */
+/*   Updated: 2022/08/31 20:51:04 by Bade-lee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ char	**handle_comm(char *line)
 		i++;
 	}
 	result = ft_split_comm(new_line);
-	result = trim_str(result);
 	free(new_line);
+	result = trim_str(result);
 	return (result);
 }

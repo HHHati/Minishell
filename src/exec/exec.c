@@ -6,7 +6,7 @@
 /*   By: Bade-lee <bade-lee@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 17:19:30 by mkoyamba          #+#    #+#             */
-/*   Updated: 2022/08/31 18:20:02 by Bade-lee         ###   ########.fr       */
+/*   Updated: 2022/08/31 20:38:48 by Bade-lee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ static void	exec_end(int **pipes, t_minishell *minishell, int *pids, pid_t pid)
 
 	close_pipes(pipes, ft_lstsize(*(minishell->list)));
 	waitpid(pid, &status, 0);
+	kill_pids(pids, ft_lstsize(*(minishell->list)));
 	g_tab_flag[0] = WEXITSTATUS(status);
 	if (g_tab_flag[0])
 		return ;
@@ -64,7 +65,6 @@ static void	exec_end(int **pipes, t_minishell *minishell, int *pids, pid_t pid)
 		g_tab_flag[0] = 0;
 	g_tab_flag[1] = DEFAULT;
 	signal(SIGINT, sigint_handler);
-	kill_pids(pids, ft_lstsize(*(minishell->list)));
 }
 
 void	minishell_exec(t_minishell *minishell)
@@ -93,5 +93,4 @@ void	minishell_exec(t_minishell *minishell)
 	signal(SIGINT, sign_exec);
 	pid = exec_loop(minishell, pipes, pids);
 	exec_end(pipes, minishell, pids, pid);
-	free(pids);
 }

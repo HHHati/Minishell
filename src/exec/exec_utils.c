@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkoyamba <mkoyamba@student.s19.be>         +#+  +:+       +#+        */
+/*   By: Bade-lee <bade-lee@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 17:11:55 by mkoyamba          #+#    #+#             */
-/*   Updated: 2022/08/29 16:58:55 by mkoyamba         ###   ########.fr       */
+/*   Updated: 2022/08/31 20:37:43 by Bade-lee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,6 @@ int	**get_pipes(t_minishell *minishell)
 		}
 		n++;
 	}
-	pipes[n] = NULL;
 	n = 0;
 	while (n < ft_lstsize(*(minishell->list)) - 1)
 	{

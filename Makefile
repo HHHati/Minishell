@@ -6,7 +6,7 @@
 #    By: mkoyamba <mkoyamba@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/18 17:11:44 by Basile            #+#    #+#              #
-#    Updated: 2022/08/31 12:38:33 by mkoyamba         ###   ########.fr        #
+#    Updated: 2022/08/31 16:21:03 by mkoyamba         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,6 +34,7 @@ SRC +=\
 		parsing.c\
 		parsing_utils.c\
 		splitting.c\
+		splitting_utils.c\
 		syntax.c\
 		syntax_utils.c\
 		command.c\

@@ -6,7 +6,7 @@
 /*   By: mkoyamba <mkoyamba@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 17:22:35 by Bade-lee          #+#    #+#             */
-/*   Updated: 2022/08/29 19:47:33 by mkoyamba         ###   ########.fr       */
+/*   Updated: 2022/08/31 16:30:11 by mkoyamba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	builtin_echo(char **comm, t_minishell *minishell)
 	len = ft_matlen(comm);
 	if (len > 1 && ft_strncmp(comm[1], "-n", 3) == 0)
 		nl = 0;
-	while (n < len - 1)
+	while (n < len)
 	{
 		if (n > 1 || nl == 1)
 		{
@@ -44,8 +44,6 @@ int	builtin_echo(char **comm, t_minishell *minishell)
 		n++;
 	}
 	if (nl)
-		ft_putendl_fd(comm[len - 1], STDOUT);
-	else if (n > 1)
-		ft_putstr_fd(comm[len - 1], STDOUT);
+		ft_putstr_fd("\n", STDOUT);
 	return (0);
 }

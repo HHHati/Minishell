@@ -6,7 +6,7 @@
 /*   By: mkoyamba <mkoyamba@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 16:42:10 by Bade-lee          #+#    #+#             */
-/*   Updated: 2022/08/29 19:50:00 by mkoyamba         ###   ########.fr       */
+/*   Updated: 2022/08/29 20:53:48 by mkoyamba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,9 +65,7 @@ t_list		**free_first(t_list **list);
 int			replace(t_list **parsed);
 char		*to_put(char *end_word);
 char		*take_comm_2(char *comm, char *line, size_t n, size_t *i);
-
 void		print_lst(t_list **alst); // A SUPPRIMER !!!!!!!!!!!
-
 char		*check_dollar(char *line, t_minishell *minishell);
 char		*take_dollar_variable(char *line, size_t i, t_minishell *minishell);
 char		*replace_dollar(

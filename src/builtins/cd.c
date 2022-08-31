@@ -6,31 +6,48 @@
 /*   By: mkoyamba <mkoyamba@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 17:22:33 by Bade-lee          #+#    #+#             */
-/*   Updated: 2022/08/29 17:56:58 by mkoyamba         ###   ########.fr       */
+/*   Updated: 2022/08/31 10:44:10 by mkoyamba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/builtins.h"
 
-static char	*str_dupli(char *line)
+static int	get_env_index(char *name, t_minishell *minishell)
 {
-	char	*new_line;
 	size_t	i;
 	size_t	n;
 
 	i = 0;
-	n = 0;
-	new_line = malloc((ft_strlen((char *)line) + 1) * sizeof(char));
-	if (!(new_line))
-		return (NULL);
-	while (line && line[n])
+	n = ft_strlen(name);
+	while (minishell->env[i])
 	{
-		new_line[i] = line[n];
+		if (!ft_strncmp(minishell->env[i], name, n))
+			return (i);
 		i++;
-		n++;
 	}
-	new_line[i] = '\0';
-	return (new_line);
+	return (-1);
+}
+
+static void	update_env(t_minishell *minishell)
+{
+	int	pwd;
+	int	old_pwd;
+	char path[PATH_MAX + 1];
+
+	pwd = get_env_index("PWD=", minishell);
+	old_pwd = get_env_index("OLDPWD=", minishell);
+	if (pwd == -1 || old_pwd == -1)
+	{
+		free_parsed(minishell->list);
+		ft_putendl_fd("minishell: alloc error, please restart.", 2);
+		free_minishell(minishell);
+	}
+	free(minishell->env[old_pwd]);
+	minishell->env[old_pwd] = ft_strjoin("OLDPWD=", minishell->env[pwd] + 4);
+	free(minishell->env[pwd]);
+	getcwd(path, PATH_MAX);
+	minishell->env[pwd] = ft_strjoin("PWD=", path);
+	return ;
 }
 
 static char	*get_env_value(char *name, t_minishell *minishell)
@@ -42,38 +59,39 @@ static char	*get_env_value(char *name, t_minishell *minishell)
 	n = ft_strlen(name);
 	while (minishell->env[i])
 	{
-		if (!(ft_strncmp(minishell->env[i], name, n))
-			&& minishell->env[i][n] == '=')
-			return (str_dupli(&(minishell->env[i][n + 1])));
+		if (!ft_strncmp(minishell->env[i], name, n))
+			return (ft_strdup(minishell->env[i] + n));
 		i++;
 	}
-	return (str_dupli(""));
+	return (ft_strdup(""));
 }
 
 int	builtin_cd(char **comm, t_minishell *minishell)
 {
 	char	*path;
 
-	if (comm[2])
+	if (!comm[1])
+		path = get_env_value("HOME=", minishell);
+	else
+		path = comm[1];
+	if (!path || !minishell->env)
 	{
-		ft_putendl_fd("minishell: cd: too many arguments", STDERR);
+		ft_putstr_fd("minishell: cd: ", STDERR);
+		ft_putendl_fd("Allocation error", STDERR);
 		return (1);
 	}
-	if (comm[1])
-		path = get_env_value("HOME", minishell);
-	else
-		path = str_dupli(comm[1]);
-	if (!path)
-		return (1);
 	if (chdir(path) == -1)
 	{
 		ft_putstr_fd("minishell: cd: ", STDERR);
 		ft_putstr_fd(comm[1], STDERR);
 		ft_putstr_fd(": ", STDERR);
 		ft_putendl_fd("No such file or directory", STDERR);
-		free(path);
+		if (!comm[1])
+			free(path);
 		return (1);
 	}
-	free(path);
+	update_env(minishell);
+	if (!comm[1])
+		free(path);
 	return (0);
 }

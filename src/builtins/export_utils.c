@@ -6,7 +6,7 @@
 /*   By: mkoyamba <mkoyamba@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 13:00:56 by Bade-lee          #+#    #+#             */
-/*   Updated: 2022/08/25 16:31:50 by mkoyamba         ###   ########.fr       */
+/*   Updated: 2022/08/31 10:56:56 by mkoyamba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,12 +62,12 @@ char	**new_env_alloc(t_minishell *minishell)
 	new_env = calloc(n + 1, sizeof(char *));
 	if (!new_env)
 		return (NULL);
-	while (i < n - 1)
+	while (i < n)
 	{
 		new_env[i] = minishell->env[i];
 		i++;
 	}
-	free(minishell->env[i]);
+	new_env[n] = NULL;
 	return (new_env);
 }
 

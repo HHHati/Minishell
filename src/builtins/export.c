@@ -6,7 +6,7 @@
 /*   By: mkoyamba <mkoyamba@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 17:22:44 by Bade-lee          #+#    #+#             */
-/*   Updated: 2022/08/29 19:27:06 by mkoyamba         ###   ########.fr       */
+/*   Updated: 2022/08/31 11:25:52 by mkoyamba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,17 @@ static int	valid_name_export(char *name)
 		return (0);
 	if (name[i] != '_' && !(ft_isalpha(name[i])))
 		return (0);
-	while (name[i] && name[i] != '_')
+	while (name[i] && name[i] != '=')
 	{
-		if (!ft_isalnum(name[i] && name[i] != '_'))
+		if (!ft_isalnum(name[i]) && name[i] != '_')
+			return (0);
+		i++;
+	}
+	if (!name[i])
+		return (0);
+	while (name[i])
+	{
+		if (!(ft_isalnum(name[i]) || name[i] == '_' || name[i] == '='))
 			return (0);
 		i++;
 	}
@@ -74,21 +82,25 @@ static int	add_value(char *name, t_minishell *minishell)
 {
 	size_t	i;
 	size_t	n;
+	char	**new_env;
 
 	i = 0;
 	n = ft_strlen(name);
-	minishell->env = new_env_alloc(minishell);
-	if (!minishell->env)
-		return (1);
-	while (minishell->env[i])
+	new_env = new_env_alloc(minishell);
+	if (!new_env)
+		return (0);
+	while (new_env[i])
 		i++;
-	minishell->env[i] = ft_calloc(n + 2, sizeof(char));
-	if (!minishell->env)
-		return (1);
-	ft_strncpy(minishell->env[i], name, n);
-	if (!contain_equal(name))
-		minishell->env[i][n] = '=';
-	return (0);
+	new_env[i] = ft_calloc(n + 1, sizeof(char));
+	if (!new_env[i])
+	{
+		mat_free(new_env);
+		return (0);
+	}
+	ft_strncpy(new_env[i], name, n);
+	free(minishell->env);
+	minishell->env = new_env;
+	return (1);
 }
 
 int	builtin_export(char **comm, t_minishell *minishell)
@@ -100,17 +112,27 @@ int	builtin_export(char **comm, t_minishell *minishell)
 	status = 0;
 	while (comm[i])
 	{
+		if (!contain_equal(comm[i]))
+			i++;
+		if (!comm[i])
+			break ;
 		if (!valid_name_export(comm[i]))
 		{
 			print_error_export(comm[i]);
 			status = 1;
 			i++;
-			continue ;
 		}
+		if (!comm[i])
+			break ;
 		if (variable_already_exist(minishell->env, comm[i]))
 			modify_variable(minishell->env, comm[i], minishell);
-		else
-			add_value(comm[i], minishell);
+		else if (!add_value(comm[i], minishell))
+		{
+			ft_putstr_fd("minishell: export ", STDERR);
+			ft_putstr_fd(comm[i], STDERR);
+			ft_putendl_fd(": alloc error", STDERR);
+		}
+		ft_putendl_fd(minishell->env[0], 2);
 		i++;
 	}
 	return (status);

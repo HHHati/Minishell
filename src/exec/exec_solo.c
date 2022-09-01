@@ -6,7 +6,7 @@
 /*   By: mkoyamba <mkoyamba@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 18:10:30 by mkoyamba          #+#    #+#             */
-/*   Updated: 2022/09/01 13:14:56 by mkoyamba         ###   ########.fr       */
+/*   Updated: 2022/09/01 18:41:35 by mkoyamba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ int	exec_solo(t_list *pipex, t_minishell *minishell, int **pipes)
 	{
 		path = set_path(content, minishell);
 		if (!path)
-			exit(1);
+			exit(0);
 	}
 	else
 		return (exec_builtins(pipex, minishell, double_r));

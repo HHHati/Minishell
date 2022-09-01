@@ -6,7 +6,7 @@
 /*   By: mkoyamba <mkoyamba@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 18:33:54 by mkoyamba          #+#    #+#             */
-/*   Updated: 2022/09/01 13:15:21 by mkoyamba         ###   ########.fr       */
+/*   Updated: 2022/09/01 18:43:19 by mkoyamba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ char	*set_path(t_content *content, t_minishell *minishell)
 {
 	char	*path;
 
-	if (content->comm[0][0] == '/')
+	if (content->comm[0] && content->comm[0][0] == '/')
 		path = content->comm[0];
 	else
 		path = get_path(minishell->env, content->comm);

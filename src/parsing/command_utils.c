@@ -6,7 +6,7 @@
 /*   By: Bade-lee <bade-lee@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 14:51:27 by Bade-lee          #+#    #+#             */
-/*   Updated: 2022/09/01 11:00:28 by Bade-lee         ###   ########.fr       */
+/*   Updated: 2022/09/01 11:06:55 by Bade-lee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,8 @@ static size_t	count_words(char *line)
 		else
 		{
 			words++;
-			while (line[i] && line[i] != '\"' && line[i] != '\'' && line[i] != ' ' && line[i] != '\t')
+			while (line[i] && line[i] != '\"' && line[i] != '\'' && line[i]
+				!= ' ' && line[i] != '\t')
 				i++;
 			i--;
 		}
@@ -54,14 +55,15 @@ static size_t	find_next_word(char *line, size_t start)
 	size_t	i;
 
 	i = 0;
-	while (line[start + i] && (line[start + i] == ' ' || line[start + i] == '\t'))
+	while (line[start + i] && (line[start + i] == ' '
+			|| line[start + i] == '\t'))
 		i++;
 	if (line[start + i] == '\"' && line[i + 1])
 	{
 		i++;
 		while (line[start + i] && line[start + i] != '\"')
 			i++;
-		return (i);	
+		return (i);
 	}
 	else if (line[start + i] && line[start + i] == '\'' && line[i + 1])
 	{
@@ -130,55 +132,4 @@ char	*take_comm_2(char *comm, char *line, size_t n, size_t *i)
 	}
 	comm[n] = '\0';
 	return (comm);
-}
-
-char **trim_str(char **result)
-{
-	size_t	i;
-	char	**new_tab;
-	char	*garbage;
-
-	i = 0;
-	new_tab = ft_calloc(ft_matlen(result) + 1, sizeof(char *));
-	if (!new_tab)
-		return (0);
-	while (result[i])
-	{
-		new_tab[i] = ft_strtrim(result[i], " \t");
-		if (!(new_tab[i]))
-		{
-			mat_free(new_tab);
-			return (0);
-		}
-		i++;
-	}
-	i = 0;
-	while (new_tab[i])
-	{
-		if (new_tab[i][0] == '\"')
-		{
-			garbage = new_tab[i];
-			new_tab[i] = ft_strtrim(new_tab[i], "\"");
-			free(garbage);
-			if (!(new_tab[i]))
-			{
-				mat_free(new_tab);
-				return (0);
-			}
-		}
-		else if (new_tab[i][0] == '\'')
-		{
-			garbage = new_tab[i];
-			new_tab[i] = ft_strtrim(new_tab[i], "\'");
-			free(garbage);
-			if (!(new_tab[i]))
-			{
-				mat_free(new_tab);
-				return (0);
-			}
-		}
-		i++;
-	}
-	mat_free(result);
-	return (new_tab);
 }

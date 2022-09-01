@@ -6,7 +6,7 @@
 /*   By: mkoyamba <mkoyamba@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 17:12:50 by mkoyamba          #+#    #+#             */
-/*   Updated: 2022/09/01 18:29:23 by mkoyamba         ###   ########.fr       */
+/*   Updated: 2022/09/01 19:02:59 by mkoyamba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void		mini_pipex(
 				t_list *pipe, int rang, int **pipes, t_minishell *minishell);
 int			exec_builtins(t_list *pipex, t_minishell *minishell, int *double_r);
 void		exec_builtins_solo_bolo(
-				t_minishell *minishell, int **pipes, int *pids, int savefd);
+				t_minishell *minishell, int **pipes, int *pids, int *savefd);
 void		error_exec(t_content *content, t_minishell *minishell, char *path);
 int			error_exec_solo(
 				t_content *content, t_minishell *minishell, char *path);

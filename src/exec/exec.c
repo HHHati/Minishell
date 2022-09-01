@@ -6,7 +6,7 @@
 /*   By: mkoyamba <mkoyamba@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 17:19:30 by mkoyamba          #+#    #+#             */
-/*   Updated: 2022/09/01 13:01:16 by mkoyamba         ###   ########.fr       */
+/*   Updated: 2022/09/01 19:03:13 by mkoyamba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,9 +72,10 @@ void	minishell_exec(t_minishell *minishell)
 	pid_t	pid;
 	int		**pipes;
 	int		*pids;
-	int		savefd;
+	int		savefd[2];
 
-	savefd = dup(STDIN);
+	savefd[0] = dup(STDIN);
+	savefd[1] = dup(STDOUT);
 	pids = malloc(ft_lstsize(*(minishell->list)) * sizeof(int));
 	if (!pids)
 		return ;

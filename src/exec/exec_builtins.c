@@ -6,7 +6,7 @@
 /*   By: mkoyamba <mkoyamba@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 16:43:24 by mkoyamba          #+#    #+#             */
-/*   Updated: 2022/09/01 13:01:47 by mkoyamba         ###   ########.fr       */
+/*   Updated: 2022/09/01 19:03:23 by mkoyamba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,10 +105,11 @@ int	error_exec_solo(t_content *content, t_minishell *minishell, char *path)
 }
 
 void	exec_builtins_solo_bolo(
-					t_minishell *minishell, int **pipes, int *pids, int savefd)
+					t_minishell *minishell, int **pipes, int *pids, int *savefd)
 {
 	g_tab_flag[0] = exec_solo(*(minishell->list), minishell, pipes);
 	free(pids);
-	dup2(savefd, STDIN);
+	dup2(savefd[0], STDIN);
+	dup2(savefd[1], STDOUT);
 	return ;
 }

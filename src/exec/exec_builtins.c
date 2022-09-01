@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_builtins.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkoyamba <mkoyamba@student.s19.be>         +#+  +:+       +#+        */
+/*   By: Bade-lee <bade-lee@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 16:43:24 by mkoyamba          #+#    #+#             */
-/*   Updated: 2022/09/01 19:03:23 by mkoyamba         ###   ########.fr       */
+/*   Updated: 2022/09/01 19:33:09 by Bade-lee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,7 @@ void	exec_builtins_solo_bolo(
 {
 	g_tab_flag[0] = exec_solo(*(minishell->list), minishell, pipes);
 	free(pids);
+	free(pipes);
 	dup2(savefd[0], STDIN);
 	dup2(savefd[1], STDOUT);
 	return ;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dollar.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkoyamba <mkoyamba@student.s19.be>         +#+  +:+       +#+        */
+/*   By: Bade-lee <bade-lee@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 16:03:32 by Bade-lee          #+#    #+#             */
-/*   Updated: 2022/08/29 19:37:31 by mkoyamba         ###   ########.fr       */
+/*   Updated: 2022/09/01 11:22:53 by Bade-lee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,8 @@ static int	check_is_var(char *line)
 	}
 	return (0);
 }
+
+
 
 char	*check_dollar(char *line, t_minishell *minishell)
 {

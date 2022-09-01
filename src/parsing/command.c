@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   command.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Bade-lee <bade-lee@student.s19.be>         +#+  +:+       +#+        */
+/*   By: mkoyamba <mkoyamba@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 12:37:28 by Bade-lee          #+#    #+#             */
-/*   Updated: 2022/08/31 20:51:04 by Bade-lee         ###   ########.fr       */
+/*   Updated: 2022/09/01 18:25:02 by mkoyamba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,5 @@ char	**handle_comm(char *line)
 	}
 	result = ft_split_comm(new_line);
 	free(new_line);
-	result = trim_str(result);
 	return (result);
 }

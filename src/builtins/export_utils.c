@@ -6,7 +6,7 @@
 /*   By: mkoyamba <mkoyamba@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 13:00:56 by Bade-lee          #+#    #+#             */
-/*   Updated: 2022/08/31 12:40:17 by mkoyamba         ###   ########.fr       */
+/*   Updated: 2022/09/01 12:56:55 by mkoyamba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,13 @@ void	print_error_export(char *name)
 	ft_putstr_fd("minishell: export: '", STDERR);
 	ft_putstr_fd(name, STDERR);
 	ft_putendl_fd("': not a valid identifier", STDERR);
+}
+
+void	print_error_export_alloc(char *name)
+{
+	ft_putstr_fd("minishell: export ", STDERR);
+	ft_putstr_fd(name, STDERR);
+	ft_putendl_fd(": alloc error", STDERR);
 }
 
 char	**new_env_alloc(t_minishell *minishell)

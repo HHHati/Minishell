@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   syntax.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Bade-lee <bade-lee@student.s19.be>         +#+  +:+       +#+        */
+/*   By: mkoyamba <mkoyamba@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 19:37:41 by Bade-lee          #+#    #+#             */
-/*   Updated: 2022/08/31 17:52:53 by Bade-lee         ###   ########.fr       */
+/*   Updated: 2022/09/01 18:15:02 by mkoyamba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,33 +43,27 @@ static int	check_pipes(char *line)
 
 static int	quotes_closed(char *line)
 {
-	int		in_squotes;
-	int		in_dquotes;
 	size_t	i;
 
-	in_squotes = 0;
-	in_dquotes = 0;
 	i = 0;
 	while (line[i])
 	{
 		if (line[i] == '\'')
 		{
-			in_squotes++;
-			if (!check_simple_quotes(line, i))
-				return (0);
-			i = check_simple_quotes(line, i);
+			i++;
+			while (line[i] != '\'')
+			{
+				if (!line[i])
+					return (0);
+				i++;
+			}
 		}
 		else if (line[i] == '\"')
-		{
-			in_dquotes++;
-			if (!check_double_quotes(line, i))
+			if (!handle_single_quotes_syntax(line, &i))
 				return (0);
-			i = check_double_quotes(line, i);
-		}
-		i++;
+		if (line[i])
+			i++;
 	}
-	if (in_squotes % 2 != 0 || in_dquotes % 2 != 0)
-		return (0);
 	return (1);
 }
 

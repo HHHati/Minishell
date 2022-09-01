@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Bade-lee <bade-lee@student.s19.be>         +#+  +:+       +#+        */
+/*   By: mkoyamba <mkoyamba@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 16:42:10 by Bade-lee          #+#    #+#             */
-/*   Updated: 2022/09/01 11:32:38 by Bade-lee         ###   ########.fr       */
+/*   Updated: 2022/09/01 18:28:46 by mkoyamba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,20 +45,23 @@ void		out(void *to_free, int code);
 char		**ft_split_comm(char *str);
 int			check_solo_operator_2(char *line, size_t i, int letter);
 int			check_operator_place(char *line, size_t i);
+int			handle_single_quotes_syntax(char *line, size_t *i);
 t_list		**free_first(t_list **list);
 int			replace(t_list **parsed);
 char		*to_put(char *end_word);
 char		*take_comm_2(char *comm, char *line, size_t n, size_t *i);
+size_t		count_words_extra(char *line, int i);
+size_t		malloc_next_word(char *line, size_t start);
+void		set_next_word(char **result, size_t n, char *line);
 char		**ft_split_pipes(char *str);
 char		*check_dollar(char *line, t_minishell *minishell);
+char		*dollar_loop(int n, char *line, size_t *i, t_minishell *minishell);
+char		*replace_var(char *line, int i, t_minishell *minishell);
 char		*take_dollar_variable(char *line, size_t i, t_minishell *minishell);
 char		*replace_dollar(char *line, size_t start, size_t end,
 				char *new_str);
 char		*remove_quotes_dollar(char *line, size_t i, char c);
 int			check_simple_quotes(char *line, size_t i);
 int			check_double_quotes(char *line, size_t i);
-char		**trim_str(char **result);
-
-void		print_lst(t_list **alst); // A SUPPRIMER !!!!!!!!!!!
 
 #endif

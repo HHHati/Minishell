@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   command_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Bade-lee <bade-lee@student.s19.be>         +#+  +:+       +#+        */
+/*   By: mkoyamba <mkoyamba@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 14:51:27 by Bade-lee          #+#    #+#             */
-/*   Updated: 2022/09/01 11:06:55 by Bade-lee         ###   ########.fr       */
+/*   Updated: 2022/09/01 18:10:28 by mkoyamba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/parser.h"
 
-static size_t	count_words(char *line)
+size_t	count_words(char *line)
 {
 	size_t	i;
 	size_t	words;
@@ -21,31 +21,14 @@ static size_t	count_words(char *line)
 	words = 0;
 	while (line[i])
 	{
+		words++;
 		while (line[i] && (line[i] == ' ' || line[i] == '\t'))
 			i++;
 		if (!line[i])
 			break ;
-		if (line[i] == '\"' && line[i + 1])
-		{
-			while (line[++i] && line[i] != '\"')
-				continue ;
-			words++;
-		}
-		else if (line[i] && line[i] == '\'' && line[i + 1])
-		{
-			while (line[++i] && line[i] != '\'')
-				continue ;
-			words++;
-		}
-		else
-		{
-			words++;
-			while (line[i] && line[i] != '\"' && line[i] != '\'' && line[i]
-				!= ' ' && line[i] != '\t')
-				i++;
-			i--;
-		}
-		i++;
+		i = count_words_extra(line, i);
+		while (line[i] && (line[i] == ' ' || line[i] == '\t'))
+			i++;
 	}
 	return (words);
 }
@@ -55,53 +38,47 @@ static size_t	find_next_word(char *line, size_t start)
 	size_t	i;
 
 	i = 0;
-	while (line[start + i] && (line[start + i] == ' '
-			|| line[start + i] == '\t'))
-		i++;
-	if (line[start + i] == '\"' && line[i + 1])
+	while (line[start + i])
 	{
+		if (line[start + i] == '\"')
+		{
+			i++;
+			while (line[start + i] != '\"')
+				i++;
+		}
+		else if (line[start + i] == '\'')
+		{
+			i++;
+			while (line[start + i] != '\'')
+				i++;
+		}
+		if (line[start + i] == ' ' || line[start + i] == '\t')
+			return (i);
 		i++;
-		while (line[start + i] && line[start + i] != '\"')
-			i++;
-		return (i);
-	}
-	else if (line[start + i] && line[start + i] == '\'' && line[i + 1])
-	{
-		i++;
-		while (line[start + i] && line[start + i] != '\'')
-			i++;
-		return (i);
-	}
-	else
-	{
-		while (line[start + i] && (line[start + i] != ' ' && line[i] != '\t'))
-			i++;
-		return (i);
 	}
 	return (i);
 }
 
 static char	**place_words(char **result, char *line)
 {
-	size_t	i;
 	size_t	n;
 	size_t	start;
 
 	n = 0;
 	start = 0;
-	while (n < count_words(line))
+	while (line[start])
 	{
-		i = 0;
-		result[n] = malloc((find_next_word(line, start) + 2) * sizeof(char));
+		while (line[start] == ' ' || line[start] == '\t')
+			start++;
+		if (!line[start])
+			break ;
+		set_next_word(result, n, line + start);
 		if (!result[n])
-			return (0);
-		while (line[start + i] && (i < find_next_word(line, start) + 1))
 		{
-			result[n][i] = line[start + i];
-			i++;
+			mat_free(result);
+			return (NULL);
 		}
-		result[n][i] = '\0';
-		start += find_next_word(line, start) + 1;
+		start += find_next_word(line, start);
 		n++;
 	}
 	return (result);
@@ -113,7 +90,7 @@ char	**ft_split_comm(char *line)
 
 	if (!line)
 		return (0);
-	result = ft_calloc((count_words(line) + 1), sizeof(char *));
+	result = ft_calloc((count_words(line) + 2), sizeof(char *));
 	if (!result)
 		return (0);
 	result = place_words(result, line);

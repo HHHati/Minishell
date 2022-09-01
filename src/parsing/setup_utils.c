@@ -6,7 +6,7 @@
 /*   By: mkoyamba <mkoyamba@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 11:57:01 by Bade-lee          #+#    #+#             */
-/*   Updated: 2022/08/25 21:40:24 by mkoyamba         ###   ########.fr       */
+/*   Updated: 2022/09/01 11:59:21 by mkoyamba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,14 +45,15 @@ static char	*file_name(char *line, size_t i)
 			|| line[i + n] == '\t' || line[i + n] == '\n'))
 		i++;
 	while (line && line [i + n] && line[i + n] != ' '
-		&& line[i + n] != '\t' && line[i + n] != '\n')
+		&& line[i + n] != '\t' && line[i + n] != '\n' && line[i + n] != '>'
+		&& line[i + n] != '<')
 		n++;
 	str = malloc((n + 1) * sizeof(char));
 	if (!str)
 		return (NULL);
 	n = 0;
 	while (line && line[i] && line[i] != ' ' && line[i] != '\t'
-		&& line[i] != '\n')
+		&& line[i] != '\n' && line[i] != '>' && line[i] != '<')
 	{
 		str[n] = line[i];
 		i++;

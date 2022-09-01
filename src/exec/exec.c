@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Bade-lee <bade-lee@student.s19.be>         +#+  +:+       +#+        */
+/*   By: mkoyamba <mkoyamba@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 17:19:30 by mkoyamba          #+#    #+#             */
-/*   Updated: 2022/08/31 20:38:48 by Bade-lee         ###   ########.fr       */
+/*   Updated: 2022/09/01 13:01:16 by mkoyamba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	mini_pipex(t_list *pipe, int rang, int **pipes,
 	signal(SIGINT, sign_out);
 	if (ft_lstsize(*(minishell->list)) == 1)
 	{
-		g_tab_flag[0] = exec_solo(*(minishell->list), minishell);
+		g_tab_flag[0] = exec_solo(*(minishell->list), minishell, pipes);
 		return ;
 	}
 	else if (rang == 0)
@@ -72,7 +72,9 @@ void	minishell_exec(t_minishell *minishell)
 	pid_t	pid;
 	int		**pipes;
 	int		*pids;
+	int		savefd;
 
+	savefd = dup(STDIN);
 	pids = malloc(ft_lstsize(*(minishell->list)) * sizeof(int));
 	if (!pids)
 		return ;
@@ -85,9 +87,7 @@ void	minishell_exec(t_minishell *minishell)
 	if (ft_lstsize(*(minishell->list)) == 1
 		&& is_builtin(((t_content *)(*(minishell->list))->content)->comm))
 	{
-		g_tab_flag[0] = exec_solo(*(minishell->list), minishell);
-		free(pids);
-		free(pipes);
+		exec_builtins_solo_bolo(minishell, pipes, pids, savefd);
 		return ;
 	}
 	signal(SIGINT, sign_exec);

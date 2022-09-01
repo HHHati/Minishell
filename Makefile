@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: Bade-lee <bade-lee@student.s19.be>         +#+  +:+       +#+         #
+#    By: mkoyamba <mkoyamba@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/18 17:11:44 by Basile            #+#    #+#              #
-#    Updated: 2022/08/31 19:48:51 by Bade-lee         ###   ########.fr        #
+#    Updated: 2022/09/01 13:54:59 by mkoyamba         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ SESSION = mkoyamba
 
 NAME = minishell
 CC = cc
-FLAGS = -Wall -Wextra -Werror
+FLAGS = -Wall -Wextra -Werror -fsanitize=address
 RL_FLAG = -lreadline -L/Users/$(SESSION)/.brew/opt/readline/lib -L /usr/local/Cellar/readline/8.1.2/lib/
 INCLUDE = -I include/minishell.h -I /Users/$(SESSION)/.brew/opt/readline/include -I /usr/local/Cellar/readline/8.1.2/include
 LIB = libft/libft.a
@@ -39,13 +39,13 @@ SRC +=\
 		syntax_utils.c\
 		command.c\
 		command_utils.c\
+		command_extra.c\
 		setup.c\
 		setup_utils.c\
 		replace.c\
 		replace_utils.c\
 		dollar.c\
 		dollar_utils.c\
-		test.c\
 
 # builtins
 SRC +=\

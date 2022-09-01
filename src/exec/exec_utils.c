@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Bade-lee <bade-lee@student.s19.be>         +#+  +:+       +#+        */
+/*   By: mkoyamba <mkoyamba@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 17:11:55 by mkoyamba          #+#    #+#             */
-/*   Updated: 2022/08/31 20:37:43 by Bade-lee         ###   ########.fr       */
+/*   Updated: 2022/09/01 12:38:02 by mkoyamba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,14 +78,20 @@ void	close_pipes(int **pipes, int size)
 	int	n;
 
 	n = 0;
-	while (n < size - 1)
+	if (pipes)
 	{
-		close(pipes[n][0]);
-		close(pipes[n][1]);
-		free(pipes[n]);
-		n++;
+		while (n < size - 1)
+		{
+			if (pipes[n])
+			{
+				close(pipes[n][0]);
+				close(pipes[n][1]);
+				free(pipes[n]);
+				n++;
+			}
+		}
+		free(pipes);
 	}
-	free(pipes);
 }
 
 void	kill_pids(int *pids, int len)

@@ -6,13 +6,13 @@
 /*   By: mkoyamba <mkoyamba@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 17:22:38 by Bade-lee          #+#    #+#             */
-/*   Updated: 2022/08/29 18:20:00 by mkoyamba         ###   ########.fr       */
+/*   Updated: 2022/09/01 12:19:43 by mkoyamba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/builtins.h"
 
-int	builtin_env(char **comm, t_minishell *minishell)
+int	builtin_env(char **comm, t_minishell *minishell, int *double_r)
 {
 	size_t	n;
 
@@ -23,5 +23,6 @@ int	builtin_env(char **comm, t_minishell *minishell)
 		ft_putendl_fd(minishell->env[n], STDOUT);
 		n++;
 	}
+	close_dr(double_r);
 	return (0);
 }

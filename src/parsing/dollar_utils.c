@@ -6,7 +6,7 @@
 /*   By: mkoyamba <mkoyamba@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 16:56:41 by Bade-lee          #+#    #+#             */
-/*   Updated: 2022/08/27 18:22:47 by mkoyamba         ###   ########.fr       */
+/*   Updated: 2022/09/01 13:52:33 by mkoyamba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,4 +52,24 @@ char	*replace_dollar(char *line, size_t start, size_t end, char *new_str)
 	if (!new_str)
 		return (NULL);
 	return (new_str);
+}
+
+char	*dollar_loop(int n, char *line, size_t *i, t_minishell *minishell)
+{
+	char	*save;
+
+	if (line[*i] == '\'' && line[*i + 1])
+	{
+		*i += 1;
+		while (line[*i] && line[*i] != '\'')
+			*i += 1;
+	}
+	else if (line[*i] == '$')
+	{
+		save = line;
+		line = replace_var(line, *i, minishell);
+		if (n)
+			free(save);
+	}
+	return (line);
 }

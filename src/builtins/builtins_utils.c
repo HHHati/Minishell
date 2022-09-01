@@ -6,7 +6,7 @@
 /*   By: mkoyamba <mkoyamba@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 12:36:09 by mkoyamba          #+#    #+#             */
-/*   Updated: 2022/08/31 12:36:14 by mkoyamba         ###   ########.fr       */
+/*   Updated: 2022/09/01 12:18:10 by mkoyamba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,4 +42,10 @@ int	contain_equal(char *name)
 		i++;
 	}
 	return (0);
+}
+
+void	close_dr(int *double_r)
+{
+	close(double_r[0]);
+	close(double_r[1]);
 }

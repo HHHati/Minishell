@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dollar.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Bade-lee <bade-lee@student.s19.be>         +#+  +:+       +#+        */
+/*   By: mkoyamba <mkoyamba@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 16:03:32 by Bade-lee          #+#    #+#             */
-/*   Updated: 2022/09/01 11:22:53 by Bade-lee         ###   ########.fr       */
+/*   Updated: 2022/09/01 17:49:34 by mkoyamba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static char	*get_value(char *line, int start, int end, t_minishell *minishell)
 		return (ft_strdup(""));
 }
 
-static char	*replace_var(char *line, int i, t_minishell *minishell)
+char	*replace_var(char *line, int i, t_minishell *minishell)
 {
 	int		n;
 	char	*value;
@@ -91,18 +91,16 @@ static int	check_is_var(char *line)
 		}
 		else if (line[i] == '$')
 			return (1);
-		i++;
+		if (line[i])
+			i++;
 	}
 	return (0);
 }
-
-
 
 char	*check_dollar(char *line, t_minishell *minishell)
 {
 	size_t	i;
 	size_t	n;
-	char	*save;
 
 	n = 0;
 	while (line && check_is_var(line))
@@ -110,21 +108,11 @@ char	*check_dollar(char *line, t_minishell *minishell)
 		i = 0;
 		while (line[i])
 		{
-			if (line[i] == '\'' && line[i + 1])
-			{
-				i++;
-				while (line[i] && line[i] != '\'')
-					i++;
-			}
-			else if (line[i] == '$')
-			{
-				save = line;
-				line = replace_var(line, i, minishell);
-				if (n)
-					free(save);
+			line = dollar_loop(n, line, &i, minishell);
+			if (line[i] == '$')
 				break ;
-			}
-			i++;
+			if (line[i])
+				i++;
 		}
 		n++;
 	}

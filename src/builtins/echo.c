@@ -6,7 +6,7 @@
 /*   By: mkoyamba <mkoyamba@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 17:22:35 by Bade-lee          #+#    #+#             */
-/*   Updated: 2022/08/31 16:30:11 by mkoyamba         ###   ########.fr       */
+/*   Updated: 2022/09/01 12:18:38 by mkoyamba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ size_t	ft_matlen(char **str)
 	return (n);
 }
 
-int	builtin_echo(char **comm, t_minishell *minishell)
+int	builtin_echo(char **comm, t_minishell *minishell, int *double_r)
 {
 	size_t	len;
 	size_t	n;
@@ -45,5 +45,6 @@ int	builtin_echo(char **comm, t_minishell *minishell)
 	}
 	if (nl)
 		ft_putstr_fd("\n", STDOUT);
+	close_dr(double_r);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: mkoyamba <mkoyamba@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 17:22:33 by Bade-lee          #+#    #+#             */
-/*   Updated: 2022/09/01 11:15:39 by mkoyamba         ###   ########.fr       */
+/*   Updated: 2022/09/01 12:18:45 by mkoyamba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ static void	cd_error(char *str)
 	ft_putendl_fd("No such file or directory", STDERR);
 }
 
-int	builtin_cd(char **comm, t_minishell *minishell)
+int	builtin_cd(char **comm, t_minishell *minishell, int *double_r)
 {
 	char	*path;
 
@@ -98,5 +98,6 @@ int	builtin_cd(char **comm, t_minishell *minishell)
 	update_env(minishell);
 	if (!comm[1])
 		free(path);
+	close_dr(double_r);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: mkoyamba <mkoyamba@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 16:43:24 by mkoyamba          #+#    #+#             */
-/*   Updated: 2022/09/01 11:21:27 by mkoyamba         ###   ########.fr       */
+/*   Updated: 2022/09/01 13:01:47 by mkoyamba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	is_builtin(char **comm)
 	return (0);
 }
 
-int	exec_builtins(t_list *pipex, t_minishell *minishell)
+int	exec_builtins(t_list *pipex, t_minishell *minishell, int *double_r)
 {
 	int				n;
 	static char		*builtins[7] = {"cd", "echo", "env", "export", "pwd",
@@ -45,7 +45,7 @@ int	exec_builtins(t_list *pipex, t_minishell *minishell)
 			break ;
 		n++;
 	}
-	return (tab[n](comm, minishell));
+	return (tab[n](comm, minishell, double_r));
 }
 
 void	error_exec(t_content *content, t_minishell *minishell, char *path)
@@ -102,4 +102,13 @@ int	error_exec_solo(t_content *content, t_minishell *minishell, char *path)
 	ft_putstr_fd(content->comm[0], STDERR);
 	ft_putendl_fd(": command not found", STDERR);
 	return (127);
+}
+
+void	exec_builtins_solo_bolo(
+					t_minishell *minishell, int **pipes, int *pids, int savefd)
+{
+	g_tab_flag[0] = exec_solo(*(minishell->list), minishell, pipes);
+	free(pids);
+	dup2(savefd, STDIN);
+	return ;
 }

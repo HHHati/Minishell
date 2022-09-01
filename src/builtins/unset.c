@@ -6,7 +6,7 @@
 /*   By: mkoyamba <mkoyamba@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 17:22:49 by Bade-lee          #+#    #+#             */
-/*   Updated: 2022/08/31 12:43:35 by mkoyamba         ###   ########.fr       */
+/*   Updated: 2022/09/01 12:17:51 by mkoyamba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ static void	delete_var(char *name, char **env)
 	}
 }
 
-int	builtin_unset(char **comm, t_minishell *minishell)
+int	builtin_unset(char **comm, t_minishell *minishell, int *double_r)
 {
 	size_t	i;
 	int		status;
@@ -80,5 +80,6 @@ int	builtin_unset(char **comm, t_minishell *minishell)
 			delete_var(comm[i], minishell->env);
 		i++;
 	}
+	close_dr(double_r);
 	return (status);
 }

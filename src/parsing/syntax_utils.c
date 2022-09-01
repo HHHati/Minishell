@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   syntax_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Bade-lee <bade-lee@student.s19.be>         +#+  +:+       +#+        */
+/*   By: mkoyamba <mkoyamba@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 11:53:37 by Bade-lee          #+#    #+#             */
-/*   Updated: 2022/09/01 10:55:32 by Bade-lee         ###   ########.fr       */
+/*   Updated: 2022/09/01 18:15:57 by mkoyamba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,4 +69,16 @@ int	check_double_quotes(char *line, size_t i)
 		return (0);
 	i--;
 	return (i);
+}
+
+int	handle_single_quotes_syntax(char *line, size_t *i)
+{
+	*i += 1;
+	while (line[*i] != '\"')
+	{
+		if (!line[*i])
+			return (0);
+		*i += 1;
+	}
+	return (1);
 }

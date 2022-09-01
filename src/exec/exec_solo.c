@@ -6,7 +6,7 @@
 /*   By: mkoyamba <mkoyamba@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 18:10:30 by mkoyamba          #+#    #+#             */
-/*   Updated: 2022/09/01 11:22:05 by mkoyamba         ###   ########.fr       */
+/*   Updated: 2022/09/01 13:14:56 by mkoyamba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,30 +55,28 @@ static void	set_put(t_content *content, int *d_redir)
 		set_output(put);
 }
 
-int	exec_solo(t_list *pipex, t_minishell *minishell)
+int	exec_solo(t_list *pipex, t_minishell *minishell, int **pipes)
 {
 	t_content	*content;
 	char		*path;
 	int			double_r[2];
 
-	pipe(double_r);
-	content = pipex->content;
+	(void)pipes;
+	content = pipe_plus_content(double_r, pipex);
 	if (!files_opening(minishell->list))
 	{
 		g_tab_flag[0] = 1;
 		return (1);
 	}
 	set_put(content, double_r);
+	close_pipes(pipes, 1);
 	if (!is_builtin(content->comm))
 	{
-		if (content->comm[0][0] == '/')
-			path = content->comm[0];
-		else
-			path = get_path(minishell->env, content->comm);
+		path = set_path(content, minishell);
 		if (!path)
 			exit(1);
 	}
 	else
-		return (exec_builtins(pipex, minishell));
+		return (exec_builtins(pipex, minishell, double_r));
 	exit(error_exec_solo(content, minishell, path));
 }

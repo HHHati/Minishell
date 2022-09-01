@@ -6,7 +6,7 @@
 /*   By: mkoyamba <mkoyamba@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 18:33:42 by mkoyamba          #+#    #+#             */
-/*   Updated: 2022/09/01 11:19:07 by mkoyamba         ###   ########.fr       */
+/*   Updated: 2022/09/01 13:21:36 by mkoyamba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,23 +59,29 @@ static void	set_put(t_content *content, int **pipes, int rang, int *d_redir)
 		dup2(pipes[rang][1], STDOUT);
 }
 
-void	exec_middle(t_list *pipex, int rg, int **pipes, t_minishell *minishell)
+static t_list	*set_pipex_middle(int rg, t_list *pipex)
 {
-	t_content	*content;
-	char		*path;
-	int			n;
-	int			double_r[2];
+	int	n;
 
-	close(pipes[rg - 1][1]);
-	close(pipes[rg][0]);
-	pipe(double_r);
 	n = 0;
 	while (n < rg)
 	{
 		pipex = pipex->next;
 		n++;
 	}
-	content = pipex->content;
+	return (pipex);
+}
+
+void	exec_middle(t_list *pipex, int rg, int **pipes, t_minishell *minishell)
+{
+	t_content	*content;
+	char		*path;
+	int			double_r[2];
+
+	close(pipes[rg - 1][1]);
+	close(pipes[rg][0]);
+	pipex = set_pipex_middle(rg, pipex);
+	content = pipe_plus_content(double_r, pipex);
 	if (!files_opening(&pipex))
 	{
 		g_tab_flag[0] = 1;
@@ -85,14 +91,11 @@ void	exec_middle(t_list *pipex, int rg, int **pipes, t_minishell *minishell)
 	close_pipes(pipes, ft_lstsize(*(minishell->list)));
 	if (!is_builtin(content->comm))
 	{
-		if (content->comm[0][0] == '/')
-			path = content->comm[0];
-		else
-			path = get_path(minishell->env, content->comm);
+		path = set_path(content, minishell);
 		if (!path)
 			exit(1);
 	}
 	else
-		exit(exec_builtins(pipex, minishell));
+		exit(exec_builtins(pipex, minishell, double_r));
 	error_exec(content, minishell, path);
 }

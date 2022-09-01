@@ -6,7 +6,7 @@
 /*   By: mkoyamba <mkoyamba@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 18:33:24 by mkoyamba          #+#    #+#             */
-/*   Updated: 2022/09/01 11:16:04 by mkoyamba         ###   ########.fr       */
+/*   Updated: 2022/09/01 13:21:58 by mkoyamba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,12 @@ static void	set_put(t_content *content, int **pipes, int *d_redir)
 		dup2(pipes[0][1], STDOUT);
 }
 
+t_content	*pipe_plus_content(int *double_r, t_list *pipex)
+{
+	pipe(double_r);
+	return (pipex->content);
+}
+
 void	exec_first(t_list *pipex, int **pipes, t_minishell *minishell)
 {
 	t_content	*content;
@@ -64,8 +70,7 @@ void	exec_first(t_list *pipex, int **pipes, t_minishell *minishell)
 	int			double_r[2];
 
 	close(pipes[0][0]);
-	pipe(double_r);
-	content = pipex->content;
+	content = pipe_plus_content(double_r, pipex);
 	if (!files_opening(minishell->list))
 	{
 		g_tab_flag[0] = 1;
@@ -75,14 +80,11 @@ void	exec_first(t_list *pipex, int **pipes, t_minishell *minishell)
 	close_pipes(pipes, ft_lstsize(*(minishell->list)));
 	if (!is_builtin(content->comm))
 	{
-		if (content->comm[0][0] == '/')
-			path = content->comm[0];
-		else
-			path = get_path(minishell->env, content->comm);
+		path = set_path(content, minishell);
 		if (!path)
 			exit(1);
 	}
 	else
-		exit(exec_builtins(pipex, minishell));
+		exit(exec_builtins(pipex, minishell, double_r));
 	error_exec(content, minishell, path);
 }

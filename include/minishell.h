@@ -6,7 +6,7 @@
 /*   By: mkoyamba <mkoyamba@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/18 18:02:26 by Bade-lee          #+#    #+#             */
-/*   Updated: 2022/09/01 11:14:37 by mkoyamba         ###   ########.fr       */
+/*   Updated: 2022/09/01 17:22:25 by mkoyamba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,6 @@
 # include "parser.h"
 # include "exec.h"
 # include "files.h"
-
-//# include "wraloc.h" //A SUPPRIMER !!!!
 
 //          ----------========== {     DEFS     } ==========----------
 

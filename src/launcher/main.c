@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Bade-lee <bade-lee@student.s19.be>         +#+  +:+       +#+        */
+/*   By: mkoyamba <mkoyamba@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 16:44:37 by mkoyamba          #+#    #+#             */
-/*   Updated: 2022/08/31 20:55:11 by Bade-lee         ###   ########.fr       */
+/*   Updated: 2022/09/01 12:53:11 by mkoyamba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +31,6 @@ static void	not_on_line(t_minishell *minishell, int mode)
 	free_minishell(minishell);
 }
 
-static void	exec_line(t_minishell *minishell)
-{
-	(void)minishell;
-	//print_lst(minishell->list); // A SUPPRIMER !!!!!!!!!!!!!!!!!
-	minishell_exec(minishell);
-}
-
 static void	histo_add(char *line)
 {
 	if (ft_strlen(line) > 0)
@@ -59,7 +52,7 @@ static void	on_line(t_minishell *minishell, char *line)
 		if (minishell->list)
 		{
 			if (replace(minishell->list))
-				exec_line(minishell);
+				minishell_exec(minishell);
 			else
 				g_tab_flag[0] = 1;
 			free_parsed(minishell->list);
@@ -70,9 +63,14 @@ static void	on_line(t_minishell *minishell, char *line)
 			g_tab_flag[0] = 1;
 		}
 	}
-	free(line);
 	rl_replace_line("", 0);
 	rl_on_new_line();
+}
+
+static void	if_line(char *line, t_minishell *minishell)
+{
+	on_line(minishell, line);
+	free(line);
 }
 
 int	main(int argc, char **argv, char **env)
@@ -95,7 +93,7 @@ int	main(int argc, char **argv, char **env)
 		else
 			line = readline("\033[0;36m\033[1mminishell\033[0;31m ▸ \033[0m");
 		if (line)
-			on_line(minishell, line);
+			if_line(line, minishell);
 		else
 			not_on_line(minishell, CTRL_D);
 	}

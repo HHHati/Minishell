@@ -6,7 +6,7 @@
 /*   By: mkoyamba <mkoyamba@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 17:22:44 by Bade-lee          #+#    #+#             */
-/*   Updated: 2022/08/31 12:39:31 by mkoyamba         ###   ########.fr       */
+/*   Updated: 2022/09/01 12:57:01 by mkoyamba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	valid_name_export(char *name)
 	return (1);
 }	
 
-static int	variable_already_exist(char **env, char *name)
+int	variable_already_exist(char **env, char *name)
 {
 	size_t	i;
 	size_t	n;
@@ -103,7 +103,7 @@ static int	add_value(char *name, t_minishell *minishell)
 	return (1);
 }
 
-int	builtin_export(char **comm, t_minishell *minishell)
+int	builtin_export(char **comm, t_minishell *minishell, int *double_r)
 {
 	int	i;
 	int	status;
@@ -122,12 +122,9 @@ int	builtin_export(char **comm, t_minishell *minishell)
 		if (variable_already_exist(minishell->env, comm[i]))
 			modify_variable(minishell->env, comm[i], minishell);
 		else if (!add_value(comm[i], minishell))
-		{
-			ft_putstr_fd("minishell: export ", STDERR);
-			ft_putstr_fd(comm[i], STDERR);
-			ft_putendl_fd(": alloc error", STDERR);
-		}
+			print_error_export_alloc(comm[i]);
 		i++;
 	}
+	close_dr(double_r);
 	return (status);
 }

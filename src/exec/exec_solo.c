@@ -6,7 +6,7 @@
 /*   By: mkoyamba <mkoyamba@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 18:10:30 by mkoyamba          #+#    #+#             */
-/*   Updated: 2022/09/01 18:41:35 by mkoyamba         ###   ########.fr       */
+/*   Updated: 2022/09/01 19:23:53 by mkoyamba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,8 @@ int	exec_solo(t_list *pipex, t_minishell *minishell, int **pipes)
 	if (!files_opening(minishell->list))
 	{
 		g_tab_flag[0] = 1;
+		if (!is_builtin(content->comm))
+			exit (1);
 		return (1);
 	}
 	set_put(content, double_r);

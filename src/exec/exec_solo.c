@@ -6,7 +6,7 @@
 /*   By: Bade-lee <bade-lee@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 18:10:30 by mkoyamba          #+#    #+#             */
-/*   Updated: 2022/08/31 20:30:47 by Bade-lee         ###   ########.fr       */
+/*   Updated: 2022/09/01 11:02:04 by Bade-lee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,10 @@ int	exec_solo(t_list *pipex, t_minishell *minishell)
 	set_put(content, double_r);
 	if (!is_builtin(content->comm))
 	{
-		path = get_path(minishell->env, content->comm);
+		if (content->comm[0][0] == '/')
+			path = content->comm[0];
+		else
+			path = get_path(minishell->env, content->comm);
 		if (!path)
 			exit(1);
 	}

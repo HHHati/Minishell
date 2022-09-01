@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkoyamba <mkoyamba@student.s19.be>         +#+  +:+       +#+        */
+/*   By: Bade-lee <bade-lee@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 17:22:33 by Bade-lee          #+#    #+#             */
-/*   Updated: 2022/08/31 10:44:10 by mkoyamba         ###   ########.fr       */
+/*   Updated: 2022/09/01 10:54:47 by Bade-lee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,9 @@ static int	get_env_index(char *name, t_minishell *minishell)
 
 static void	update_env(t_minishell *minishell)
 {
-	int	pwd;
-	int	old_pwd;
-	char path[PATH_MAX + 1];
+	int		pwd;
+	int		old_pwd;
+	char	path[PATH_MAX + 1];
 
 	pwd = get_env_index("PWD=", minishell);
 	old_pwd = get_env_index("OLDPWD=", minishell);
@@ -66,6 +66,14 @@ static char	*get_env_value(char *name, t_minishell *minishell)
 	return (ft_strdup(""));
 }
 
+static void	cd_error(char *str)
+{
+	ft_putstr_fd("minishell: cd: ", STDERR);
+	ft_putstr_fd(str, STDERR);
+	ft_putstr_fd(": ", STDERR);
+	ft_putendl_fd("No such file or directory", STDERR);
+}
+
 int	builtin_cd(char **comm, t_minishell *minishell)
 {
 	char	*path;
@@ -82,10 +90,7 @@ int	builtin_cd(char **comm, t_minishell *minishell)
 	}
 	if (chdir(path) == -1)
 	{
-		ft_putstr_fd("minishell: cd: ", STDERR);
-		ft_putstr_fd(comm[1], STDERR);
-		ft_putstr_fd(": ", STDERR);
-		ft_putendl_fd("No such file or directory", STDERR);
+		cd_error(comm[1])
 		if (!comm[1])
 			free(path);
 		return (1);

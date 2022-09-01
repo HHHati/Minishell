@@ -6,7 +6,7 @@
 /*   By: Bade-lee <bade-lee@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 17:08:06 by Bade-lee          #+#    #+#             */
-/*   Updated: 2022/08/31 12:07:11 by Bade-lee         ###   ########.fr       */
+/*   Updated: 2022/09/01 10:58:48 by Bade-lee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static size_t	count_words(char *line)
 		if (line[i] == '\"' && line[i + 1])
 		{
 			while (line[++i] && line[i] != '\"')
-				continue ;	
+				continue ;
 		}
 		else if (line[i] && line[i] == '\'' && line[i + 1])
 		{
@@ -33,7 +33,7 @@ static size_t	count_words(char *line)
 		}
 		else if (line[i] && line[i] == '|')
 			words++;
-		i++;	
+		i++;
 	}
 	return (words);
 }
@@ -49,17 +49,17 @@ static size_t	find_next_word(char *line, size_t start)
 		{
 			i++;
 			while (line[start + i] && line[start + i] != '\"')
-				i++;	
+				i++;
 		}
 		else if (line[start + i] && line[start + i] == '\'' && line[i + 1])
 		{
 			i++;
 			while (line[start + i] && line[start + i] != '\'')
-				i++;;
+				i++;
 		}
 		else if (line[start + i] && line[start + i] == '|')
 			return (i);
-		i++;	
+		i++;
 	}
 	return (i);
 }

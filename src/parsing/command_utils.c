@@ -6,7 +6,7 @@
 /*   By: Bade-lee <bade-lee@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 14:51:27 by Bade-lee          #+#    #+#             */
-/*   Updated: 2022/08/31 20:54:05 by Bade-lee         ###   ########.fr       */
+/*   Updated: 2022/09/01 11:00:28 by Bade-lee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static size_t	count_words(char *line)
 		{
 			while (line[++i] && line[i] != '\"')
 				continue ;
-			words++;	
+			words++;
 		}
 		else if (line[i] && line[i] == '\'' && line[i + 1])
 		{
@@ -44,7 +44,7 @@ static size_t	count_words(char *line)
 				i++;
 			i--;
 		}
-		i++;	
+		i++;
 	}
 	return (words);
 }

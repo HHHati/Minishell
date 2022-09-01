@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_first.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkoyamba <mkoyamba@student.s19.be>         +#+  +:+       +#+        */
+/*   By: Bade-lee <bade-lee@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 18:33:24 by mkoyamba          #+#    #+#             */
-/*   Updated: 2022/08/29 19:35:05 by mkoyamba         ###   ########.fr       */
+/*   Updated: 2022/09/01 11:01:30 by Bade-lee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,10 @@ void	exec_first(t_list *pipex, int **pipes, t_minishell *minishell)
 	close_pipes(pipes, ft_lstsize(*(minishell->list)));
 	if (!is_builtin(content->comm))
 	{
-		path = get_path(minishell->env, content->comm);
+		if (content->comm[0][0] == '/')
+			path = content->comm[0];
+		else
+			path = get_path(minishell->env, content->comm);
 		if (!path)
 			exit(1);
 	}

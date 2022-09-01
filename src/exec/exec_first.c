@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_first.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Bade-lee <bade-lee@student.s19.be>         +#+  +:+       +#+        */
+/*   By: mkoyamba <mkoyamba@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 18:33:24 by mkoyamba          #+#    #+#             */
-/*   Updated: 2022/09/01 11:01:30 by Bade-lee         ###   ########.fr       */
+/*   Updated: 2022/09/01 11:16:04 by mkoyamba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,9 +84,5 @@ void	exec_first(t_list *pipex, int **pipes, t_minishell *minishell)
 	}
 	else
 		exit(exec_builtins(pipex, minishell));
-	execve(path, content->comm, minishell->env);
-	ft_putstr_fd("minishell: ", STDERR);
-	ft_putstr_fd(content->comm[0], STDERR);
-	ft_putendl_fd(": command not found", STDERR);
-	exit (127);
+	error_exec(content, minishell, path);
 }

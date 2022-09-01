@@ -6,7 +6,7 @@
 /*   By: mkoyamba <mkoyamba@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 17:12:50 by mkoyamba          #+#    #+#             */
-/*   Updated: 2022/08/29 19:28:56 by mkoyamba         ###   ########.fr       */
+/*   Updated: 2022/09/01 11:21:05 by mkoyamba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,5 +41,7 @@ void	kill_pids(int *pids, int len);
 pid_t	exec_loop(t_minishell *minishell, int **pipes, int *pids);
 void	mini_pipex(t_list *pipe, int rang, int **pipes, t_minishell *minishell);
 int		exec_builtins(t_list *pipex, t_minishell *minishell);
+void	error_exec(t_content *content, t_minishell *minishell, char *path);
+int		error_exec_solo(t_content *content, t_minishell *minishell, char *path);
 
 #endif

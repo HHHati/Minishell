@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Bade-lee <bade-lee@student.s19.be>         +#+  +:+       +#+        */
+/*   By: mkoyamba <mkoyamba@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 16:42:10 by Bade-lee          #+#    #+#             */
-/*   Updated: 2022/08/31 17:15:23 by Bade-lee         ###   ########.fr       */
+/*   Updated: 2022/09/01 11:23:43 by mkoyamba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,22 +28,6 @@
 
 # define SMP_OP 0
 # define APP_OP 1
-
-//          ----------========== {    STRUCT    } ==========----------
-
-typedef struct s_content
-{
-	t_list	**input;
-	t_list	**output;
-	char	**comm;
-}				t_content;
-
-typedef struct s_redirection
-{
-	char	*name;
-	int		type;
-	int		fd;
-}				t_redirection;
 
 //          ----------========== {     FCTS     } ==========----------
 

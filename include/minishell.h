@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Bade-lee <bade-lee@student.s19.be>         +#+  +:+       +#+        */
+/*   By: mkoyamba <mkoyamba@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/18 18:02:26 by Bade-lee          #+#    #+#             */
-/*   Updated: 2022/08/31 18:27:39 by Bade-lee         ###   ########.fr       */
+/*   Updated: 2022/09/01 11:14:37 by mkoyamba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@
 # include "../libft/include/libft.h"
 # include "struct.h"
 # include "builtins.h"
-# include "exec.h"
 # include "parser.h"
+# include "exec.h"
 # include "files.h"
 
 //# include "wraloc.h" //A SUPPRIMER !!!!

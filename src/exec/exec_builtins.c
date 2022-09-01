@@ -6,7 +6,7 @@
 /*   By: mkoyamba <mkoyamba@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 16:43:24 by mkoyamba          #+#    #+#             */
-/*   Updated: 2022/08/29 19:27:46 by mkoyamba         ###   ########.fr       */
+/*   Updated: 2022/09/01 11:21:27 by mkoyamba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,4 +46,60 @@ int	exec_builtins(t_list *pipex, t_minishell *minishell)
 		n++;
 	}
 	return (tab[n](comm, minishell));
+}
+
+void	error_exec(t_content *content, t_minishell *minishell, char *path)
+{
+	int	fd;
+
+	execve(path, content->comm, minishell->env);
+	if (content->comm[0][0] == '/')
+	{
+		fd = open(content->comm[0], O_DIRECTORY);
+		ft_putstr_fd("minishell: ", STDERR);
+		ft_putstr_fd(content->comm[0], STDERR);
+		if (fd == -1)
+		{
+			ft_putendl_fd(": No such file or directory", STDERR);
+			exit(127);
+		}
+		else
+		{
+			ft_putendl_fd(": Is a directory", STDERR);
+			close(fd);
+			exit(126);
+		}
+	}
+	ft_putstr_fd("minishell: ", STDERR);
+	ft_putstr_fd(content->comm[0], STDERR);
+	ft_putendl_fd(": command not found", STDERR);
+	exit(127);
+}
+
+int	error_exec_solo(t_content *content, t_minishell *minishell, char *path)
+{
+	int	fd;
+
+	execve(path, content->comm, minishell->env);
+	if (content->comm[0][0] == '/')
+	{
+		fd = open(content->comm[0], O_DIRECTORY);
+		ft_putstr_fd("minishell: ", STDERR);
+		ft_putstr_fd(content->comm[0], STDERR);
+		if (fd == -1)
+		{
+			ft_putendl_fd(": No such file or directory", STDERR);
+			return (127);
+		}
+		else
+		{
+			ft_putendl_fd(": Is a directory", STDERR);
+			close(fd);
+			return (126);
+		}
+	}
+	ft_putstr_fd("minishell: ", STDERR);
+	ft_putstr_fd(content->comm[0], STDERR);
+	ft_putendl_fd(": command not found", STDERR);
+	return (127);
 }

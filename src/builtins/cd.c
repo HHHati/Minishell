@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Bade-lee <bade-lee@student.s19.be>         +#+  +:+       +#+        */
+/*   By: mkoyamba <mkoyamba@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 17:22:33 by Bade-lee          #+#    #+#             */
-/*   Updated: 2022/09/01 11:06:08 by Bade-lee         ###   ########.fr       */
+/*   Updated: 2022/09/01 11:15:39 by mkoyamba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ int	builtin_cd(char **comm, t_minishell *minishell)
 	}
 	if (chdir(path) == -1)
 	{
-		cd_error(comm[1])
+		cd_error(comm[1]);
 		if (!comm[1])
 			free(path);
 		return (1);

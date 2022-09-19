@@ -6,7 +6,7 @@
 #    By: mkoyamba <mkoyamba@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/18 17:11:44 by Basile            #+#    #+#              #
-#    Updated: 2022/09/19 17:56:10 by mkoyamba         ###   ########.fr        #
+#    Updated: 2022/09/19 18:04:14 by mkoyamba         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@
 
 NAME = minishell
 CC = cc
-FLAGS = -Wall -Wextra -Werror -fsanitize=address
+FLAGS = -Wall -Wextra -Werror
 RL_FLAG = -lreadline -L$(shell brew --prefix readline)/lib
 INCLUDE = -I include/minishell.h -I$(shell brew --prefix readline)/include
 LIB = libft/libft.a

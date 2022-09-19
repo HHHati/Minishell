@@ -6,7 +6,7 @@
 /*   By: mkoyamba <mkoyamba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 16:01:33 by mkoyamba          #+#    #+#             */
-/*   Updated: 2022/09/19 17:35:35 by mkoyamba         ###   ########.fr       */
+/*   Updated: 2022/09/19 18:39:04 by mkoyamba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,16 +68,22 @@ static unsigned char	return_atoi(char *number)
 	return (0);
 }
 
+static void	too_long_exit(int code, t_minishell *minishell)
+{
+	g_tab_flag[0] = code;
+	free_parsed(minishell->list);
+	free_minishell(minishell);
+}
+
 int	builtin_exit(char **comm, t_minishell *minishell, int *double_r)
 {
 	size_t	n;
 
 	(void)double_r;
-	(void)minishell;
 	n = 0;
 	ft_putendl_fd("exit", STDERR);
 	if (ft_matlen(comm) < 2)
-		exit(0);
+		too_long_exit(0, minishell);
 	while (comm[1][n])
 	{
 		if (n == 0 && comm[1][n] == '-')
@@ -86,13 +92,13 @@ int	builtin_exit(char **comm, t_minishell *minishell, int *double_r)
 		{
 			exec_error_print(
 				"minishell: exit", "", ": numeric argument required");
-			exit(255);
+			too_long_exit(255, minishell);
 		}
 		n++;
 	}
 	if (ft_matlen(comm) != 2)
 		ft_putendl_fd("minishell: exit: too many arguments", STDERR);
 	else
-		exit(return_atoi(comm[1]));
+		too_long_exit(return_atoi(comm[1]), minishell);
 	return (1);
 }

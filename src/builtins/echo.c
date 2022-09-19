@@ -6,7 +6,7 @@
 /*   By: mkoyamba <mkoyamba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 17:22:35 by Bade-lee          #+#    #+#             */
-/*   Updated: 2022/09/19 15:56:11 by mkoyamba         ###   ########.fr       */
+/*   Updated: 2022/09/19 18:07:00 by mkoyamba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,5 +75,6 @@ int	builtin_echo(char **comm, t_minishell *minishell, int *double_r)
 	if (result)
 		ft_putstr_fd(result, STDOUT);
 	close_dr(double_r);
+	free(result);
 	return (0);
 }

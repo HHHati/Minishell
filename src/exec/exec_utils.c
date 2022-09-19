@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkoyamba <mkoyamba@student.s19.be>         +#+  +:+       +#+        */
+/*   By: mkoyamba <mkoyamba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 17:11:55 by mkoyamba          #+#    #+#             */
-/*   Updated: 2022/09/01 12:38:02 by mkoyamba         ###   ########.fr       */
+/*   Updated: 2022/09/19 18:23:42 by mkoyamba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ void	kill_pids(int *pids, int len)
 	n = 0;
 	while (n < len)
 	{
-		kill(pids[n], SIGSTOP);
+		kill(pids[n], SIGKILL);
 		n++;
 	}
 	free(pids);

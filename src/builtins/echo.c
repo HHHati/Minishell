@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkoyamba <mkoyamba@student.s19.be>         +#+  +:+       +#+        */
+/*   By: mkoyamba <mkoyamba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 17:22:35 by Bade-lee          #+#    #+#             */
-/*   Updated: 2022/09/01 12:18:38 by mkoyamba         ###   ########.fr       */
+/*   Updated: 2022/09/19 15:56:11 by mkoyamba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,29 +22,58 @@ size_t	ft_matlen(char **str)
 	return (n);
 }
 
-int	builtin_echo(char **comm, t_minishell *minishell, int *double_r)
+static char	*get_join_echo(char *result, char *add)
 {
-	size_t	len;
-	size_t	n;
-	int		nl;
+	char	*buf;
 
-	(void)minishell;
+	buf = result;
+	result = ft_strjoin(result, add);
+	free(buf);
+	return (result);
+}
+
+static char	*get_echo(char **comm, int nl, size_t len)
+{
+	size_t	n;
+	char	*result;
+
 	n = 1;
-	nl = 1;
-	len = ft_matlen(comm);
-	if (len > 1 && ft_strncmp(comm[1], "-n", 3) == 0)
-		nl = 0;
+	result = ft_strdup("");
+	if (!result)
+		return (NULL);
 	while (n < len)
 	{
 		if (n > 1 || nl == 1)
 		{
-			ft_putstr_fd(comm[n], STDOUT);
-			ft_putstr_fd(" ", STDOUT);
+			result = get_join_echo(result, comm[n]);
+			if (!result)
+				return (NULL);
+			if (n < len - 1)
+				result = get_join_echo(result, " ");
+			if (!result)
+				return (NULL);
 		}
 		n++;
 	}
 	if (nl)
-		ft_putstr_fd("\n", STDOUT);
+		result = get_join_echo(result, "\n");
+	return (result);
+}
+
+int	builtin_echo(char **comm, t_minishell *minishell, int *double_r)
+{
+	size_t	len;
+	int		nl;
+	char	*result;
+
+	(void)minishell;
+	nl = 1;
+	len = ft_matlen(comm);
+	if (len > 1 && ft_strncmp(comm[1], "-n", 3) == 0)
+		nl = 0;
+	result = get_echo(comm, nl, len);
+	if (result)
+		ft_putstr_fd(result, STDOUT);
 	close_dr(double_r);
 	return (0);
 }

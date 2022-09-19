@@ -1,26 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putendl_fd.c                                    :+:      :+:    :+:   */
+/*   exec_print.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mkoyamba <mkoyamba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/01 15:39:39 by bade-lee          #+#    #+#             */
-/*   Updated: 2022/09/19 14:49:21 by mkoyamba         ###   ########.fr       */
+/*   Created: 2022/09/19 14:42:38 by mkoyamba          #+#    #+#             */
+/*   Updated: 2022/09/19 14:53:21 by mkoyamba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../../include/exec.h"
 
-void	ft_putendl_fd(char *s, int fd)
+void	exec_error_print(char *s1, char *s2, char *s3)
 {
+	char	*buf;
 	char	*result;
 
-	if (!s || fd < 0)
+	buf = ft_strjoin(s1, s2);
+	if (!buf)
 		return ;
-	result = ft_strjoin(s, "\n");
+	result = ft_strjoin(buf, s3);
+	free(buf);
 	if (!result)
 		return ;
-	write(fd, result, ft_strlen(result));
+	ft_putendl_fd(result, STDERR);
 	free(result);
 }

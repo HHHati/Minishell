@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkoyamba <mkoyamba@student.s19.be>         +#+  +:+       +#+        */
+/*   By: mkoyamba <mkoyamba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 17:12:50 by mkoyamba          #+#    #+#             */
-/*   Updated: 2022/09/05 12:02:27 by mkoyamba         ###   ########.fr       */
+/*   Updated: 2022/09/19 16:04:07 by mkoyamba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,5 +50,6 @@ int			error_exec_solo(
 				t_content *content, t_minishell *minishell, char *path);
 t_content	*pipe_plus_content(int *double_r, t_list *pipex);
 char		*set_path(t_content *content, t_minishell *minishell);
+void		exec_error_print(char *s1, char *s2, char *s3);
 
 #endif

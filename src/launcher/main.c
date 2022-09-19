@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkoyamba <mkoyamba@student.s19.be>         +#+  +:+       +#+        */
+/*   By: mkoyamba <mkoyamba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 16:44:37 by mkoyamba          #+#    #+#             */
-/*   Updated: 2022/09/01 12:53:11 by mkoyamba         ###   ########.fr       */
+/*   Updated: 2022/09/19 16:47:10 by mkoyamba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,6 @@ static void	histo_add(char *line)
 static void	on_line(t_minishell *minishell, char *line)
 {
 	histo_add(line);
-	if (ft_strncmp(line, "exit", 5) == 0)
-		not_on_line(minishell, EXIT);
 	if (!syntax_check(line))
 	{
 		if (!line[0])

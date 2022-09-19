@@ -3,22 +3,20 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: Bade-lee <bade-lee@student.s19.be>         +#+  +:+       +#+         #
+#    By: mkoyamba <mkoyamba@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/18 17:11:44 by Basile            #+#    #+#              #
-#    Updated: 2022/09/01 19:35:04 by Bade-lee         ###   ########.fr        #
+#    Updated: 2022/09/19 17:56:10 by mkoyamba         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 #          ----------========== {     VARS     } ==========----------
 
-SESSION = mkoyamba
-
 NAME = minishell
 CC = cc
-FLAGS = -Wall -Wextra -Werror
-RL_FLAG = -lreadline -L/Users/$(SESSION)/.brew/opt/readline/lib -L /usr/local/Cellar/readline/8.1.2/lib/
-INCLUDE = -I include/minishell.h -I /Users/$(SESSION)/.brew/opt/readline/include -I /usr/local/Cellar/readline/8.1.2/include
+FLAGS = -Wall -Wextra -Werror -fsanitize=address
+RL_FLAG = -lreadline -L$(shell brew --prefix readline)/lib
+INCLUDE = -I include/minishell.h -I$(shell brew --prefix readline)/include
 LIB = libft/libft.a
 
 #          ----------========== {     SRCS     } ==========----------
@@ -56,6 +54,7 @@ SRC +=\
 		export.c\
 		pwd.c\
 		unset.c\
+		exit.c\
 		builtins_utils.c\
 
 # files
@@ -74,6 +73,7 @@ SRC +=\
 		get_path.c\
 		split_pipex.c\
 		exec_builtins.c\
+		exec_print.c\
 
 #          ----------========== {     OBJS     } ==========----------
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkoyamba <mkoyamba@student.s19.be>         +#+  +:+       +#+        */
+/*   By: mkoyamba <mkoyamba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 17:17:09 by Bade-lee          #+#    #+#             */
-/*   Updated: 2022/09/01 12:56:22 by mkoyamba         ###   ########.fr       */
+/*   Updated: 2022/09/19 16:04:31 by mkoyamba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,5 +40,6 @@ void	is_valid_export(char **comm, int *i, int *status);
 int		valid_name_export(char *name);
 int		variable_already_exist(char **env, char *name);
 void	close_dr(int *double_r);
+int		builtin_exit(char **comm, t_minishell *minishell, int *double_r);
 
 #endif

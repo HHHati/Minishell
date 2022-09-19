@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   command.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkoyamba <mkoyamba@student.s19.be>         +#+  +:+       +#+        */
+/*   By: mkoyamba <mkoyamba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 12:37:28 by Bade-lee          #+#    #+#             */
-/*   Updated: 2022/09/01 18:25:02 by mkoyamba         ###   ########.fr       */
+/*   Updated: 2022/09/19 21:48:17 by mkoyamba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,23 +49,26 @@ size_t	first_comm(char *line)
 
 char	*take_comm(char *line, size_t *i)
 {
-	char	*comm;
+	char	pass;
 	size_t	n;
 	size_t	j;
 
-	n = 0;
 	j = *i;
 	while (line[*i] && line[*i] != '<' && line[*i] != '>')
 	{
-		*i += 1;
-		n++;
+		while (line[*i] && (line[*i] == '\'' || line[*i] == '\"'))
+		{
+			pass = line[*i];
+			*i += 1;
+			while (line[*i] && line[*i] != pass)
+				*i += 1;
+		}
+		if (line[*i])
+			*i += 1;
 	}
-	comm = malloc((n + 1) * sizeof(char));
-	if (!comm)
-		return (NULL);
-	n = 0;
+	n = *i - j;
 	*i = j;
-	return (take_comm_2(comm, line, n, i));
+	return (take_comm_2(line, n, i));
 }
 
 char	**handle_comm(char *line)

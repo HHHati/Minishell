@@ -3,14 +3,70 @@
 /*                                                        :::      ::::::::   */
 /*   setup.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Bade-lee <bade-lee@student.s19.be>         +#+  +:+       +#+        */
+/*   By: mkoyamba <mkoyamba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 11:10:34 by Bade-lee          #+#    #+#             */
-/*   Updated: 2022/08/31 20:52:11 by Bade-lee         ###   ########.fr       */
+/*   Updated: 2022/09/19 21:56:11 by mkoyamba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/parser.h"
+
+static t_list	**handle_output(char *line)
+{
+	size_t	i;
+	char	pass;
+	t_list	**op_list;
+
+	i = 0;
+	op_list = malloc(sizeof(t_list *));
+	if (!op_list)
+		return (NULL);
+	*op_list = ft_lstnew(NULL);
+	while (line[i])
+	{
+		if (line[i] == '\"' || line[i] == '\'')
+		{
+			pass = line[i];
+			i++;
+			while (line[i] && line[i] != pass)
+				i++;
+		}
+		else if (line[i] == '>')
+			add_op_output(op_list, line, &i);
+		if (line[i])
+			i++;
+	}
+	return (free_first(op_list));
+}
+
+static t_list	**handle_input(char *line)
+{
+	size_t	i;
+	t_list	**ip_list;
+
+	i = 0;
+	ip_list = malloc(sizeof(t_list *));
+	if (!ip_list)
+		return (NULL);
+	*ip_list = ft_lstnew(NULL);
+	while (line[i])
+	{
+		if (line[i] == '<')
+		{
+			if (line[i + 1] == '<')
+			{
+				ft_lstadd_back(ip_list, ft_lstnew(get_op(line, i + 1, STR_IP)));
+				i++;
+			}
+			else
+				ft_lstadd_back(ip_list, ft_lstnew(get_op(line, i, FD_IP)));
+			i++;
+		}
+		i++;
+	}
+	return (free_first(ip_list));
+}
 
 t_list	**create_big_list(char **tab)
 {

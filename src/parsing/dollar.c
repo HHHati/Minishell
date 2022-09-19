@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dollar.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkoyamba <mkoyamba@student.s19.be>         +#+  +:+       +#+        */
+/*   By: mkoyamba <mkoyamba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 16:03:32 by Bade-lee          #+#    #+#             */
-/*   Updated: 2022/09/01 17:49:34 by mkoyamba         ###   ########.fr       */
+/*   Updated: 2022/09/19 19:07:08 by mkoyamba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,9 +108,11 @@ char	*check_dollar(char *line, t_minishell *minishell)
 		i = 0;
 		while (line[i])
 		{
-			line = dollar_loop(n, line, &i, minishell);
 			if (line[i] == '$')
+			{
+				line = dollar_loop(n, line, &i, minishell);
 				break ;
+			}
 			if (line[i])
 				i++;
 		}

@@ -6,7 +6,7 @@
 /*   By: mkoyamba <mkoyamba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 19:19:37 by mkoyamba          #+#    #+#             */
-/*   Updated: 2022/09/19 18:03:14 by mkoyamba         ###   ########.fr       */
+/*   Updated: 2022/09/19 21:43:50 by mkoyamba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,5 @@ void	free_minishell(t_minishell *minishell)
 	mat_free(minishell->env);
 	free(minishell);
 	rl_clear_history();
-	system("leaks minishell");
 	exit(g_tab_flag[0]);
 }

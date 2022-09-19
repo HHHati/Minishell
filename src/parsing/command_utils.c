@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   command_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkoyamba <mkoyamba@student.s19.be>         +#+  +:+       +#+        */
+/*   By: mkoyamba <mkoyamba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 14:51:27 by Bade-lee          #+#    #+#             */
-/*   Updated: 2022/09/01 18:10:28 by mkoyamba         ###   ########.fr       */
+/*   Updated: 2022/09/19 21:48:32 by mkoyamba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,13 +99,20 @@ char	**ft_split_comm(char *line)
 	return (result);
 }
 
-char	*take_comm_2(char *comm, char *line, size_t n, size_t *i)
+char	*take_comm_2(char *line, size_t n, size_t *i)
 {
-	while (line [*i] && line[*i] && line[*i] != '<' && line[*i] != '>')
+	size_t	j;
+	char	*comm;
+
+	comm = malloc((n + 1) * sizeof(char));
+	if (!comm)
+		return (NULL);
+	j = 0;
+	while (j < n)
 	{
-		comm[n] = line[*i];
+		comm[j] = line[*i];
 		*i += 1;
-		n++;
+		j++;
 	}
 	comm[n] = '\0';
 	return (comm);

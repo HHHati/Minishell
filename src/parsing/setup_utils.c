@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   setup_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkoyamba <mkoyamba@student.s19.be>         +#+  +:+       +#+        */
+/*   By: mkoyamba <mkoyamba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 11:57:01 by Bade-lee          #+#    #+#             */
-/*   Updated: 2022/09/01 11:59:21 by mkoyamba         ###   ########.fr       */
+/*   Updated: 2022/09/19 21:56:13 by mkoyamba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ static char	*file_name(char *line, size_t i)
 	return (str);
 }
 
-static t_redirection	*get_op(char *line, size_t i, int type)
+t_redirection	*get_op(char *line, size_t i, int type)
 {
 	t_redirection	*input_content;
 
@@ -81,58 +81,14 @@ static t_redirection	*get_op(char *line, size_t i, int type)
 	return (input_content);
 }
 
-t_list	**handle_input(char *line)
+void	add_op_output(t_list **op_list, char *line, size_t *i)
 {
-	size_t	i;
-	t_list	**ip_list;
-
-	i = 0;
-	ip_list = malloc(sizeof(t_list *));
-	if (!ip_list)
-		return (NULL);
-	*ip_list = ft_lstnew(NULL);
-	while (line[i])
+	if (line[*i + 1] == '>')
 	{
-		if (line[i] == '<')
-		{
-			if (line[i + 1] == '<')
-			{
-				ft_lstadd_back(ip_list, ft_lstnew(get_op(line, i + 1, STR_IP)));
-				i++;
-			}
-			else
-				ft_lstadd_back(ip_list, ft_lstnew(get_op(line, i, FD_IP)));
-			i++;
-		}
-		i++;
+		ft_lstadd_back(op_list, ft_lstnew(get_op(line, *i + 1, APP_OP)));
+		*i += 1;
 	}
-	return (free_first(ip_list));
-}
-
-t_list	**handle_output(char *line)
-{
-	size_t	i;
-	t_list	**op_list;
-
-	i = 0;
-	op_list = malloc(sizeof(t_list *));
-	if (!op_list)
-		return (NULL);
-	*op_list = ft_lstnew(NULL);
-	while (line[i])
-	{
-		if (line[i] == '>')
-		{
-			if (line[i + 1] == '>')
-			{
-				ft_lstadd_back(op_list, ft_lstnew(get_op(line, i + 1, APP_OP)));
-				i++;
-			}
-			else
-				ft_lstadd_back(op_list, ft_lstnew(get_op(line, i, SMP_OP)));
-			i++;
-		}
-		i++;
-	}
-	return (free_first(op_list));
+	else
+		ft_lstadd_back(op_list, ft_lstnew(get_op(line, *i, SMP_OP)));
+	*i += 1;
 }

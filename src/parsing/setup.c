@@ -6,7 +6,7 @@
 /*   By: mkoyamba <mkoyamba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 11:10:34 by Bade-lee          #+#    #+#             */
-/*   Updated: 2022/09/19 21:56:11 by mkoyamba         ###   ########.fr       */
+/*   Updated: 2022/09/20 11:53:06 by mkoyamba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,22 @@ static t_list	**handle_output(char *line)
 	return (free_first(op_list));
 }
 
+static void	add_op_input(t_list **ip_list, char *line, size_t *i)
+{
+	if (line[*i + 1] == '<')
+	{
+		ft_lstadd_back(ip_list, ft_lstnew(get_op(line, *i + 1, STR_IP)));
+		*i += 1;
+	}
+	else
+		ft_lstadd_back(ip_list, ft_lstnew(get_op(line, *i, FD_IP)));
+	*i += 1;
+}
+
 static t_list	**handle_input(char *line)
 {
 	size_t	i;
+	char	pass;
 	t_list	**ip_list;
 
 	i = 0;
@@ -52,17 +65,15 @@ static t_list	**handle_input(char *line)
 	*ip_list = ft_lstnew(NULL);
 	while (line[i])
 	{
-		if (line[i] == '<')
+		if (line[i] == '\"' || line[i] == '\'')
 		{
-			if (line[i + 1] == '<')
-			{
-				ft_lstadd_back(ip_list, ft_lstnew(get_op(line, i + 1, STR_IP)));
-				i++;
-			}
-			else
-				ft_lstadd_back(ip_list, ft_lstnew(get_op(line, i, FD_IP)));
+			pass = line[i];
 			i++;
+			while (line[i] && line[i] != pass)
+				i++;
 		}
+		else if (line[i] == '<')
+			add_op_input(ip_list, line, &i);
 		i++;
 	}
 	return (free_first(ip_list));

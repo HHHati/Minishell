@@ -10,7 +10,7 @@ As required by the project constraints, the use of standard C library functions 
 Only functions previously re-implemented in the **libft** project were allowed.
 
 This project was developed as a **group project**, in collaboration with  
-**[Mkoyomba](https://github.com/Mkoyomba)**.
+**[mkoyomba](https://github.com/mkoyamba)**.
 
 ---
 
